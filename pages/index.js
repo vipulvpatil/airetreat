@@ -1,6 +1,8 @@
 const Index = () => {
   return (
-    <>{"Index"}</>
+    <>
+      {"Welcome to Ai Retreat"}
+    </>
   )
 }
 
