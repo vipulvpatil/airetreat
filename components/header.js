@@ -7,10 +7,8 @@ import Link from "next/link"
 const MenuItem = ({children, href}) => {
   if(href) {
     return (
-      <Link href={href}>
-        <Button className={styles.menuItem} href={href}>
-          {children}
-        </Button>
+      <Link className={styles.menuItem} href={href}>
+        {children}
       </Link>
     )
   } else {

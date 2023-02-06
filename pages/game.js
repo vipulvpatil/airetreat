@@ -1,12 +1,12 @@
 import { Button, Stack } from "@mui/material"
 import { useState } from "react"
-// import bg from "../public/primary-bg.png"
+import styles from "@/styles/Home.module.css"
 
 const Game = () => {
   const [currentGame, setCurrentGame] = useState(null)
 
   return (
-    <div >Game here</div>
+    <div className={styles.gameBackground}>Game here</div>
   )
 }
 

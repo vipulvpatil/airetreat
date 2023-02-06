@@ -41,6 +41,10 @@
   max-width: 350px;
 }
 
+.gameBackground {
+  background-image: url("/primary-bg.png");
+}
+
 .main {
   max-width: 100vw;
   min-width: 350px;
