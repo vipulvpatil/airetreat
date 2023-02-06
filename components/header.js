@@ -1,22 +1,18 @@
 
 import Image from "next/image"
 import styles from "@/styles/Home.module.css"
-import {Button, Grid, Stack} from "@mui/material"
+import {Button, Grid, Stack, Typography} from "@mui/material"
 import Link from "next/link"
 
 const MenuItem = ({children, href}) => {
   if(href) {
     return (
       <Link className={styles.menuItem} href={href}>
-        {children}
+        <Typography variant="link">{children}</Typography>
       </Link>
     )
   } else {
-    return (
-      <Button className={styles.menuItem} href={href}>
-        {children}
-      </Button>
-    )
+    return
   }
 }
 
@@ -39,9 +35,9 @@ const Header = () => {
                 blurDataURL="/AiRetreatLogo.png"
               />
             </MenuItem>
-            <MenuItem href="/">Home</MenuItem>
-            <MenuItem href="/game">Game</MenuItem>
-            <MenuItem>Rules</MenuItem>
+            <MenuItem href="/">HOME</MenuItem>
+            <MenuItem href="/game">GAME</MenuItem>
+            <MenuItem href="/rules">RULES</MenuItem>
           </Stack>
         </Grid>
         <Grid item tablet={6}>

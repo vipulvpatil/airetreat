@@ -24,7 +24,7 @@ export const theme = extendTheme({
           main: colors.secondaryColor,
         },
         text: {
-          primary: colors.backgroundColor,
+          primary: colors.primaryColor,
           secondary:  colors.tertiaryColor,
         },
         error: {
@@ -71,9 +71,10 @@ export const theme = extendTheme({
       fontFamily: bodyFont.style.fontFamily,
       fontSize: 16,
     },
-    tab: {
+    link: {
       fontFamily: bodyFont.style.fontFamily,
       fontSize: 14,
+      fontWeight: 500,
     },
     footer: {
       fontFamily: headerFont.style.fontFamily,

@@ -3,7 +3,7 @@
   min-height: 100vh;
   background-color: var(--mui-palette-secondary-main);
   border: 1px solid var(--mui-palette-debug-main);
-  color: var(--mui-palette-tertiary-main);
+  color: var(--mui-palette-primary-main);
   display: flex;
   flex-direction: column;
 }
