@@ -33,6 +33,9 @@ export const theme = extendTheme({
         action: {
           disabled: `${colors.backgroundColor}5C`,
           disabledBackground: `${colors.primaryColor}5C`
+        },
+        chatBox: {
+          main: `${colors.backgroundColor}CC`
         }
       },
     },

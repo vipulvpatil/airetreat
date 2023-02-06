@@ -42,7 +42,41 @@
 }
 
 .gameBackground {
+  min-width: 1400px;
+  max-width: 1400px;
+  height: 1000px;
   background-image: url("/primary-bg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.chatBox {
+  width: 250px;
+  height: 350px;
+  border: 1px solid var(--mui-palette-primary-main);
+  background-color: var(--mui-palette-chatBox-main);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.chatBox1 {
+  position: sticky;
+  transform: translate(50px, 300px);
+}
+
+.chatBox2 {
+  position: sticky;
+  transform: translate(400px, -300px);
+}
+
+.chatBox3 {
+  position: sticky;
+  transform: translate(750px, -650px);
+}
+
+.chatBox4 {
+  position: sticky;
+  transform: translate(1100px, -750px);
 }
 
 .main {
