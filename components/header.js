@@ -1,14 +1,29 @@
 
 import Image from "next/image"
 import styles from "@/styles/Home.module.css"
-import {Grid, Stack} from "@mui/material"
+import {Button, Grid, Stack} from "@mui/material"
+import Link from "next/link"
 
-const MenuItem = ({children}) => {
-  return <div className={styles.menuItem}>{children}</div>
+const MenuItem = ({children, href}) => {
+  if(href) {
+    return (
+      <Link href={href}>
+        <Button className={styles.menuItem} href={href}>
+          {children}
+        </Button>
+      </Link>
+    )
+  } else {
+    return (
+      <Button className={styles.menuItem} href={href}>
+        {children}
+      </Button>
+    )
+  }
 }
 
 const ProfileIcon = ({children}) => {
-  return <div className={styles.profileIcon}>{children}</div>
+  return <Button className={styles.profileIcon}>{children}</Button>
 }
 
 const Header = () => {
@@ -17,7 +32,7 @@ const Header = () => {
       <Grid container>
         <Grid item tablet={6}>
           <Stack spacing={0.5} direction="row">
-            <MenuItem>
+            <MenuItem href="/">
               <Image
                 src="/AiRetreatLogo.png"
                 alt="Ai Retreat"
@@ -26,15 +41,14 @@ const Header = () => {
                 blurDataURL="/AiRetreatLogo.png"
               />
             </MenuItem>
-            <MenuItem>Home</MenuItem>
-            <MenuItem>Game</MenuItem>
+            <MenuItem href="/">Home</MenuItem>
+            <MenuItem href="/game">Game</MenuItem>
             <MenuItem>Rules</MenuItem>
           </Stack>
         </Grid>
         <Grid item tablet={6}>
           <Stack spacing={0.5} direction="row" sx={{justifyContent:"end"}}>
             <ProfileIcon>VP</ProfileIcon>
-            <MenuItem>Profile</MenuItem>
           </Stack>
         </Grid>
       </Grid>

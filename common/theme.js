@@ -2,7 +2,7 @@ import {bodyFont, headerFont} from "@/common/font"
 import {experimental_extendTheme as extendTheme} from "@mui/material/styles"
 
 const colors = {
-  primaryColor: "#FFCBBC",  
+  primaryColor: "#F4EDED",  
   backgroundColor: "#333333",
   secondaryColor: "#FFFFFF",
   tertiaryColor: "#FDAD95",
