@@ -51,8 +51,8 @@
 }
 
 .gameBackground {
-  min-width: 1400px;
-  max-width: 1400px;
+  min-width: 2400px;
+  max-width: 2400px;
   height: 1024px;
   background-image: url("/primary-bg.png");
   background-position: center;
@@ -78,25 +78,25 @@
 
 .chatBox1 {
   position: sticky;
-  transform: translate(50px, 300px);
+  transform: translate(500px, 250px);
   width: fit-content;
 }
 
 .chatBox2 {
   position: sticky;
-  transform: translate(400px, -300px);
+  transform: translate(875px, -360px);
   width: fit-content;
 }
 
 .chatBox3 {
   position: sticky;
-  transform: translate(750px, -650px);
+  transform: translate(1280px, -750px);
   width: fit-content;
 }
 
 .chatBox4 {
   position: sticky;
-  transform: translate(1100px, -750px);
+  transform: translate(1630px, -919px);
   width: fit-content;
 }
 
