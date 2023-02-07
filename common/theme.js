@@ -38,12 +38,11 @@ export const theme = extendTheme({
           main: `${colors.backgroundColor}CC`
         },
         bot: {
-          one: "#6564DB",
-          two: "#F75C03",
-          three: "#D84797",
-          four: "#679436"
+          one: "#F75C03",
+          two: "#107E7D",
+          three: "#BA1B1D",
+          four: "#9448BC",
         }
-
       },
     },
   },
