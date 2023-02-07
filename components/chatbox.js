@@ -1,8 +1,9 @@
 const { TextField, Typography } = require("@mui/material")
 import styles from "@/styles/Home.module.css"
 
-const ChatBox = ({chatList, botColor, botName}) => {
+const ChatBox = ({chatList, botColor, botName, addPadding}) => {
   let chatListJsx
+  let styleJsx
   
   if (chatList) {
     chatListJsx = chatList.map((chat) => {
@@ -16,15 +17,21 @@ const ChatBox = ({chatList, botColor, botName}) => {
     })
   }
 
+  if (addPadding === "top") {
+    styleJsx = {paddingTop: "300px"}
+  } else {
+    styleJsx = {paddingTop: "50px"}
+  }
+
   return (
-    <>
-      <div className={styles.chatBox} style={{border: `5px solid ${botColor}`}}>
+    <div className={styles.chatBox} style={styleJsx}>
+      <div className={styles.conversation} style={{border: `5px solid ${botColor}`}}>
         {chatListJsx}
       </div>
       <Typography variant="h4" sx={{backgroundColor: botColor, p: "5px"}}>
         {botName}
       </Typography>
-    </>
+    </div>
   )
 }
 

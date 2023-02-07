@@ -87,21 +87,14 @@ const Game = () => {
   return (
     <div>
       <div className={styles.blurBackground}>
-      <div className={styles.chatBox1}>
-        <ChatBox chatList={placeholderChatList} botColor="var(--mui-palette-bot-one)" botName={botNames[0]}/>
-      </div>
-
-      <div className={styles.chatBox2}>
-        <ChatBox chatList={placeholderChatList} botColor="var(--mui-palette-bot-two)" botName={botNames[1]}/>
-      </div>
-
-      <div className={styles.chatBox3}>
-        <ChatBox chatList={placeholderChatList} botColor="var(--mui-palette-bot-three)" botName={botNames[2]}/>
-      </div>
-
-      <div className={styles.chatBox4}>
-        <ChatBox chatList={placeholderChatList} botColor="var(--mui-palette-bot-four)" botName={botNames[3]}/>
-      </div>
+        <div className={styles.gameContainer}>
+          <Stack direction="row" spacing={2} alignItems="flex-start" justifyContent="space-around">
+            <ChatBox chatList={placeholderChatList} botColor="var(--mui-palette-bot-one)" botName={botNames[0]} addPadding="top"/>
+            <ChatBox chatList={placeholderChatList} botColor="var(--mui-palette-bot-two)" botName={botNames[1]}/>
+            <ChatBox chatList={placeholderChatList} botColor="var(--mui-palette-bot-three)" botName={botNames[2]}/>
+            <ChatBox chatList={placeholderChatList} botColor="var(--mui-palette-bot-four)" botName={botNames[3]} addPadding="top"/>
+          </Stack>
+        </div>
       </div>
     </div>
   )
