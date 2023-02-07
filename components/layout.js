@@ -7,7 +7,9 @@ const Layout = ({children}) => {
     <div className={styles.container}>
       <Header />
       <main className={styles.main}>
+      <div className={styles.gameBackground}>
         {children}
+        </div>
       </main>
       <footer className={styles.footer}>
         <Typography variant="footer">

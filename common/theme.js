@@ -34,9 +34,16 @@ export const theme = extendTheme({
           disabled: `${colors.backgroundColor}5C`,
           disabledBackground: `${colors.primaryColor}5C`
         },
-        chatBox: {
+        semiTransparent: {
           main: `${colors.backgroundColor}CC`
+        },
+        bot: {
+          one: "#6564DB",
+          two: "#F75C03",
+          three: "#D84797",
+          four: "#679436"
         }
+
       },
     },
   },
