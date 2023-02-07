@@ -7,7 +7,7 @@ const ChatBox = ({chatList, botColor, botName}) => {
   if (chatList) {
     chatListJsx = chatList.map((chat) => {
       return (
-        <div className={styles.qna}>
+        <div className={styles.qna} key={chat.id}>
           <Typography variant="question">Q: {chat.question}</Typography>
           <div/>
           <Typography variant="answer">A: {chat.answer}</Typography>
