@@ -6,7 +6,7 @@ const colors = {
   backgroundColor: "#333333",
   secondaryColor: "#FFFFFF",
   tertiaryColor: "#FDAD95",
-  emergencyColor: "#E4572E",
+  emergencyColor: "#E53D00",
 }
 
 export const theme = extendTheme({
@@ -38,10 +38,10 @@ export const theme = extendTheme({
           main: `${colors.backgroundColor}CC`
         },
         bot: {
-          one: "#F75C03",
-          two: "#107E7D",
-          three: "#BA1B1D",
-          four: "#9448BC",
+          one: "#B0228C",
+          two: "#4785FF",
+          three: "#613E8E",
+          four: "#47A025",
         }
       },
     },

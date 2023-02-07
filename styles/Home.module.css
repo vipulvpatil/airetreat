@@ -126,3 +126,15 @@
   justify-content: center;
   align-items: center;
 }
+
+.gameStatusBox {
+  max-width: 500px;
+  margin: -10rem auto 5rem auto;
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--mui-palette-semiTransparent-main);
+}
+
+.timerBar {
+  padding-top: 1rem;
+}

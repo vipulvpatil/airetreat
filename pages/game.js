@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import styles from "@/styles/Home.module.css"
 import ChatBox from "@/components/chatbox"
 import UserBox from "@/components/userbox"
+import GameStatusBox from "@/components/game_status_box"
 
 const allBotNames = ["C-3PO", "R2-D2", "Data", "Ultron", "Gort", "Sonny", "HAL 9000", "Ava", "KITT", "Kasumi", "EDI", "ED-209", "T-800", "Robocop", "Maria", "David", "TARS", "EVE", "B.O.B.", "Skynet", "The Machine", "V.I.K.I.", "GLaDOS", "Jarvis", "The Hive", "The Borg",
 "The T-1000"]
@@ -10,8 +11,37 @@ const allBotNames = ["C-3PO", "R2-D2", "Data", "Ultron", "Gort", "Sonny", "HAL 9
 const allBotColors = ["var(--mui-palette-bot-one)", "var(--mui-palette-bot-two)", "var(--mui-palette-bot-three)", "var(--mui-palette-bot-four)"]
 
 const Game = () => {
-  const [currentGame, setCurrentGame] = useState(null)
   const [bots, setBots] = useState([])
+  const [currentGame, setCurrentGame] = useState({
+    status: {
+      currentState:{
+        timeElapsed: 0,
+        totalTime: 60
+      }
+    }
+  })
+
+  useEffect(() => {
+    var seconds = 0;
+    const incrementSeconds = () => {
+        seconds += 0.1
+        if(seconds > 60) {
+          seconds -= 60
+        }
+        setCurrentGame({
+          status: {
+            currentState:{
+              timeElapsed: seconds,
+              totalTime: 60
+            }
+          }
+        })
+    }
+    var cancel = setInterval(incrementSeconds, 100);
+    return () => {
+      clearInterval(cancel)
+    }
+  }, [])
 
   useEffect(() => {
     const availableBotNames = allBotNames.slice()
@@ -104,6 +134,7 @@ const Game = () => {
             <ChatBox chatList={placeholderChatList} bot={bots[2]}/>
             <ChatBox chatList={placeholderChatList} bot={bots[3]} addPadding="top"/>
           </Stack>
+          <GameStatusBox status={currentGame?.status}/>
           <UserBox bots={bots}/>
         </div>
       </div>
