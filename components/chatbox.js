@@ -21,7 +21,7 @@ const ChatBox = ({chatList, bot, addPadding}) => {
 
   if (bot) {
     botName = bot.name
-    botColor = bot.color
+    botColor = bot.style.color
   }
 
   if (addPadding === "top") {

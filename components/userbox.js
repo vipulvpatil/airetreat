@@ -17,8 +17,9 @@ const UserBox = ({bots}) => {
     botsJsx = bots.map((bot, i) => {
       return (
         <Button
+          variant="contained"
           className={styles.botButton}
-          style={{backgroundColor: bots[i].color}}
+          color={bots[i].style.theme}
           key={i}
           onClick={botSelected(bots[i])}
         >

@@ -1,12 +1,22 @@
 import {bodyFont, headerFont} from "@/common/font"
+import { yellow } from "@mui/material/colors"
 import {experimental_extendTheme as extendTheme} from "@mui/material/styles"
 
 const colors = {
   primaryColor: "#F4EDED",  
   backgroundColor: "#333333",
-  secondaryColor: "#FFFFFF",
-  tertiaryColor: "#E8D9D9",
+  secondaryColor: "#E8D9D9",
   emergencyColor: "#E53D00",
+}
+
+const botColors = ["#B0228C", "#4785FF", "#613E8E", "#47A025"]
+
+const generateBotStyle = (botColor) => {
+  return  {
+    main: botColor,
+    dark: `${botColor}CC`,
+    contrastText: colors.primaryColor,
+  }
 }
 
 export const theme = extendTheme({
@@ -22,7 +32,7 @@ export const theme = extendTheme({
         },
         text: {
           primary: colors.primaryColor,
-          secondary:  colors.tertiaryColor,
+          secondary:  colors.secondaryColor,
         },
         error: {
           main: colors.emergencyColor,
@@ -34,12 +44,10 @@ export const theme = extendTheme({
         semiTransparent: {
           main: `${colors.backgroundColor}CC`
         },
-        bot: {
-          one: "#B0228C",
-          two: "#4785FF",
-          three: "#613E8E",
-          four: "#47A025",
-        }
+        botStyle1: generateBotStyle(botColors[0]),
+        botStyle2: generateBotStyle(botColors[1]),
+        botStyle3: generateBotStyle(botColors[2]),
+        botStyle4: generateBotStyle(botColors[3]),
       },
     },
   },

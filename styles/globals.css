@@ -93,3 +93,7 @@ a {
     color-scheme: dark;
   }
 }
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: var(--mui-palette-primary-main);
+}

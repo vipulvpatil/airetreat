@@ -156,3 +156,9 @@
   width: -webkit-fill-available;
   width: stretch;
 }
+
+.selectedBotButtons {
+  border-top: 1px solid var(--mui-palette-primary-main);
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}

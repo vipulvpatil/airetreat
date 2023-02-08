@@ -8,7 +8,24 @@ import GameStatusBox from "@/components/game_status_box"
 const allBotNames = ["C-3PO", "R2-D2", "Data", "Ultron", "Gort", "Sonny", "HAL 9000", "Ava", "KITT", "Kasumi", "EDI", "ED-209", "T-800", "Robocop", "Maria", "David", "TARS", "EVE", "B.O.B.", "Skynet", "The Machine", "V.I.K.I.", "GLaDOS", "Jarvis", "The Hive", "The Borg",
 "The T-1000"]
 
-const allBotColors = ["var(--mui-palette-bot-one)", "var(--mui-palette-bot-two)", "var(--mui-palette-bot-three)", "var(--mui-palette-bot-four)"]
+const botStyles = [
+  {
+    theme: "botStyle1",
+    color: "var(--mui-palette-botStyle1-main)",
+  },
+  {
+    theme: "botStyle2",
+    color: "var(--mui-palette-botStyle2-main)",
+  },
+  {
+    theme: "botStyle3",
+    color: "var(--mui-palette-botStyle3-main)",
+  },
+  {
+    theme: "botStyle4",
+    color: "var(--mui-palette-botStyle4-main)",
+  },
+]
 
 const Game = () => {
   const [bots, setBots] = useState([])
@@ -55,7 +72,7 @@ const Game = () => {
     for(let i=0; i < 4; i++){
       botList.push({
         name: names[i],
-        color: allBotColors[i]
+        style: botStyles[i]
       })
     }
     setBots(botList)
