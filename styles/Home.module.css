@@ -129,7 +129,7 @@
 
 .gameStatusBox {
   max-width: 500px;
-  margin: -10rem auto 5rem auto;
+  margin: -12rem auto 3rem auto;
   padding: 1rem;
   text-align: center;
   background-color: var(--mui-palette-semiTransparent-main);
@@ -137,4 +137,22 @@
 
 .timerBar {
   padding-top: 1rem;
+}
+
+.selectedBotBox {
+  background-color: var(--mui-palette-semiTransparent-main);
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 5px dashed var(--mui-palette-primary-main);
+}
+
+.selectedBotMessageBox {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.selectedBotMessageTextField {
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: stretch;
 }

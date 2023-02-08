@@ -5,7 +5,7 @@ const colors = {
   primaryColor: "#F4EDED",  
   backgroundColor: "#333333",
   secondaryColor: "#FFFFFF",
-  tertiaryColor: "#FDAD95",
+  tertiaryColor: "#E8D9D9",
   emergencyColor: "#E53D00",
 }
 
@@ -19,9 +19,6 @@ export const theme = extendTheme({
         },
         secondary: {
           main: colors.backgroundColor,
-        },
-        tertiary: {
-          main: colors.secondaryColor,
         },
         text: {
           primary: colors.primaryColor,
