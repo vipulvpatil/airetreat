@@ -1,6 +1,6 @@
 import styles from "@/styles/Home.module.css"
 import { LinearProgress, Typography } from "@mui/material"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 
   // Will be in one of 3 states. 
   // 1. Awaiting a question.

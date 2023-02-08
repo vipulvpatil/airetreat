@@ -1,5 +1,5 @@
 import { Button, Stack } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import styles from "@/styles/Home.module.css"
 import ChatBox from "@/components/chatbox"
 import UserBox from "@/components/userbox"
@@ -28,6 +28,7 @@ const botStyles = [
 ]
 
 const Game = () => {
+  const interval = useRef()
   const [bots, setBots] = useState([])
   const [currentGame, setCurrentGame] = useState({
     status: {
@@ -38,25 +39,26 @@ const Game = () => {
     }
   })
 
+
   useEffect(() => {
-    var seconds = 0;
-    const incrementSeconds = () => {
-        seconds += 0.1
-        if(seconds > 60) {
-          seconds -= 60
-        }
-        setCurrentGame({
-          status: {
-            currentState:{
-              timeElapsed: seconds,
-              totalTime: 60
-            }
+    let seconds = currentGame.status.currentState.timeElapsed
+    interval.current = setInterval(()=> {
+      seconds += 0.1
+      if(seconds > 60) {
+        seconds -= 60
+      }
+      setCurrentGame({
+        status: {
+          currentState:{
+            timeElapsed: seconds,
+            totalTime: 60
           }
-        })
-    }
-    var cancel = setInterval(incrementSeconds, 100);
+        }
+      })
+    }, 100)
     return () => {
-      clearInterval(cancel)
+      clearInterval(interval.current)
+      interval.current = null
     }
   }, [])
 

@@ -4,7 +4,7 @@ import { Button, Stack, TextField } from "@mui/material"
 const SelectedBotBox = ({bot}) => {
   return (
     <div className={styles.selectedBotBox} style={{borderColor: bot.style.color}}>
-      <Stack spacing={2}>
+      <Stack>
         <Stack className={styles.selectedBotMessageBox} direction="row" spacing={1}>
           <TextField label="question" className={styles.selectedBotMessageTextField} color={bot.style.theme}/>
           <Button variant="contained" color={bot.style.theme}>Send</Button>
