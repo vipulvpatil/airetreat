@@ -25,9 +25,9 @@ const ChatBox = ({chatList, bot, addPadding}) => {
   }
 
   if (addPadding === "top") {
-    styleJsx = {paddingTop: "300px"}
+    styleJsx = {paddingTop: "250px"}
   } else {
-    styleJsx = {paddingTop: "50px"}
+    styleJsx = {paddingTop: "20px"}
   }
 
   return (

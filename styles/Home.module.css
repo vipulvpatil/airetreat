@@ -74,7 +74,7 @@
 
 .conversation {
   width: 250px;
-  height: 350px;
+  height: 250px;
   background-color: var(--mui-palette-semiTransparent-main);
   overflow-y: scroll;
   overflow-wrap: break-word;
@@ -129,7 +129,7 @@
 
 .gameStatusBox {
   max-width: 500px;
-  margin: -12rem auto 3rem auto;
+  margin: -12rem auto 2rem auto;
   padding: 1rem;
   text-align: center;
   background-color: var(--mui-palette-semiTransparent-main);
