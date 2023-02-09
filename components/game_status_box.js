@@ -7,28 +7,30 @@ import { useEffect, useRef, useState } from "react"
   // 2. Awaiting an answer.
   // 3. Waiting on user.
 
-const GameStatusBox = ({status}) => {
+const GameStatusBox = ({gameStatus}) => {
   const interval = useRef()
   const [timeElapsed, setTimeElapsed] = useState(0)
   let progressJsx
 
   useEffect(() => {
-    let seconds = status.currentState.timeElapsed
-    interval.current = setInterval(()=> {
-      seconds += 0.1
-      if(seconds > 60) {
-        seconds -= 60
-      }
-      setTimeElapsed(seconds)
-    }, 100)
+    if (gameStatus){
+      let seconds = gameStatus.currentState.timeElapsed
+      interval.current = setInterval(()=> {
+        seconds += 0.1
+        if(seconds > 60) {
+          seconds -= 60
+        }
+        setTimeElapsed(seconds)
+      }, 100)
+    }
     return () => {
       clearInterval(interval.current)
       interval.current = null
     }
-  }, [status])
+  }, [gameStatus])
   
-  if (status){
-    const timeElapsedPercent = 100*timeElapsed/status.currentState.totalTime
+  if (gameStatus){
+    const timeElapsedPercent = 100*timeElapsed/gameStatus.currentState.totalTime
     progressJsx = (
       <div className={styles.timerBar}>
         <LinearProgress variant="determinate" color="error" value={timeElapsedPercent} sx={{height: "10px"}}/>

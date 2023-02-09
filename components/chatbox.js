@@ -1,16 +1,35 @@
 const { TextField, Typography } = require("@mui/material")
 import styles from "@/styles/Home.module.css"
 
-const ChatBox = ({chatList, bot, addPadding}) => {
+const ChatBox = ({bot, addPadding}) => {
   let chatListJsx
   let styleJsx
   let botColor
   let botName
   
-  if (chatList) {
-    chatListJsx = chatList.map((chat) => {
+  if (bot) {
+    const messages = bot.messages
+    const chatList = []
+    let lastChat = null
+    for(let i = 0; i < messages.length; i++) {
+      if(i%2==0) {
+        lastChat = {
+          question: messages[i]
+        }
+      } else {
+        lastChat.answer = messages[i]
+        chatList.push(lastChat)
+        lastChat = null
+      }
+    }
+    if(lastChat) {
+      chatList.push(lastChat)
+      lastChat = null
+    }
+
+    chatListJsx = chatList.map((chat, index) => {
       return (
-        <div className={styles.qna} key={chat.id}>
+        <div className={styles.qna} key={index}>
           <Typography variant="question">Q: {chat.question}</Typography>
           <div/>
           <Typography variant="answer">A: {chat.answer}</Typography>

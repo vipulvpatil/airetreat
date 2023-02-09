@@ -1,35 +1,22 @@
 import styles from "@/styles/Home.module.css"
 import { Button, Stack, TextField } from "@mui/material"
 import { useState } from "react"
+import api from "@/lib/api"
 
 const SelectedBotBox = ({bot}) => {
   const [message, setMessage] = useState("")
-  const getParamsForAction = (action) => {
-    switch(action) {
-      case "sendMessage":
-        return message
-      default:
-        return null
-    }
-  }
 
   const messageChanged = (event) => {
     setMessage(event.target.value)
   }
 
-  const callApi = (action) => async () => {
-    const res = await fetch("/api/game", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        action: action,
-        params: getParamsForAction(action)
-      })
-    })
-    const resJson = await res.json()
-    console.log(resJson)
+  const sendMessage = () => {
+    if(message){
+      const trimmedMessage = message.trim()
+      if(trimmedMessage){
+        api.call("sendMessage", message)
+      }
+    }
   }
 
   return (
@@ -45,7 +32,7 @@ const SelectedBotBox = ({bot}) => {
           <Button
             variant="contained" 
             color={bot.style.theme}
-            onClick={callApi("sendMessage")}
+            onClick={sendMessage}
           >
             Send
           </Button>
