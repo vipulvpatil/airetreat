@@ -26,6 +26,11 @@ const games = {
         messages: ["What is your name?", "My name is GLaDOS", "What is your name?", "My name is GLaDOS", "What is your name?", "My name is GLaDOS", "What is your name?", "My name is GLaDOS", "What is your name?", "My name is GLaDOS", "What is your name?", "My name is GLaDOS", "What is your name?", "My name is GLaDOS", "What is your name? And please answer this honestly", "My name is GLaDOS", "What is your name?", "My name is GLaDOS", "What is your name?", "My name is GLaDOS", "What is your name?", "My name is GLaDOS", "What is your name?", "My name is GLaDOS"]
       }
     ],
+    player: {
+      id: "player",
+      name: "The T-1000",
+      messages: ["What is your name?", "My name is T-1000"],
+    },
     currentState: {
       timeElapsed: 0,
       totalTime: 60
@@ -33,18 +38,29 @@ const games = {
   }
 }
 
+const addMessage = (id, name, message) => {
+  const game = games[params.id]
+
+  game.bots = game.bots.map(bot => {
+    if(bot.name === name){
+      bot.messages = bots.messages.push(message)
+    }
+    return bot
+  });
+}
+
 const getStatus = (params) => {
-  console.log("getting status")
-  console.log(params)
-  console.log(params.id)
-  console.log(games[params.id])
   return [{game: games[params.id]}, null]
 }
 
 const sendMessage = (params) => {
-  console.log("getting status")
-  console.log(params)
-  return ["success", null]
+  if(!params.name || !params.message){
+    return [null, "name and message is required"]
+  }
+
+  const bot = addMessage(id, params.name, params.message)
+
+  return [{game: games[params.id]}, null]
 }
 
 const functionMap = {
@@ -64,9 +80,12 @@ const Game = (req, res) => {
 
   if(req.body && req.body["action"]) {
     const action = req.body.action
-    console.log(action)
     const actionFunc = functionMap[action]
     if(!actionFunc) {
+      res.status(400)
+      return
+    }
+    if(!req.body.params || !req.body.params.id) {
       res.status(400)
       return
     }
