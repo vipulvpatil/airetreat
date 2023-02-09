@@ -28,7 +28,6 @@ const botStyles = [
 ]
 
 const Game = () => {
-  const interval = useRef()
   const [bots, setBots] = useState([])
   const [currentGame, setCurrentGame] = useState({
     status: {
@@ -38,29 +37,6 @@ const Game = () => {
       }
     }
   })
-
-
-  useEffect(() => {
-    let seconds = currentGame.status.currentState.timeElapsed
-    interval.current = setInterval(()=> {
-      seconds += 0.1
-      if(seconds > 60) {
-        seconds -= 60
-      }
-      setCurrentGame({
-        status: {
-          currentState:{
-            timeElapsed: seconds,
-            totalTime: 60
-          }
-        }
-      })
-    }, 100)
-    return () => {
-      clearInterval(interval.current)
-      interval.current = null
-    }
-  }, [])
 
   useEffect(() => {
     const availableBotNames = allBotNames.slice()
