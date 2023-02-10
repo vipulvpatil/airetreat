@@ -9,7 +9,8 @@ const colors = {
   emergencyColor: "#E53D00",
 }
 
-const botColors = ["#B0228C", "#4785FF", "#613E8E", "#47A025"]
+// const botColors = ["#B0228C", "#4785FF", "#613E8E", "#47A025"]
+const botColors = ["#8C964A", "#5458C9", "#AD5C93", "#087F8C"]
 
 const generateBotStyle = (botColor) => {
   return  {
