@@ -88,9 +88,6 @@ const temp = async () => {
 }
 
 const getStatus = (params) => {
-  temp()
-
-
   return [{game: games[params.id]}, null]
 }
 
