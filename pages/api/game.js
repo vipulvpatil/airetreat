@@ -1,3 +1,6 @@
+import { initializeApp, applicationDefault, cert } from "firebase-admin/app"
+import { getFirestore, Timestamp, FieldValue } from "firebase-admin/firestore"
+
 const allBotNames = ["C-3PO", "R2-D2", "Data", "Ultron", "Gort", "Sonny", "HAL 9000", "Ava", "KITT", "Kasumi", "EDI", "ED-209", "T-800", "Robocop", "Maria", "David", "TARS", "EVE", "B.O.B.", "Skynet", "The Machine", "V.I.K.I.", "GLaDOS", "Jarvis", "The Hive", "The Borg",
 "The T-1000"]
 
@@ -49,7 +52,45 @@ const addMessage = (id, name, message) => {
   });
 }
 
+const decodeFromBase64 = (str) => {
+  const decoded = Buffer.from(str, "base64").toString("ascii")
+  return Buffer.from(decoded)
+}
+
+const temp = async () => {
+  const serviceAccountString = decodeFromBase64(process.env.FIREBASE_SERVICE_ACCOUNT_BASE64)
+  console.log(serviceAccountString)
+  const serviceAccount = JSON.parse(serviceAccountString)
+  console.log(serviceAccount)
+
+  initializeApp({
+    credential: cert(serviceAccount)
+  });
+  
+  const db = getFirestore();
+
+  const docRef = db.collection('users').doc('alovelace');
+
+  await docRef.set({
+    first: 'Ada',
+    last: 'Lovelace',
+    born: 1815
+  })
+
+  const aTuringRef = db.collection('users').doc('aturing');
+
+  await aTuringRef.set({
+    'first': 'Alan',
+    'middle': 'Mathison',
+    'last': 'Turing',
+    'born': 1912
+  })
+}
+
 const getStatus = (params) => {
+  temp()
+
+
   return [{game: games[params.id]}, null]
 }
 
