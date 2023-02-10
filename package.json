@@ -15,7 +15,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.4",
     "@next/font": "13.1.2",
-    "@sentry/nextjs": "^7.33.0",
+    "@sentry/nextjs": "^7.37.1",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",
     "formidable": "^2.1.1",
@@ -27,7 +27,8 @@
     "pdf-parse": "^1.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-html-comment": "^2.0.16"
+    "react-html-comment": "^2.0.16",
+    "sentry": "^0.1.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
