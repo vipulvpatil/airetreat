@@ -1,11 +1,19 @@
 import { Button, Stack, Typography } from "@mui/material"
 import styles from "@/styles/Home.module.css"
 import { useRouter } from "next/router"
+import api from "@/lib/api"
 
 const Index = () => {
   const router = useRouter()
-  const createGame = () => {
-    router.push("/game")
+  const createGame = async () => {
+    const playerId = "1"
+    const resp = await api.call("newGame", {playerId})
+    if(resp.error) {
+      console.log(resp.error)
+    } else {
+      const gameId = resp.result.gameId
+      router.push(`game/${gameId}`)
+    }
   }
 
   return (

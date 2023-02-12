@@ -63,7 +63,7 @@ const Game = () => {
     const getGameStatus = async () => {
       const {id} = router.query
       if(id) {
-        const resp = await api.call("gameStatus", {id})
+        const resp = await api.call("gameStatus", {id, playerId: "1"})
         if(resp.error) {
           console.log(resp.error)
         } else {
@@ -75,7 +75,7 @@ const Game = () => {
   }, [router])
 
   useEffect(() => {
-    if(currentGame) {
+    if(currentGame && currentGame.bots) {
       const botList = currentGame.bots.map((bot, index) => {
         return Object.assign(bot, {style: botStyles[index]})
       })

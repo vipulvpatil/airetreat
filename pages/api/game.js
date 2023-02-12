@@ -1,8 +1,10 @@
-import { initializeApp, applicationDefault, cert } from "firebase-admin/app"
-import { getFirestore, Timestamp, FieldValue } from "firebase-admin/firestore"
+import {NewGame} from "@/model/game"
+import {CreateGameInStorage, GetGameFromStorage} from "@/db/game"
 
 const allBotNames = ["C-3PO", "R2-D2", "Data", "Ultron", "Gort", "Sonny", "HAL 9000", "Ava", "KITT", "Kasumi", "EDI", "ED-209", "T-800", "Robocop", "Maria", "David", "TARS", "EVE", "B.O.B.", "Skynet", "The Machine", "V.I.K.I.", "GLaDOS", "Jarvis", "The Hive", "The Borg",
 "The T-1000"]
+
+const parodyBotNames = ["C-21PO", "R4-D4", "Gart", "HAL 9999", "Avis", "ED-I", "T-5000", "Davide", "B.O.B.Z", "The Machy-ne", "GLaDOODLES", "JARV-EESE", "The Hivey-five", "T-3PO", "InfoData", "Sort", "Electronic Device-209", "T-800X", "RoboCupp", "EVE-a-L", "GLaDOSE"]
 
 const games = {
   "123":{
@@ -52,47 +54,20 @@ const addMessage = (id, name, message) => {
   });
 }
 
-const decodeFromBase64 = (str) => {
-  const decoded = Buffer.from(str, "base64").toString("ascii")
-  return Buffer.from(decoded)
+const newGame = async (params) => {
+  const game = NewGame(params.playerId)
+  const gameId = await CreateGameInStorage(game)
+  return [{gameId}, null]
 }
 
-const temp = async () => {
-  const serviceAccountString = decodeFromBase64(process.env.FIREBASE_SERVICE_ACCOUNT_BASE64)
-  console.log(serviceAccountString)
-  const serviceAccount = JSON.parse(serviceAccountString)
-  console.log(serviceAccount)
-
-  initializeApp({
-    credential: cert(serviceAccount)
-  });
-  
-  const db = getFirestore();
-
-  const docRef = db.collection('users').doc('alovelace');
-
-  await docRef.set({
-    first: 'Ada',
-    last: 'Lovelace',
-    born: 1815
-  })
-
-  const aTuringRef = db.collection('users').doc('aturing');
-
-  await aTuringRef.set({
-    'first': 'Alan',
-    'middle': 'Mathison',
-    'last': 'Turing',
-    'born': 1912
-  })
+const getStatus = async (params) => {
+  console.log(params)
+  const game = await GetGameFromStorage(params.id)
+  return [{game}, null]
 }
 
-const getStatus = (params) => {
-  return [{game: games[params.id]}, null]
-}
-
-const sendMessage = (params) => {
-  if(!params.name || !params.message){
+const sendMessage = async (params) => {
+  if(!params.name || !params.message || !req.body.params.id){
     return [null, "name and message is required"]
   }
 
@@ -102,17 +77,18 @@ const sendMessage = (params) => {
 }
 
 const functionMap = {
+  "newGame": newGame,
   "gameStatus": getStatus,
   "sendMessage": sendMessage,
 }
 
-const Game = (req, res) => {
+const Game = async (req, res) => {
   console.log(req.method)
   console.log(req.url)
   console.log(req.body)
 
   if(req.method !== "POST") {
-    res.status(404)
+    res.status(404).json({error: "only POST is allowed"})
     return
   }
 
@@ -120,17 +96,21 @@ const Game = (req, res) => {
     const action = req.body.action
     const actionFunc = functionMap[action]
     if(!actionFunc) {
-      res.status(400)
+      res.status(400).json({error: "unknown action requested"})
       return
     }
-    if(!req.body.params || !req.body.params.id) {
-      res.status(400)
+    if(!req.body.params) {
+      res.status(400).json({error: "empty params not allowed"})
       return
     }
-    const [result, err] = actionFunc(req.body.params)
+    if(!req.body.params.playerId) {
+      res.status(400).json({error: "valid player id is required"})
+      return
+    }
+    const [result, err] = await actionFunc(req.body.params)
     res.status(200).json({result: result, error: err})
   } else {
-    res.status(500)
+    res.status(400).json({error: "improper request"})
   }
 }
 
