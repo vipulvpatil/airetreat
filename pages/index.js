@@ -3,9 +3,13 @@ import styles from "@/styles/Home.module.css"
 import { useRouter } from "next/router"
 import api from "@/lib/api"
 import { loadPlayerData } from "@/lib/local_storage"
+import { useState } from "react"
+import JoinGameDialog from "@/components/join_game_dialog"
 
 const Index = () => {
   const router = useRouter()
+  const [joinGameDialogOpen, setJoinGameDialogOpen] = useState()
+  const [joinGameId, setJoinGameId] = useState("")
   const playerData = loadPlayerData()
 
   const createGame = async () => {
@@ -14,18 +18,16 @@ const Index = () => {
       console.log(resp.error)
     } else {
       const gameId = resp.result.gameId
-      router.push(`game/${gameId}`)
+      router.push(`/game/${gameId}`)
     }
   }
 
-  const joinGame = async () => {
-    const gameId = "jzj0My94pJcRF8kABmJ0"
-    const resp = await api.call("joinGame", {playerId: playerData.id, gameId})
-    if(resp.error) {
-      console.log(resp.error)
-    } else {
-      const gameId = resp.result.gameId
-    }
+  const joinGame = () => {
+    setJoinGameDialogOpen(true)
+  }
+
+  const gameJoinClosed = () => {
+    router.push(`/game/join/${joinGameId}`)
   }
 
   return (
@@ -35,6 +37,7 @@ const Index = () => {
         <Button className={styles.primaryButton} variant="contained" onClick={createGame}>Create a Game</Button>
         <Button className={styles.primaryButton} variant="contained" onClick={joinGame}>Join Game</Button>
       </Stack>
+      <JoinGameDialog open={joinGameDialogOpen} joinGameId={joinGameId} setJoinGameId={setJoinGameId} handleClose={gameJoinClosed} />
     </div>
   )
 }

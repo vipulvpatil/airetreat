@@ -16,15 +16,15 @@ export const JoinGameInStorage = async (gameId, playerId) => {
     const gameSnap = await t.get(gameRef)
     const game = gameSnap.data()
     const players = game.players
-    if(Object.keys(players).length == 1 && game.currentState.state === "NOT_STARTED"){
-      if(!players[playerId]){
+    if(!players[playerId]){
+      if(Object.keys(players).length == 1 && game.currentState.state === "NOT_STARTED"){
         // start game here. 
         players[playerId] = {}
         game.players = players
         await t.set(gameRef, game)
+      } else {
+        throw new Error("Game is not in the correct state to join")
       }
-    } else {
-      throw new Error("Game should have exactly 1 current player")
     }
   })
   return gameId

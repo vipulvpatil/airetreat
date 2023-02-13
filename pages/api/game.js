@@ -61,8 +61,8 @@ const newGame = async (params) => {
 
 const joinGame = async (params) => {
   try {
-    const game = await JoinGameInStorage(params.gameId, params.playerId)
-    return [{gameId: game.id}, null]
+    const gameId = await JoinGameInStorage(params.gameId, params.playerId)
+    return [{gameId}, null]
   } catch (err) {
     console.log(err)
     return [null, `unable to join game: ${err}`]
