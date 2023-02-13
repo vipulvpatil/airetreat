@@ -15,9 +15,7 @@ export const JoinGameInStorage = async (gameId, playerId) => {
   await db.runTransaction(async (t) => {
     const gameSnap = await t.get(gameRef)
     const game = gameSnap.data()
-    console.log(game)
     const players = game.players
-    console.log(players)
     if(Object.keys(players).length == 1 && game.currentState.state === "NOT_STARTED"){
       if(!players[playerId]){
         // start game here. 

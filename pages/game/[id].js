@@ -1,11 +1,12 @@
-import { Button, Stack } from "@mui/material"
-import { useEffect, useRef, useState } from "react"
+import { Stack } from "@mui/material"
+import { useEffect, useState } from "react"
 import styles from "@/styles/Home.module.css"
 import ChatBox from "@/components/chatbox"
 import UserBox from "@/components/userbox"
 import GameStatusBox from "@/components/game_status_box"
 import { useRouter } from "next/router"
 import api from "@/lib/api"
+import { loadPlayerData } from "@/lib/local_storage"
 
 const botStyles = [
   {
@@ -26,35 +27,9 @@ const botStyles = [
   },
 ]
 
-const placeholderMessages = [
-  "What is your name?",
-  "My name is not important",
-  "What is your name?",
-  "My name is not important",
-  "What is your name?",
-  "My name is not important",
-  "What is your name?",
-  "My name is not important",
-  "What is your name?",
-  "My name is not important",
-  "What is your name?",
-  "My name is not important",
-  "What is your name?",
-  "My name is not important",
-  "What is your name? And please answer this honestly",
-  "My name is not important",
-  "What is your name?",
-  "My name is not important",
-  "What is your name?",
-  "My name is not important",
-  "What is your name?",
-  "My name is not important",
-  "What is your name?",
-  "My name is not important",
-]
-
 const Game = () => {
   const router = useRouter()
+  const playerData = loadPlayerData()
 
   const [bots, setBots] = useState([])
   const [currentGame, setCurrentGame] = useState(null)
@@ -63,7 +38,7 @@ const Game = () => {
     const getGameStatus = async () => {
       const {id} = router.query
       if(id) {
-        const resp = await api.call("gameStatus", {gameId:id, playerId: "1"})
+        const resp = await api.call("gameStatus", {gameId:id, playerId: playerData.id})
         if(resp.error) {
           console.log(resp.error)
         } else {

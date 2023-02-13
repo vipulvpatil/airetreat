@@ -70,8 +70,10 @@ const joinGame = async (params) => {
 }
 
 const getStatus = async (params) => {
-  console.log(params)
-  const game = await GetGameFromStorage(params.id)
+  if(!params.gameId){
+    return [null, "gameId is required"]
+  }
+  const game = await GetGameFromStorage(params.gameId)
   return [{game}, null]
 }
 

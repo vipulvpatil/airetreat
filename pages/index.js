@@ -2,12 +2,14 @@ import { Button, Stack, Typography } from "@mui/material"
 import styles from "@/styles/Home.module.css"
 import { useRouter } from "next/router"
 import api from "@/lib/api"
+import { loadPlayerData } from "@/lib/local_storage"
 
 const Index = () => {
   const router = useRouter()
+  const playerData = loadPlayerData()
+
   const createGame = async () => {
-    const playerId = "1"
-    const resp = await api.call("newGame", {playerId})
+    const resp = await api.call("newGame", {playerId: playerData.id})
     if(resp.error) {
       console.log(resp.error)
     } else {
@@ -17,9 +19,8 @@ const Index = () => {
   }
 
   const joinGame = async () => {
-    const playerId = "2"
     const gameId = "jzj0My94pJcRF8kABmJ0"
-    const resp = await api.call("joinGame", {playerId, gameId})
+    const resp = await api.call("joinGame", {playerId: playerData.id, gameId})
     if(resp.error) {
       console.log(resp.error)
     } else {
