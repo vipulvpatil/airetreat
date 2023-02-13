@@ -1,5 +1,5 @@
 import {NewGame} from "@/model/game"
-import {CreateGameInStorage, GetGameFromStorage} from "@/db/game"
+import {CreateGameInStorage, GetGameFromStorage, JoinGameInStorage} from "@/db/game"
 
 const allBotNames = ["C-3PO", "R2-D2", "Data", "Ultron", "Gort", "Sonny", "HAL 9000", "Ava", "KITT", "Kasumi", "EDI", "ED-209", "T-800", "Robocop", "Maria", "David", "TARS", "EVE", "B.O.B.", "Skynet", "The Machine", "V.I.K.I.", "GLaDOS", "Jarvis", "The Hive", "The Borg",
 "The T-1000"]
@@ -55,9 +55,18 @@ const addMessage = (id, name, message) => {
 }
 
 const newGame = async (params) => {
-  const game = NewGame(params.playerId)
-  const gameId = await CreateGameInStorage(game)
+  const gameId = await CreateGameInStorage(params.playerId)
   return [{gameId}, null]
+}
+
+const joinGame = async (params) => {
+  try {
+    const game = await JoinGameInStorage(params.gameId, params.playerId)
+    return [{gameId: game.id}, null]
+  } catch (err) {
+    console.log(err)
+    return [null, `unable to join game: ${err}`]
+  }
 }
 
 const getStatus = async (params) => {
@@ -67,17 +76,18 @@ const getStatus = async (params) => {
 }
 
 const sendMessage = async (params) => {
-  if(!params.name || !params.message || !req.body.params.id){
+  if(!params.name || !params.message || !params.gameId){
     return [null, "name and message is required"]
   }
 
-  const bot = addMessage(id, params.name, params.message)
+  const bot = addMessage(params.gameId, params.name, params.message)
 
   return [{game: games[params.id]}, null]
 }
 
 const functionMap = {
   "newGame": newGame,
+  "joinGame": joinGame,
   "gameStatus": getStatus,
   "sendMessage": sendMessage,
 }

@@ -63,7 +63,7 @@ const Game = () => {
     const getGameStatus = async () => {
       const {id} = router.query
       if(id) {
-        const resp = await api.call("gameStatus", {id, playerId: "1"})
+        const resp = await api.call("gameStatus", {gameId:id, playerId: "1"})
         if(resp.error) {
           console.log(resp.error)
         } else {
