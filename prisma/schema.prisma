@@ -49,3 +49,54 @@ model User {
 
   @@map("users")
 }
+
+model Player {
+  id        String   @id @default(cuid())
+  bots      Bot[]
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("players")
+}
+
+model Bot {
+  id                       String    @id @default(cuid())
+  name                     String
+  type                     String
+  playerId                 String?   @map("player_id")
+  gameId                   String    @map("game_id")
+  questionCount            Int       @default(0) @map("question_count")
+  createdAt                DateTime  @default(now()) @map("created_at")
+  player                   Player?   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  game                     Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  lastQuestionTargetInGame Game?     @relation("lastQuestionTarget")
+  messages                 Message[]
+
+  @@map("bots")
+}
+
+model Game {
+  id                      String    @id @default(cuid())
+  state                   String
+  currentTurnIndex        Int       @map("current_turn_index")
+  turnOrder               String[]  @map("turn_order")
+  stateHandled            Boolean   @map("state_handled")
+  stateHandledAt          DateTime? @map("state_handled_at")
+  currentStateTotalTime   Int       @map("current_state_total_time")
+  lastQuestion            String?   @map("last_question")
+  lastQuestionTargetBotId String?   @unique @map("last_question_target_bot_id")
+  createdAt               DateTime  @default(now()) @map("created_at")
+  updatedAt               DateTime  @updatedAt @default(now()) @map("updated_at")
+  bots                    Bot[]
+  lastQuestionTargetBot   Bot?      @relation("lastQuestionTarget", fields: [lastQuestionTargetBotId], references: [id], onDelete: Cascade)
+
+  @@map("games")
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  botId     String
+  createdAt DateTime @default(now()) @map("created_at")
+  bot       Bot      @relation(fields: [botId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
