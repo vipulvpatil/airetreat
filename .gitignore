@@ -45,3 +45,8 @@ next.config.original.js
 
 # Sentry
 next.config.wizardcopy.js
+
+# V.P. ignored
+certs/
+*database_schema_test.sql
+.swc*
