@@ -81,7 +81,7 @@ model Game {
   turnOrder               String[]  @map("turn_order")
   stateHandled            Boolean   @map("state_handled")
   stateHandledAt          DateTime? @map("state_handled_at")
-  currentStateTotalTime   Int       @map("current_state_total_time")
+  stateTotalTime          Int       @default(0) @map("state_total_time")
   lastQuestion            String?   @map("last_question")
   lastQuestionTargetBotId String?   @unique @map("last_question_target_bot_id")
   createdAt               DateTime  @default(now()) @map("created_at")
