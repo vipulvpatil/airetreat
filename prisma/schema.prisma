@@ -94,7 +94,8 @@ model Game {
 
 model Message {
   id        String   @id @default(cuid())
-  botId     String
+  botId     String   @map("bot_id")
+  text      String
   createdAt DateTime @default(now()) @db.Timestamptz(3) @map("created_at")
   bot       Bot      @relation(fields: [botId], references: [id], onDelete: Cascade)
 
