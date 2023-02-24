@@ -8,7 +8,7 @@ import JoinGameDialog from "@/components/join_game_dialog"
 
 const Index = () => {
   const router = useRouter()
-  const [joinGameDialogOpen, setJoinGameDialogOpen] = useState()
+  const [joinGameDialogOpen, setJoinGameDialogOpen] = useState(false)
   const [joinGameId, setJoinGameId] = useState("")
   const playerData = loadPlayerData()
 

@@ -1,5 +1,6 @@
 import {NewGame} from "@/model/game"
-import {CreateGameInStorage, GetGameFromStorage, JoinGameInStorage} from "@/db/game"
+import {GetGameFromStorage, JoinGameInStorage} from "@/db/game"
+import GrpcService from "@/lib/grpc_service"
 
 const allBotNames = ["C-3PO", "R2-D2", "Data", "Ultron", "Gort", "Sonny", "HAL 9000", "Ava", "KITT", "Kasumi", "EDI", "ED-209", "T-800", "Robocop", "Maria", "David", "TARS", "EVE", "B.O.B.", "Skynet", "The Machine", "V.I.K.I.", "GLaDOS", "Jarvis", "The Hive", "The Borg",
 "The T-1000"]
@@ -53,8 +54,8 @@ const addMessage = (id, name, message) => {
 }
 
 const newGame = async (params) => {
-  const gameId = await CreateGameInStorage(params.playerId)
-  return [{gameId}, null]
+  const {gameId} = await GrpcService.createGame(params.playerId)
+  return [gameId, null]
 }
 
 const joinGame = async (params) => {
