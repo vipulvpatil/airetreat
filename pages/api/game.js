@@ -54,36 +54,41 @@ const addMessage = (id, name, message) => {
 }
 
 const newGame = async (params) => {
+  try {
   const {gameId} = await GrpcService.createGame(params.playerId)
-  return [gameId, null]
+  return {result: {gameId}, err:null}
+  } catch {
+    console.log(err)
+    return {result: null, err: `unable to create game: ${err}`}
+  }
 }
 
 const joinGame = async (params) => {
   try {
     const gameId = await JoinGameInStorage(params.gameId, params.playerId)
-    return [{gameId}, null]
+    return {result: {gameId}, err:null}
   } catch (err) {
     console.log(err)
-    return [null, `unable to join game: ${err}`]
+    return {result: null, err: `unable to join game: ${err}`}
   }
 }
 
 const getStatus = async (params) => {
   if(!params.gameId){
-    return [null, "gameId is required"]
+    return {result: null, err: "gameId is required"}
   }
   const game = await GetGameFromStorage(params.gameId)
-  return [{game}, null]
+  return {result: {game}, err: null}
 }
 
 const sendMessage = async (params) => {
   if(!params.name || !params.message || !params.gameId){
-    return [null, "name and message is required"]
+    return {result: null, err:"name and message is required"}
   }
 
   const bot = addMessage(params.gameId, params.name, params.message)
 
-  return [{game: games[params.id]}, null]
+  return {result: {game: games[params.id]}, err: null}
 }
 
 const functionMap = {
@@ -118,7 +123,7 @@ const Game = async (req, res) => {
       res.status(400).json({error: "valid player id is required"})
       return
     }
-    const [result, err] = await actionFunc(req.body.params)
+    const {result, err} = await actionFunc(req.body.params)
     res.status(200).json({result: result, error: err})
   } else {
     res.status(400).json({error: "improper request"})
