@@ -19,11 +19,11 @@ const UserBox = ({bots}) => {
         <Button
           variant="contained"
           className={styles.botButton}
-          color={bots[i].style.theme}
+          color={bot.style.theme}
           key={i}
-          onClick={botSelected(bots[i])}
+          onClick={botSelected(bot)}
         >
-          {bots[i].name}
+          {bot.name}
         </Button>
       )
     })

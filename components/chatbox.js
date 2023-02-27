@@ -6,18 +6,18 @@ const ChatBox = ({bot, addPadding}) => {
   let styleJsx
   let botColor
   let botName
-  
+
   if (bot) {
-    const messages = bot.messages
+    const messages = bot.botMessages
     const chatList = []
     let lastChat = null
     for(let i = 0; i < messages.length; i++) {
       if(i%2==0) {
         lastChat = {
-          question: messages[i]
+          question: messages[i].text
         }
       } else {
-        lastChat.answer = messages[i]
+        lastChat.answer = messages[i].text
         chatList.push(lastChat)
         lastChat = null
       }

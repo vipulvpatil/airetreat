@@ -6,7 +6,7 @@ import UserBox from "@/components/userbox"
 import GameStatusBox from "@/components/game_status_box"
 import { useRouter } from "next/router"
 import api from "@/lib/api"
-import { loadPlayerData } from "@/lib/local_storage"
+import { loadPlayerDataAsync } from "@/lib/local_storage"
 
 const botStyles = [
   {
@@ -29,7 +29,6 @@ const botStyles = [
 
 const Game = () => {
   const router = useRouter()
-  const playerData = loadPlayerData()
 
   const [bots, setBots] = useState([])
   const [currentGame, setCurrentGame] = useState(null)
@@ -38,6 +37,7 @@ const Game = () => {
     const getGame = async () => {
       const {id} = router.query
       if(id) {
+        const playerData = await loadPlayerDataAsync()
         const resp = await api.call("getGame", {gameId:id, playerId: playerData.id})
         if(resp.error) {
           console.log(resp.error)
@@ -50,8 +50,11 @@ const Game = () => {
   }, [router])
 
   useEffect(() => {
-    if(currentGame && currentGame.bots) {
-      const botList = currentGame.bots.map((bot, index) => {
+    if(currentGame && currentGame.bots && currentGame.myBotId) {
+      const otherBots = currentGame.bots.filter((bot) => {
+        return bot.id !== currentGame.myBotId
+      })
+      const botList = otherBots.map((bot, index) => {
         return Object.assign(bot, {style: botStyles[index]})
       })
       setBots(botList)

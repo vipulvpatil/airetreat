@@ -84,8 +84,8 @@ const joinGame = async (params) => {
     return {result: null, err: "gameId is required"}
   }
   try {
-    const gameId = await GrpcService.joinGame(params.gameId, params.playerId)
-    return {result: {gameId}, err:null}
+    await GrpcService.joinGame(params.gameId, params.playerId)
+    return {result: {gameId: params.gameId}, err:null}
   } catch (err) {
     console.log(err)
     return {result: null, err: `unable to join game: ${err}`}
