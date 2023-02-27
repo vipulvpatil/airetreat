@@ -54,31 +54,42 @@ const addMessage = (id, name, message) => {
 }
 
 const newGame = async (params) => {
+  if(!params.playerId){
+    return {result: null, err: "playerId is required"}
+  }
   try {
-  const {gameId} = await GrpcService.createGame(params.playerId)
-  return {result: {gameId}, err:null}
-  } catch {
+    const {gameId} = await GrpcService.createGame(params.playerId)
+    return {result: {gameId}, err:null}
+  } catch (err){
     console.log(err)
     return {result: null, err: `unable to create game: ${err}`}
   }
 }
 
-const joinGame = async (params) => {
+const getGame = async (params) => {
+  if(!params.gameId){
+    return {result: null, err: "gameId is required"}
+  }
   try {
-    const gameId = await JoinGameInStorage(params.gameId, params.playerId)
+    const game = await GrpcService.getGameForPlayer(params.gameId, params.playerId)
+    return {result: {game}, err:null}
+  } catch (err){
+    console.log(err)
+    return {result: null, err: `unable to get game: ${err}`}
+  }
+}
+
+const joinGame = async (params) => {
+  if(!params.gameId){
+    return {result: null, err: "gameId is required"}
+  }
+  try {
+    const gameId = await GrpcService.joinGame(params.gameId, params.playerId)
     return {result: {gameId}, err:null}
   } catch (err) {
     console.log(err)
     return {result: null, err: `unable to join game: ${err}`}
   }
-}
-
-const getStatus = async (params) => {
-  if(!params.gameId){
-    return {result: null, err: "gameId is required"}
-  }
-  const game = await GetGameFromStorage(params.gameId)
-  return {result: {game}, err: null}
 }
 
 const sendMessage = async (params) => {
@@ -87,22 +98,17 @@ const sendMessage = async (params) => {
   }
 
   const bot = addMessage(params.gameId, params.name, params.message)
-
   return {result: {game: games[params.id]}, err: null}
 }
 
 const functionMap = {
   "newGame": newGame,
   "joinGame": joinGame,
-  "gameStatus": getStatus,
+  "getGame": getGame,
   "sendMessage": sendMessage,
 }
 
 const Game = async (req, res) => {
-  console.log(req.method)
-  console.log(req.url)
-  console.log(req.body)
-
   if(req.method !== "POST") {
     res.status(404).json({error: "only POST is allowed"})
     return

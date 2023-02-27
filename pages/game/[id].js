@@ -35,10 +35,10 @@ const Game = () => {
   const [currentGame, setCurrentGame] = useState(null)
 
   useEffect(() => {
-    const getGameStatus = async () => {
+    const getGame = async () => {
       const {id} = router.query
       if(id) {
-        const resp = await api.call("gameStatus", {gameId:id, playerId: playerData.id})
+        const resp = await api.call("getGame", {gameId:id, playerId: playerData.id})
         if(resp.error) {
           console.log(resp.error)
         } else {
@@ -46,7 +46,7 @@ const Game = () => {
         }
       }
     }
-    getGameStatus()
+    getGame()
   }, [router])
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const Game = () => {
             <ChatBox bot={bots[2]}/>
             <ChatBox bot={bots[3]} addPadding="top"/>
           </Stack>
-          <GameStatusBox gameStatus={currentGame}/>
+          <GameStatusBox game={currentGame}/>
           <UserBox bots={bots}/>
         </div>
       </div>
