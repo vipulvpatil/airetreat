@@ -36,8 +36,9 @@ const Header = () => {
               />
             </MenuItem>
             <MenuItem href="/">HOME</MenuItem>
-            <MenuItem href="/game">GAME</MenuItem>
+            <MenuItem href="/games">GAMES</MenuItem>
             <MenuItem href="/rules">RULES</MenuItem>
+            <MenuItem href="/background">BACKGROUND</MenuItem>
           </Stack>
         </Grid>
         <Grid item tablet={6}>

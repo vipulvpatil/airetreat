@@ -3,13 +3,12 @@ import { yellow } from "@mui/material/colors"
 import {experimental_extendTheme as extendTheme} from "@mui/material/styles"
 
 const colors = {
-  primaryColor: "#F4EDED",  
+  primaryColor: "#F4EDED",
   backgroundColor: "#333333",
   secondaryColor: "#E8D9D9",
   emergencyColor: "#E53D00",
 }
 
-// const botColors = ["#B0228C", "#4785FF", "#613E8E", "#47A025"]
 const botColors = ["#8C964A", "#5458C9", "#AD5C93", "#087F8C"]
 
 const generateBotStyle = (botColor) => {
@@ -43,7 +42,7 @@ export const theme = extendTheme({
           disabledBackground: `${colors.primaryColor}5C`
         },
         semiTransparent: {
-          main: `${colors.backgroundColor}CC`
+          main: `${colors.backgroundColor}E0`
         },
         botStyle1: generateBotStyle(botColors[0]),
         botStyle2: generateBotStyle(botColors[1]),

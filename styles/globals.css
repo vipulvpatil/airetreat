@@ -97,3 +97,7 @@ a {
 .MuiOutlinedInput-notchedOutline {
   border-color: var(--mui-palette-primary-main);
 }
+
+.MuiDivider-root {
+  border-bottom-color: var(--mui-palette-primary-main);
+}

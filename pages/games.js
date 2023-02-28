@@ -5,11 +5,26 @@ import api from "@/lib/api"
 import { loadPlayerData } from "@/lib/local_storage"
 import { useState } from "react"
 import JoinGameDialog from "@/components/join_game_dialog"
+import usePoll from "react-use-poll"
+import GameList from "@/components/game_list"
 
 const Index = () => {
   const router = useRouter()
   const [joinGameDialogOpen, setJoinGameDialogOpen] = useState(false)
   const [joinGameId, setJoinGameId] = useState("")
+  const [gameIds, setGameIds] = useState()
+
+  const getGameIds = async () => {
+    const playerData = await loadPlayerData()
+    const resp = await api.call("getGameIds", {playerId: playerData.id})
+    if(resp.error) {
+      console.log(resp.error)
+    } else {
+      setGameIds(resp.result.gameIds)
+    }
+  }
+
+  usePoll(getGameIds, [], {interval: 5000})
 
   const createGame = async () => {
     const playerData = await loadPlayerData()
@@ -35,7 +50,9 @@ const Index = () => {
   return (
     <div className={styles.indexContent}>
       <Stack spacing={2} sx={{alignItems: "center"}}>
-        <Typography variant="h6" className={styles.mainText}>AI Retreat is two-player game of deduction. Ask a friend or play with someone online.</Typography>
+        <Typography variant="h5" className={styles.mainText}>Your ongoing games</Typography>
+        <GameList gameIds={gameIds}/>
+        <Divider flexItem light={true}/>
         <Button className={styles.primaryButton} variant="contained" onClick={createGame}>Create a Game</Button>
         <Button className={styles.primaryButton} variant="contained" onClick={joinGame}>Join Game</Button>
       </Stack>
