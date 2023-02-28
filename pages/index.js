@@ -13,7 +13,7 @@ const Index = () => {
 
   const createGame = async () => {
     const playerData = await loadPlayerData()
-    const resp = await api.call("newGame", {playerId: playerData.id})
+    const resp = await api.call("createGame", {playerId: playerData.id})
     if(resp.error) {
       console.log(resp.error)
     } else {
@@ -35,7 +35,7 @@ const Index = () => {
   return (
     <div className={styles.indexContent}>
       <Stack spacing={2} sx={{alignItems: "center"}}>
-      <Typography className={styles.mainText}>AI Retreat is two-player game of deduction. Ask a friend or play with someone online.</Typography>
+        <Typography className={styles.mainText}>AI Retreat is two-player game of deduction. Ask a friend or play with someone online.</Typography>
         <Button className={styles.primaryButton} variant="contained" onClick={createGame}>Create a Game</Button>
         <Button className={styles.primaryButton} variant="contained" onClick={joinGame}>Join Game</Button>
       </Stack>

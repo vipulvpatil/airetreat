@@ -2,6 +2,7 @@ import styles from "@/styles/Home.module.css"
 import { Button, Stack, TextField } from "@mui/material"
 import { useState } from "react"
 import api from "@/lib/api"
+import { loadPlayerData } from "@/lib/local_storage"
 
 const SelectedBotBox = ({bot}) => {
   const [message, setMessage] = useState("")
@@ -10,12 +11,16 @@ const SelectedBotBox = ({bot}) => {
     setMessage(event.target.value)
   }
 
-  const sendMessage = () => {
-    if(message){
-      const trimmedMessage = message.trim()
-      if(trimmedMessage){
-        api.call("sendMessage", message)
-      }
+  const sendMessage = async () => {
+    console.log(bot.id)
+    const trimmedMessage = message.trim()
+    if(trimmedMessage){
+      const playerData = await loadPlayerData()
+      api.call("sendMessage", {
+        playerId: playerData.id,
+        botId: bot.id,
+        text: message,
+      })
     }
   }
 
@@ -23,21 +28,21 @@ const SelectedBotBox = ({bot}) => {
     <div className={styles.selectedBotBox} style={{borderColor: bot.style.color}}>
       <Stack>
         <Stack className={styles.selectedBotMessageBox} direction="row" spacing={1}>
-          <TextField 
+          <TextField
             label="question"
             className={styles.selectedBotMessageTextField}
             color={bot.style.theme}
             onChange={messageChanged}
           />
           <Button
-            variant="contained" 
+            variant="contained"
             color={bot.style.theme}
             onClick={sendMessage}
           >
             Send
           </Button>
         </Stack>
-        <Stack 
+        <Stack
           className={styles.selectedBotButtons}
           direction="row"
           justifyContent="space-evenly"
