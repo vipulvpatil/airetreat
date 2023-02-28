@@ -7,6 +7,7 @@ import GameStatusBox from "@/components/game_status_box"
 import { useRouter } from "next/router"
 import api from "@/lib/api"
 import { loadPlayerData } from "@/lib/local_storage"
+import usePoll from "react-use-poll"
 
 const botStyles = [
   {
@@ -34,21 +35,20 @@ const Game = () => {
   const [currentGame, setCurrentGame] = useState(null)
   const [playerBot, setPlayerBot] = useState(null)
 
-  useEffect(() => {
-    const getGame = async () => {
-      const {id} = router.query
-      if(id) {
-        const playerData = await loadPlayerData()
-        const resp = await api.call("getGame", {gameId:id, playerId: playerData.id})
-        if(resp.error) {
-          console.log(resp.error)
-        } else {
-          setCurrentGame(resp.result.game)
-        }
+  const getGame = async () => {
+    const {id} = router.query
+    if(id) {
+      const playerData = await loadPlayerData()
+      const resp = await api.call("getGame", {gameId:id, playerId: playerData.id})
+      if(resp.error) {
+        console.log(resp.error)
+      } else {
+        setCurrentGame(resp.result.game)
       }
     }
-    getGame()
-  }, [router])
+  }
+
+  usePoll(getGame, [], {interval: 1000})
 
   useEffect(() => {
     if(currentGame && currentGame.bots && currentGame.myBotId) {
