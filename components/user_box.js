@@ -2,10 +2,11 @@ import { TextField, Typography, Stack, Button } from "@mui/material"
 import styles from "@/styles/Home.module.css"
 import { useEffect, useState } from "react"
 import SelectedBotBox from "@/components/selected_bot_box"
+import { convertMessagesToChatList } from "@/common/chat_formatter"
+import ChatList from "@/components/chat_list"
 
-const UserBox = ({bots}) => {
+const UserBox = ({bots, playerBot}) => {
   const [selectedBot, setSelectedBot] = useState(null)
-  let chatListJsx
   let botsJsx
   let selectedBotJsx
 
@@ -42,7 +43,7 @@ const UserBox = ({bots}) => {
         {botsJsx}
       </Stack>
       <div className={styles.userConversation}>
-        {chatListJsx}
+        <ChatList chatList={playerBot && convertMessagesToChatList(playerBot.botMessages)}/>
       </div>
     </div>
   )

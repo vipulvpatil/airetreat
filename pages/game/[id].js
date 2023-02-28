@@ -1,8 +1,8 @@
 import { Stack } from "@mui/material"
 import { useEffect, useState } from "react"
 import styles from "@/styles/Home.module.css"
-import ChatBox from "@/components/chatbox"
-import UserBox from "@/components/userbox"
+import ChatBox from "@/components/chat_box"
+import UserBox from "@/components/user_box"
 import GameStatusBox from "@/components/game_status_box"
 import { useRouter } from "next/router"
 import api from "@/lib/api"
@@ -32,6 +32,7 @@ const Game = () => {
 
   const [bots, setBots] = useState([])
   const [currentGame, setCurrentGame] = useState(null)
+  const [playerBot, setPlayerBot] = useState(null)
 
   useEffect(() => {
     const getGame = async () => {
@@ -51,8 +52,13 @@ const Game = () => {
 
   useEffect(() => {
     if(currentGame && currentGame.bots && currentGame.myBotId) {
-      const otherBots = currentGame.bots.filter((bot) => {
-        return bot.id !== currentGame.myBotId
+      const otherBots = []
+      currentGame.bots.forEach(bot => {
+        if (bot.id === currentGame.myBotId) {
+          setPlayerBot(bot)
+        } else {
+          otherBots.push(bot)
+        }
       })
       const botList = otherBots.map((bot, index) => {
         return Object.assign(bot, {style: botStyles[index]})
@@ -72,7 +78,7 @@ const Game = () => {
             <ChatBox bot={bots[3]} addPadding="top"/>
           </Stack>
           <GameStatusBox game={currentGame}/>
-          <UserBox bots={bots}/>
+          <UserBox bots={bots} playerBot={playerBot}/>
         </div>
       </div>
     </div>
