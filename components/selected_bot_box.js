@@ -15,12 +15,21 @@ const SelectedBotBox = ({bot}) => {
     console.log(bot.id)
     const trimmedMessage = message.trim()
     if(trimmedMessage){
-      const playerData = await loadPlayerData()
-      api.call("sendMessage", {
-        playerId: playerData.id,
-        botId: bot.id,
-        text: message,
-      })
+      try {
+        const playerData = await loadPlayerData()
+        const resp = await api.call("sendMessage", {
+          playerId: playerData.id,
+          botId: bot.id,
+          text: message,
+        })
+        if (resp.error) {
+          console.log(error)
+        } else {
+          setMessage("")
+        }
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 
@@ -33,6 +42,7 @@ const SelectedBotBox = ({bot}) => {
             className={styles.selectedBotMessageTextField}
             color={bot.style.theme}
             onChange={messageChanged}
+            value={message}
           />
           <Button
             variant="contained"
