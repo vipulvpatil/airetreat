@@ -27,7 +27,9 @@ const Index = () => {
   }
 
   const gameJoinClosed = () => {
-    router.push(`/game/join/${joinGameId}`)
+    if(joinGameId) {
+      router.push(`/game/join/${joinGameId}`)
+    }
   }
 
   return (
