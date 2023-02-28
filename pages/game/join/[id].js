@@ -1,4 +1,4 @@
-import { loadPlayerDataAsync } from "@/lib/local_storage"
+import { loadPlayerData } from "@/lib/local_storage"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import styles from "@/styles/Home.module.css"
@@ -12,7 +12,7 @@ const Join = () => {
     const joinGame = async () => {
       const {id} = router.query
       if(id) {
-        const playerData = await loadPlayerDataAsync()
+        const playerData = await loadPlayerData()
         const resp = await api.call("joinGame", {gameId: id, playerId: playerData.id})
         if(resp.error) {
           console.log(resp.error)

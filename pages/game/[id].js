@@ -6,7 +6,7 @@ import UserBox from "@/components/userbox"
 import GameStatusBox from "@/components/game_status_box"
 import { useRouter } from "next/router"
 import api from "@/lib/api"
-import { loadPlayerDataAsync } from "@/lib/local_storage"
+import { loadPlayerData } from "@/lib/local_storage"
 
 const botStyles = [
   {
@@ -37,7 +37,7 @@ const Game = () => {
     const getGame = async () => {
       const {id} = router.query
       if(id) {
-        const playerData = await loadPlayerDataAsync()
+        const playerData = await loadPlayerData()
         const resp = await api.call("getGame", {gameId:id, playerId: playerData.id})
         if(resp.error) {
           console.log(resp.error)

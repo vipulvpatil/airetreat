@@ -2,7 +2,7 @@ import { Button, Stack, Typography } from "@mui/material"
 import styles from "@/styles/Home.module.css"
 import { useRouter } from "next/router"
 import api from "@/lib/api"
-import { loadPlayerDataAsync } from "@/lib/local_storage"
+import { loadPlayerData } from "@/lib/local_storage"
 import { useState } from "react"
 import JoinGameDialog from "@/components/join_game_dialog"
 
@@ -12,7 +12,7 @@ const Index = () => {
   const [joinGameId, setJoinGameId] = useState("")
 
   const createGame = async () => {
-    const playerData = await loadPlayerDataAsync()
+    const playerData = await loadPlayerData()
     const resp = await api.call("newGame", {playerId: playerData.id})
     if(resp.error) {
       console.log(resp.error)
