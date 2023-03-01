@@ -57,8 +57,8 @@ const getGameIds = async (params) => {
     return {result: null, err: "playerId is required"}
   }
   try {
-    const gameIds = ["dummy_id1", "dummy_id2", "dummy_id3"]
-    return {result: {gameIds}, err:null}
+    const gameIds = await GrpcService.getGamesForPlayer(params.playerId)
+    return {result: gameIds, err:null}
   } catch (err) {
     console.log(err)
     return {result: null, err: `unable to get games: ${err}`}
