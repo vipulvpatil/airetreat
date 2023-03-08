@@ -5,7 +5,7 @@ import SelectedBotBox from "@/components/selected_bot_box"
 import { convertMessagesToChatList } from "@/common/chat_formatter"
 import ChatList from "@/components/chat_list"
 
-const UserBox = ({bots, playerBot}) => {
+const UserBox = ({bots, playerBot, gameId}) => {
   const [selectedBot, setSelectedBot] = useState(null)
   let botsJsx
   let selectedBotJsx
@@ -31,7 +31,7 @@ const UserBox = ({bots, playerBot}) => {
   }
 
   if(selectedBot){
-    selectedBotJsx = <SelectedBotBox bot={selectedBot}/>
+    selectedBotJsx = <SelectedBotBox bot={selectedBot} gameId={gameId}/>
   } else {
     selectedBotJsx = null
   }

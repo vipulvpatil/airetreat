@@ -40,11 +40,11 @@ const joinGame = async (params) => {
 }
 
 const sendMessage = async (params) => {
-  if(!params.playerId || !params.botId || !params.text){
-    return {result: null, err: "playerId, botId and text is required"}
+  if(!params.gameId || !params.playerId || !params.botId || !params.text){
+    return {result: null, err: "gameId, playerId, botId and text is required"}
   }
   try {
-    await GrpcService.sendMessage(params.playerId, params.botId, params.text)
+    await GrpcService.sendMessage(params.gameId, params.playerId, params.botId, params.text)
     return {result: null, err:null}
   } catch (err) {
     console.log(err)

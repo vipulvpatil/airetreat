@@ -43,7 +43,8 @@ const Game = () => {
       if(resp.error) {
         console.log(resp.error)
       } else {
-        setCurrentGame(resp.result.game)
+        const game = Object.assign(resp.result.game, {id})
+        setCurrentGame(game)
       }
     }
   }
@@ -78,7 +79,7 @@ const Game = () => {
             <ChatBox bot={bots[3]} addPadding="top"/>
           </Stack>
           <GameStatusBox game={currentGame}/>
-          <UserBox bots={bots} playerBot={playerBot}/>
+          <UserBox bots={bots} playerBot={playerBot} gameId={currentGame && currentGame.id}/>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { useState } from "react"
 import api from "@/lib/api"
 import { loadPlayerData } from "@/lib/local_storage"
 
-const SelectedBotBox = ({bot}) => {
+const SelectedBotBox = ({bot, gameId}) => {
   const [message, setMessage] = useState("")
 
   const messageChanged = (event) => {
@@ -12,12 +12,12 @@ const SelectedBotBox = ({bot}) => {
   }
 
   const sendMessage = async () => {
-    console.log(bot.id)
     const trimmedMessage = message.trim()
     if(trimmedMessage){
       try {
         const playerData = await loadPlayerData()
         const resp = await api.call("sendMessage", {
+          gameId: gameId,
           playerId: playerData.id,
           botId: bot.id,
           text: message,
