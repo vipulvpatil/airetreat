@@ -46,6 +46,14 @@ const Game = () => {
     }
   }, [router])
 
+  const updateCurrentGameIfStateChanged = async (gameId, existingGameState) => {
+    const game = await getGame(gameId)
+    const gameWithId = Object.assign(game, {id: gameId})
+    if (existingGameState !== game.state){
+      setCurrentGame(game)
+    }
+  }
+
   const getGame = async (gameId) => {
     const playerData = await loadPlayerData()
     const resp = await api.call("getGame", {gameId, playerId: playerData.id})
@@ -53,15 +61,16 @@ const Game = () => {
       console.log(resp.error)
     } else {
       const game = Object.assign(resp.result.game, {id: gameId})
-      setCurrentGame(game)
+      return game
     }
   }
 
   usePoll(() => {
     if(gameId) {
-      getGame(gameId)
+      const currentGameState = currentGame && currentGame.state
+      updateCurrentGameIfStateChanged(gameId, currentGameState)
     }
-  }, [gameId], {interval: 1000})
+  }, [gameId, currentGame], {interval: 1000})
 
   useEffect(() => {
     if(currentGame && currentGame.bots && currentGame.myBotId) {

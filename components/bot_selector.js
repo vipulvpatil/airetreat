@@ -53,7 +53,7 @@ const BotSelector = ({bots, setSelectedBot, playerBot}) => {
         key={100}
         onClick={botSelected(playerBot)}
       >
-        {"self"}
+        {"Myself"}
       </Button>
     )
     botRow2.push(
