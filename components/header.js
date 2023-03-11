@@ -31,7 +31,6 @@ const Header = () => {
                 src="/AiRetreatLogo.png"
                 alt="Ai Retreat"
                 width={38} height={24}
-                placeholder="blur"
                 blurDataURL="/AiRetreatLogo.png"
               />
             </MenuItem>

@@ -34,22 +34,30 @@ const Game = () => {
   const [bots, setBots] = useState([])
   const [currentGame, setCurrentGame] = useState(null)
   const [playerBot, setPlayerBot] = useState(null)
+  const [gameId, setGameId] = useState(null)
 
-  const getGame = async () => {
-    const {id} = router.query
-    if(id) {
-      const playerData = await loadPlayerData()
-      const resp = await api.call("getGame", {gameId:id, playerId: playerData.id})
-      if(resp.error) {
-        console.log(resp.error)
-      } else {
-        const game = Object.assign(resp.result.game, {id})
-        setCurrentGame(game)
-      }
+  useEffect(() => {
+    if(router.query && router.query.id) {
+      setGameId(router.query.id)
+    }
+  }, [router])
+
+  const getGame = async (gameId) => {
+    const playerData = await loadPlayerData()
+    const resp = await api.call("getGame", {gameId, playerId: playerData.id})
+    if(resp.error) {
+      console.log(resp.error)
+    } else {
+      const game = Object.assign(resp.result.game, {id: gameId})
+      setCurrentGame(game)
     }
   }
 
-  usePoll(getGame, [], {interval: 1000})
+  usePoll(() => {
+    if(gameId) {
+      getGame(gameId)
+    }
+  }, [gameId], {interval: 1000})
 
   useEffect(() => {
     if(currentGame && currentGame.bots && currentGame.myBotId) {
