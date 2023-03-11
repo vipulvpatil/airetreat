@@ -9,7 +9,7 @@ const colors = {
   emergencyColor: "#E53D00",
 }
 
-const botColors = ["#8C964A", "#5458C9", "#AD5C93", "#087F8C"]
+const botColors = ["#8C964A", "#5458C9", "#AD5C93", "#087F8C", "#666666"]
 
 const generateBotStyle = (botColor) => {
   return  {
@@ -48,6 +48,7 @@ export const theme = extendTheme({
         botStyle2: generateBotStyle(botColors[1]),
         botStyle3: generateBotStyle(botColors[2]),
         botStyle4: generateBotStyle(botColors[3]),
+        botStyleSelf: generateBotStyle(botColors[4]),
       },
     },
   },

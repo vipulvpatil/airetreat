@@ -26,6 +26,10 @@ const botStyles = [
     theme: "botStyle4",
     color: "var(--mui-palette-botStyle4-main)",
   },
+  {
+    theme: "botStyleSelf",
+    color: "var(--mui-palette-botStyleSelf-main)",
+  },
 ]
 
 const Game = () => {
@@ -64,6 +68,7 @@ const Game = () => {
       const otherBots = []
       currentGame.bots.forEach(bot => {
         if (bot.id === currentGame.myBotId) {
+          Object.assign(bot, {style: botStyles[4]})
           setPlayerBot(bot)
         } else {
           otherBots.push(bot)
