@@ -12,23 +12,24 @@ const GameStatusBox = ({game}) => {
   const [timeElapsed, setTimeElapsed] = useState(0)
   let progressJsx
   let displayMessage
+  let lastQuestion
 
-  useEffect(() => {
-    if (game){
-      let seconds = 0
-      interval.current = setInterval(()=> {
-        seconds += 0.1
-        if(seconds > 60) {
-          seconds -= 60
-        }
-        setTimeElapsed(seconds)
-      }, 100)
-    }
-    return () => {
-      clearInterval(interval.current)
-      interval.current = null
-    }
-  }, [game])
+  // useEffect(() => {
+  //   if (game){
+  //     let seconds = 0
+  //     interval.current = setInterval(()=> {
+  //       seconds += 0.1
+  //       if(seconds > 60) {
+  //         seconds -= 60
+  //       }
+  //       setTimeElapsed(seconds)
+  //     }, 100)
+  //   }
+  //   return () => {
+  //     clearInterval(interval.current)
+  //     interval.current = null
+  //   }
+  // }, [game])
 
   if (game){
     const timeElapsedPercent = 100*timeElapsed/game.stateTotalTime
@@ -38,12 +39,16 @@ const GameStatusBox = ({game}) => {
       </div>
     )
     displayMessage = game.displayMessage
+    lastQuestion = game.lastQuestion
   }
 
   return (
     <div className={styles.gameStatusBox}>
       <Typography variant="h4">
         {displayMessage}
+      </Typography>
+      <Typography variant="h5">
+        {lastQuestion}
       </Typography>
       {progressJsx}
     </div>
