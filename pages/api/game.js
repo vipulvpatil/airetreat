@@ -9,7 +9,7 @@ const createGame = async (params) => {
     return {result: {gameId}, err:null}
   } catch (err){
     console.log(err)
-    return {result: null, err: `unable to create game: ${err}`}
+    return {result: null, err}
   }
 }
 
@@ -22,7 +22,7 @@ const getGame = async (params) => {
     return {result: {game}, err:null}
   } catch (err){
     console.log(err)
-    return {result: null, err: `unable to get game: ${err}`}
+    return {result: null, err}
   }
 }
 
@@ -35,7 +35,7 @@ const joinGame = async (params) => {
     return {result: {gameId: params.gameId}, err:null}
   } catch (err) {
     console.log(err)
-    return {result: null, err: `unable to join game: ${err}`}
+    return {result: null, err}
   }
 }
 
@@ -48,7 +48,7 @@ const sendMessage = async (params) => {
     return {result: null, err:null}
   } catch (err) {
     console.log(err)
-    return {result: null, err: `unable to send message: ${err}`}
+    return {result: null, err}
   }
 }
 
@@ -61,7 +61,7 @@ const getGameIds = async (params) => {
     return {result: gameIds, err:null}
   } catch (err) {
     console.log(err)
-    return {result: null, err: `unable to get games: ${err}`}
+    return {result: null, err}
   }
 }
 

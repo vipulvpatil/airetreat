@@ -8,6 +8,7 @@ import { useRouter } from "next/router"
 import api from "@/lib/api"
 import { loadPlayerData } from "@/lib/local_storage"
 import usePoll from "react-use-poll"
+import ErrorChecker from "@/common/error_checker"
 
 const botStyles = [
   {
@@ -48,8 +49,7 @@ const Game = () => {
 
   const updateCurrentGameIfStateChanged = async (gameId, existingGameState) => {
     const game = await getGame(gameId)
-    const gameWithId = Object.assign(game, {id: gameId})
-    if (existingGameState !== game.state){
+    if (game && existingGameState !== game.state){
       setCurrentGame(game)
     }
   }
@@ -58,6 +58,9 @@ const Game = () => {
     const playerData = await loadPlayerData()
     const resp = await api.call("getGame", {gameId, playerId: playerData.id})
     if(resp.error) {
+      if(ErrorChecker.errorIsNotFound(resp.error)){
+        router.push("/games")
+      }
       console.log(resp.error)
     } else {
       const game = Object.assign(resp.result.game, {id: gameId})
