@@ -1,56 +1,48 @@
 import styles from "@/styles/Home.module.css"
-import { LinearProgress, Typography } from "@mui/material"
-import { useEffect, useRef, useState } from "react"
+import { HorizontalRule } from "@mui/icons-material"
+import { Divider, Stack, Typography } from "@mui/material"
 
-  // Will be in one of 3 states.
-  // 1. Awaiting a question.
-  // 2. Awaiting an answer.
-  // 3. Waiting on user.
+  // Possible states
+	// "WAITING_FOR_PLAYERS_TO_JOIN"
+	// "WAITING_ON_BOT_TO_ASK_A_QUESTION"
+	// "WAITING_ON_BOT_TO_ANSWER"
+	// "WAITING_ON_YOU_TO_ASK_A_QUESTION"
+	// "WAITING_ON_YOU_TO_ANSWER"
+	// "YOU_LOST"
+	// "YOU_WON"
+	// "TIME_UP"
+
 
 const GameStatusBox = ({game}) => {
-  const interval = useRef()
-  const [timeElapsed, setTimeElapsed] = useState(0)
-  let progressJsx
   let displayMessage
   let lastQuestion
-
-  // useEffect(() => {
-  //   if (game){
-  //     let seconds = 0
-  //     interval.current = setInterval(()=> {
-  //       seconds += 0.1
-  //       if(seconds > 60) {
-  //         seconds -= 60
-  //       }
-  //       setTimeElapsed(seconds)
-  //     }, 100)
-  //   }
-  //   return () => {
-  //     clearInterval(interval.current)
-  //     interval.current = null
-  //   }
-  // }, [game])
+  let displayQuestion = false
 
   if (game){
-    const timeElapsedPercent = 100*timeElapsed/game.stateTotalTime
-    progressJsx = (
-      <div className={styles.timerBar}>
-        <LinearProgress variant="determinate" color="error" value={timeElapsedPercent} sx={{height: "10px"}}/>
-      </div>
-    )
     displayMessage = game.displayMessage
-    lastQuestion = game.lastQuestion
+    if(game.state === "WAITING_ON_BOT_TO_ANSWER" || game.state === "WAITING_ON_YOU_TO_ANSWER") {
+      displayQuestion = true
+      lastQuestion = `${game.lastQuestion}`
+    } else {
+      displayQuestion = false
+      lastQuestion = ""
+    }
   }
 
   return (
     <div className={styles.gameStatusBox}>
-      <Typography variant="h4">
-        {displayMessage}
-      </Typography>
-      <Typography variant="h5">
-        {lastQuestion}
-      </Typography>
-      {progressJsx}
+      <Stack spacing={1}>
+        <Typography variant="h6">
+          {displayMessage}
+        </Typography>
+        <Divider variant="fullWidth" />
+        <Typography variant="h4">
+          {displayQuestion && "Question"}
+        </Typography>
+        <Typography variant="h5">
+          {displayQuestion && lastQuestion}
+        </Typography>
+      </Stack>
     </div>
 
   )
