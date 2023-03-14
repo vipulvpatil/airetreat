@@ -40,6 +40,9 @@ const Game = () => {
   const [currentGame, setCurrentGame] = useState(null)
   const [playerBot, setPlayerBot] = useState(null)
   const [gameId, setGameId] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [selectedBot, setSelectedBot] = useState(null)
+  const [isAnswering, setAnswering] = useState(false)
 
   useEffect(() => {
     if(router.query && router.query.id) {
@@ -93,6 +96,10 @@ const Game = () => {
     }
   }, [currentGame])
 
+  const selectBot = (bot) => {
+    setSelectedBot(bot)
+  }
+
   return (
     <div>
       <div className={styles.blurBackground}>
@@ -103,8 +110,15 @@ const Game = () => {
             <ChatBox bot={bots[2]}/>
             <ChatBox bot={bots[3]} addPadding="top"/>
           </Stack>
-          <GameStatusBox game={currentGame}/>
-          <UserBox bots={bots} playerBot={playerBot} gameId={currentGame && currentGame.id}/>
+          <GameStatusBox game={currentGame} errorMessage={errorMessage}/>
+          <UserBox
+            bots={bots}
+            playerBot={playerBot}
+            gameId={currentGame && currentGame.id}
+            selectedBot={selectedBot}
+            selectBot={selectBot}
+            isAnswering={isAnswering}
+          />
         </div>
       </div>
     </div>

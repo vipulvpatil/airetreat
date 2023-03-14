@@ -4,7 +4,7 @@ import { useState } from "react"
 import api from "@/lib/api"
 import { loadPlayerData } from "@/lib/local_storage"
 
-const SelectedBotBox = ({bot, gameId}) => {
+const SelectedBotBox = ({bot, gameId, textFieldLabel}) => {
   const [message, setMessage] = useState("")
 
   const messageChanged = (event) => {
@@ -38,7 +38,7 @@ const SelectedBotBox = ({bot, gameId}) => {
       <Stack>
         <Stack className={styles.selectedBotMessageBox} direction="row" spacing={1}>
           <TextField
-            label="question"
+            label={textFieldLabel}
             className={styles.selectedBotMessageTextField}
             color={bot.style.theme}
             onChange={messageChanged}

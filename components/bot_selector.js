@@ -1,11 +1,11 @@
 import { Stack, Button } from "@mui/material"
 import styles from "@/styles/Home.module.css"
 
-const BotSelector = ({bots, setSelectedBot, playerBot}) => {
+const BotSelector = ({bots, selectBot, playerBot}) => {
   let botRow1
   let botRow2
   const botSelected = (bot) => () => {
-    setSelectedBot(bot)
+    selectBot(bot)
   }
 
   if (bots && bots.length == 4) {
@@ -67,12 +67,6 @@ const BotSelector = ({bots, setSelectedBot, playerBot}) => {
         {bots[3].name}
       </Button>
     )
-
-    // botsJsx = bots.map((bot, i) => {
-    //   return (
-
-    //   )
-    // })
   }
 
   return (

@@ -13,10 +13,11 @@ import { Divider, Stack, Typography } from "@mui/material"
 	// "TIME_UP"
 
 
-const GameStatusBox = ({game}) => {
+const GameStatusBox = ({game, errorMessage}) => {
   let displayMessage
   let lastQuestion
   let displayQuestion = false
+  let errorMessageJsx = null
 
   if (game){
     displayMessage = game.displayMessage
@@ -41,6 +42,9 @@ const GameStatusBox = ({game}) => {
         </Typography>
         <Typography variant="h5">
           {displayQuestion && lastQuestion}
+        </Typography>
+        <Typography variant="h6">
+          {errorMessage}
         </Typography>
       </Stack>
     </div>

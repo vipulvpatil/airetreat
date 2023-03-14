@@ -6,12 +6,18 @@ import { convertMessagesToChatList } from "@/common/chat_formatter"
 import ChatList from "@/components/chat_list"
 import BotSelector from "@/components/bot_selector"
 
-const UserBox = ({bots, playerBot, gameId}) => {
-  const [selectedBot, setSelectedBot] = useState(null)
+const UserBox = ({bots, playerBot, gameId, selectedBot, selectBot, isAnswering}) => {
   let selectedBotJsx
 
+  // is there a default selected bot?
+
   if(selectedBot){
-    selectedBotJsx = <SelectedBotBox bot={selectedBot} gameId={gameId}/>
+    selectedBotJsx =
+      <SelectedBotBox
+        bot={selectedBot}
+        gameId={gameId}
+        textFieldLabel={isAnswering?"answer":"question"}
+      />
   } else {
     selectedBotJsx = null
   }
@@ -19,7 +25,7 @@ const UserBox = ({bots, playerBot, gameId}) => {
   return (
     <div className={styles.userBox}>
       {selectedBotJsx}
-      <BotSelector bots={bots} setSelectedBot={setSelectedBot} playerBot={playerBot}/>
+      <BotSelector bots={bots} selectBot={selectBot} playerBot={playerBot}/>
       <div className={styles.userConversation}>
         <ChatList chatList={playerBot && convertMessagesToChatList(playerBot.botMessages)}/>
       </div>
