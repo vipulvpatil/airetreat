@@ -43,7 +43,7 @@ const GameStatusBox = ({game, errorMessage}) => {
         <Typography variant="h5">
           {displayQuestion && lastQuestion}
         </Typography>
-        <Typography variant="h6">
+        <Typography variant="h6" className={styles.errorMessage}>
           {errorMessage}
         </Typography>
       </Stack>

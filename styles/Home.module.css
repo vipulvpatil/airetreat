@@ -163,3 +163,7 @@
   padding-top: 1rem;
   padding-bottom: 0.5rem;
 }
+
+.errorMessage {
+  color: var(--mui-palette-error-main);
+}
