@@ -9,6 +9,7 @@ import api from "@/lib/api"
 import { loadPlayerData } from "@/lib/local_storage"
 import usePoll from "react-use-poll"
 import ErrorChecker from "@/common/error_checker"
+import ConversationHistory from "@/components/conversation_history"
 
 const botStyles = [
   {
@@ -144,6 +145,7 @@ const Game = () => {
             <ChatBox bot={bots[3]} addPadding="top"/>
           </Stack>
           <GameStatusBox game={currentGame} errorMessage={errorMessage}/>
+          <ConversationHistory conversation={currentGame && currentGame.conversation}/>
           <UserBox
             bots={bots}
             playerBot={playerBot}

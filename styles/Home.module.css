@@ -135,6 +135,17 @@
   background-color: var(--mui-palette-semiTransparent-main);
 }
 
+.conversationHistoryBox {
+  max-width: 500px;
+  max-height: 200px;
+  margin: 2rem auto 2rem auto;
+  padding: 1rem;
+  text-align: left;
+  background-color: var(--mui-palette-semiTransparent-main);
+  overflow-y: scroll;
+  overflow-wrap: break-word;
+}
+
 .timerBar {
   padding-top: 1rem;
 }

@@ -1,5 +1,4 @@
 import styles from "@/styles/Home.module.css"
-import { HorizontalRule } from "@mui/icons-material"
 import { Divider, Stack, Typography } from "@mui/material"
 
   // Possible states
@@ -17,7 +16,6 @@ const GameStatusBox = ({game, errorMessage}) => {
   let displayMessage
   let lastQuestion
   let displayQuestion = false
-  let errorMessageJsx = null
 
   if (game){
     displayMessage = game.displayMessage
