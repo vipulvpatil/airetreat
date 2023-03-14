@@ -96,8 +96,24 @@ const Game = () => {
     }
   }, [currentGame])
 
+  useEffect(() => {
+    if(currentGame && currentGame.state === "WAITING_ON_YOU_TO_ANSWER"){
+      setSelectedBot(playerBot)
+      setAnswering(true)
+    } else if(currentGame.state !== "WAITING_ON_YOU_TO_ASK_A_QUESTION") {
+      setSelectedBot(null)
+      setAnswering(false)
+    } else {
+      setAnswering(false)
+    }
+  })
+
   const selectBot = (bot) => {
-    setSelectedBot(bot)
+    if(currentGame) {
+      if(currentGame.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION" && bot !== playerBot){
+        setSelectedBot(bot)
+      }
+    }
   }
 
   return (

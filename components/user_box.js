@@ -9,8 +9,6 @@ import BotSelector from "@/components/bot_selector"
 const UserBox = ({bots, playerBot, gameId, selectedBot, selectBot, isAnswering}) => {
   let selectedBotJsx
 
-  // is there a default selected bot?
-
   if(selectedBot){
     selectedBotJsx =
       <SelectedBotBox
