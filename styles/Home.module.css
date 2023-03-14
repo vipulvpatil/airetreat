@@ -80,6 +80,12 @@
   overflow-wrap: break-word;
 }
 
+.conversationButtons {
+  width: 250px;
+  height: 50px;
+  background-color: var(--mui-palette-semiTransparent-main);
+}
+
 .userConversation {
   width: 500px;
   height: 150px;

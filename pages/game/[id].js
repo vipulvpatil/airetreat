@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material"
 import { useEffect, useState } from "react"
 import styles from "@/styles/Home.module.css"
-import ChatBox from "@/components/chat_box"
+import BotBox from "@/components/bot_box"
 import UserBox from "@/components/user_box"
 import GameStatusBox from "@/components/game_status_box"
 import { useRouter } from "next/router"
@@ -139,10 +139,24 @@ const Game = () => {
       <div className={styles.blurBackground}>
         <div className={styles.gameContainer}>
           <Stack direction="row" spacing={2} alignItems="flex-start" justifyContent="space-around">
-            <ChatBox bot={bots[0]} addPadding="top"/>
-            <ChatBox bot={bots[1]}/>
-            <ChatBox bot={bots[2]}/>
-            <ChatBox bot={bots[3]} addPadding="top"/>
+            <BotBox
+              bot={bots[0]}
+              addPadding="top"
+              selectBot={selectBot}
+            />
+            <BotBox
+              bot={bots[1]}
+              selectBot={selectBot}
+            />
+            <BotBox
+              bot={bots[2]}
+              selectBot={selectBot}
+            />
+            <BotBox
+              bot={bots[3]}
+              addPadding="top"
+              selectBot={selectBot}
+            />
           </Stack>
           <GameStatusBox game={currentGame} errorMessage={errorMessage}/>
           <ConversationHistory conversation={currentGame && currentGame.conversation}/>

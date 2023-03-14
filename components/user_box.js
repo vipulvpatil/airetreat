@@ -21,7 +21,6 @@ const UserBox = ({bots, playerBot, gameId, selectedBot, selectBot, isAnswering})
   return (
     <div className={styles.userBox}>
       {selectedBotJsx}
-      <BotSelector bots={bots} selectBot={selectBot} playerBot={playerBot}/>
       <div className={styles.userConversation}>
         <ChatList chatList={playerBot && convertMessagesToChatList(playerBot.botMessages)}/>
       </div>
