@@ -165,11 +165,9 @@ const Game = () => {
             playerBot={playerBot}
           />
           <UserBox
-            bots={bots}
             playerBot={playerBot}
             gameId={currentGame && currentGame.id}
             selectedBot={selectedBot}
-            selectBot={selectBot}
             isAnswering={isAnswering}
           />
         </div>
