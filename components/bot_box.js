@@ -1,7 +1,6 @@
 const { Typography, Button, Stack } = require("@mui/material")
 import { createConversationForBot } from "@/common/chat_formatter"
 import styles from "@/styles/Home.module.css"
-import ChatList from "@/components/chat_list"
 import Conversation from "@/components/conversation"
 
 const BotBox = ({bot, addPadding, selectBot}) => {
@@ -25,7 +24,6 @@ const BotBox = ({bot, addPadding, selectBot}) => {
   return (
     <div className={styles.chatBox} style={styleJsx}>
       <div className={styles.conversation} style={{border: `5px solid ${botColor}`}}>
-        {/* <ChatList chatList={bot && convertMessagesToChatList(bot.botMessages)}/> */}
         <Conversation
           conversation={bot && createConversationForBot(bot)}
         />

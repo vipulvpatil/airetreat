@@ -53,4 +53,4 @@ const createFullConversationForGame = (conversation, bots, playerBot) => {
   return chatList
 }
 
-export {convertMessagesToChatList, createConversationForBot, createFullConversationForGame}
+export {createConversationForBot, createFullConversationForGame}
