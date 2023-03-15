@@ -25,4 +25,32 @@ const createConversationForBot = (bot) => {
   })
 }
 
-export {convertMessagesToChatList, createConversationForBot}
+const createFullConversationForGame = (conversation, bots, playerBot) => {
+  const botMap = {}
+  bots.forEach(bot => {
+    botMap[bot.id] = bot
+  })
+  botMap[playerBot.id] = playerBot
+  const chatList = []
+  let lastChat = null
+  for(let i = 0; i < conversation.length; i++) {
+    const conversationElement = conversation[i]
+    if(conversationElement.isQuestion) {
+      lastChat = {
+        bot: botMap[conversationElement.botId],
+        question: conversationElement.text
+      }
+    } else {
+      lastChat.answer = conversationElement.text
+      chatList.push(lastChat)
+      lastChat = null
+    }
+  }
+  if(lastChat) {
+    chatList.push(lastChat)
+    lastChat = null
+  }
+  return chatList
+}
+
+export {convertMessagesToChatList, createConversationForBot, createFullConversationForGame}

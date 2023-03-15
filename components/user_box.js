@@ -3,11 +3,14 @@ import SelectedBotBox from "@/components/selected_bot_box"
 import { createConversationForBot } from "@/common/chat_formatter"
 import Conversation from "./conversation"
 import { Button, Stack, Typography } from "@mui/material"
+import { useState } from "react"
 
-const UserBox = ({playerBot, gameId, selectedBot, isAnswering}) => {
+const UserBox = ({playerBot, gameId, selectedBot, isAnswering, fullConversation}) => {
   let selectedBotJsx
   let botName
   let botColor
+
+  const [showAllChat, setShowAllChat] = useState(false)
 
   if(selectedBot){
     selectedBotJsx =
@@ -29,7 +32,8 @@ const UserBox = ({playerBot, gameId, selectedBot, isAnswering}) => {
     <div className={styles.userBox}>
       {selectedBotJsx}
       <div className={styles.userConversation} style={{border: `5px solid ${botColor}`}}>
-        <Conversation conversation={playerBot && createConversationForBot(playerBot)}/>
+        {!showAllChat && <Conversation conversation={playerBot && createConversationForBot(playerBot)}/>}
+        {showAllChat && <Conversation conversation={fullConversation}/>}
       </div>
       <Typography variant="h4" sx={{backgroundColor: botColor, textAlign: "center"}}>
         {botName} (self)
@@ -37,11 +41,13 @@ const UserBox = ({playerBot, gameId, selectedBot, isAnswering}) => {
       <Stack direction="row" justifyContent="space-around" sx={{backgroundColor: botColor, p: "5px"}}>
         <Button
           variant="contained"
-        >
+          onClick={()=>{setShowAllChat(false)}}
+          >
           my chat
         </Button>
         <Button
           variant="contained"
+          onClick={()=>{setShowAllChat(true)}}
         >
           all chat
         </Button>

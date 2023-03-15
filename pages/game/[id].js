@@ -10,6 +10,7 @@ import { loadPlayerData } from "@/lib/local_storage"
 import usePoll from "react-use-poll"
 import ErrorChecker from "@/common/error_checker"
 import ConversationHistory from "@/components/conversation_history"
+import { createFullConversationForGame } from "@/common/chat_formatter"
 
 const botStyles = [
   {
@@ -44,6 +45,7 @@ const Game = () => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [selectedBot, setSelectedBot] = useState(null)
   const [isAnswering, setAnswering] = useState(false)
+  const [fullConversation, setFullConversation] = useState(null)
 
   useEffect(() => {
     if(router.query && router.query.id) {
@@ -97,6 +99,12 @@ const Game = () => {
       setErrorMessage(null)
     }
   }, [currentGame])
+
+  useEffect(() => {
+    if(currentGame && bots && playerBot) {
+      setFullConversation(createFullConversationForGame(currentGame.conversation, bots, playerBot))
+    }
+  }, [currentGame, bots, playerBot])
 
   useEffect(() => {
     if(currentGame) {
@@ -159,16 +167,12 @@ const Game = () => {
             />
           </Stack>
           <GameStatusBox game={currentGame} errorMessage={errorMessage}/>
-          <ConversationHistory
-            conversation={currentGame && currentGame.conversation}
-            bots={bots}
-            playerBot={playerBot}
-          />
           <UserBox
             playerBot={playerBot}
             gameId={currentGame && currentGame.id}
             selectedBot={selectedBot}
             isAnswering={isAnswering}
+            fullConversation={fullConversation}
           />
         </div>
       </div>
