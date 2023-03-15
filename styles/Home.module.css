@@ -136,7 +136,7 @@
 .gameStatusBox {
   max-width: 500px;
   margin: -12rem auto 2rem auto;
-  padding: 1rem;
+  padding: 0.5rem;
   text-align: center;
   background-color: var(--mui-palette-semiTransparent-main);
 }
@@ -181,7 +181,7 @@
   padding-bottom: 0.5rem;
 }
 
-.errorMessage {
+.statusMessage {
   color: var(--mui-palette-error-main);
 }
 

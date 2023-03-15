@@ -41,7 +41,7 @@ const Game = () => {
   const [currentGame, setCurrentGame] = useState(null)
   const [playerBot, setPlayerBot] = useState(null)
   const [gameId, setGameId] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [statusMessage, setStatusMessage] = useState(null)
   const [selectedBot, setSelectedBot] = useState(null)
   const [isAnswering, setAnswering] = useState(false)
   const [fullConversation, setFullConversation] = useState(null)
@@ -95,7 +95,11 @@ const Game = () => {
         return Object.assign(bot, {style: botStyles[index]})
       })
       setBots(botList)
-      setErrorMessage(null)
+      if(currentGame.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION" || currentGame.state === "WAITING_ON_YOU_TO_ANSWER") {
+        setStatusMessage("waiting on you")
+      } else {
+        setStatusMessage("please wait")
+      }
     }
   }, [currentGame])
 
@@ -123,20 +127,19 @@ const Game = () => {
   })
 
   const selectBot = (bot) => {
-    setErrorMessage(null)
     if(currentGame) {
       if(currentGame.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION") {
         if(bot !== playerBot) {
           setSelectedBot(bot)
         } else if(!selectedBot) {
-          setErrorMessage("please select a bot other than yourself")
+          setStatusMessage("please select a bot other than yourself")
         }
       } else if (currentGame.state === "WAITING_ON_YOU_TO_ANSWER") {
         if (bot !== playerBot){
-          setErrorMessage("you cannot select a bot other than yourself")
+          setStatusMessage("you cannot select a bot other than yourself")
         }
       } else {
-        setErrorMessage("please wait for your turn")
+        setStatusMessage("please wait for your turn")
       }
     }
   }
@@ -165,7 +168,7 @@ const Game = () => {
               selectBot={selectBot}
             />
           </Stack>
-          <GameStatusBox game={currentGame} errorMessage={errorMessage}/>
+          <GameStatusBox game={currentGame} statusMessage={statusMessage}/>
           <UserBox
             playerBot={playerBot}
             gameId={currentGame && currentGame.id}

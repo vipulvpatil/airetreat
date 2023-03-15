@@ -12,20 +12,11 @@ import { Divider, Stack, Typography } from "@mui/material"
 	// "TIME_UP"
 
 
-const GameStatusBox = ({game, errorMessage}) => {
+const GameStatusBox = ({game, statusMessage}) => {
   let displayMessage
-  let lastQuestion
-  let displayQuestion = false
 
   if (game){
     displayMessage = game.displayMessage
-    if(game.state === "WAITING_ON_BOT_TO_ANSWER" || game.state === "WAITING_ON_YOU_TO_ANSWER") {
-      displayQuestion = true
-      lastQuestion = `${game.lastQuestion}`
-    } else {
-      displayQuestion = false
-      lastQuestion = ""
-    }
   }
 
   return (
@@ -35,14 +26,8 @@ const GameStatusBox = ({game, errorMessage}) => {
           {displayMessage}
         </Typography>
         <Divider variant="fullWidth" />
-        <Typography variant="h4">
-          {displayQuestion && "Question"}
-        </Typography>
-        <Typography variant="h5">
-          {displayQuestion && lastQuestion}
-        </Typography>
-        <Typography variant="h6" className={styles.errorMessage}>
-          {errorMessage}
+        <Typography variant="h6" className={styles.statusMessage}>
+          {statusMessage}
         </Typography>
       </Stack>
     </div>
