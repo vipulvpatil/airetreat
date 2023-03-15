@@ -13,7 +13,6 @@ const Conversation = ({conversation}) => {
       {
         conversation &&
         conversation.map((conversationElement, index) => {
-          console.log(conversationElement.bot.style.color)
           return (
             <div className={styles.qna} key={index}>
               <div className={`${styles.messageBubble} ${styles.messageBubbleLeft}`}>

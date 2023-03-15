@@ -9,7 +9,6 @@ import api from "@/lib/api"
 import { loadPlayerData } from "@/lib/local_storage"
 import usePoll from "react-use-poll"
 import ErrorChecker from "@/common/error_checker"
-import ConversationHistory from "@/components/conversation_history"
 import { createFullConversationForGame } from "@/common/chat_formatter"
 
 const botStyles = [
