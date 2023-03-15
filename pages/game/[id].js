@@ -159,7 +159,11 @@ const Game = () => {
             />
           </Stack>
           <GameStatusBox game={currentGame} errorMessage={errorMessage}/>
-          <ConversationHistory conversation={currentGame && currentGame.conversation}/>
+          <ConversationHistory
+            conversation={currentGame && currentGame.conversation}
+            bots={bots}
+            playerBot={playerBot}
+          />
           <UserBox
             bots={bots}
             playerBot={playerBot}
