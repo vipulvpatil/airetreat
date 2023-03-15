@@ -19,4 +19,10 @@ const convertMessagesToChatList = (messages) => {
   return chatList
 }
 
-export {convertMessagesToChatList}
+const createConversationForBot = (bot) => {
+  return convertMessagesToChatList(bot.botMessages).map((chat) => {
+    return Object.assign(chat, {bot: bot})
+  })
+}
+
+export {convertMessagesToChatList, createConversationForBot}
