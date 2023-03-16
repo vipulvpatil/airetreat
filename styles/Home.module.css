@@ -66,10 +66,11 @@
 
 .gameContainer {
   min-width: 500px;
-  max-width: 1400px;
+  max-width: 1200px;
   width: 100vw;
   height: 1024px;
   margin: auto;
+  padding: 1rem;
 }
 
 .conversation {
@@ -88,7 +89,7 @@
 
 .userConversation {
   width: 500px;
-  height: 250px;
+  height: 286px;
   background-color: var(--mui-palette-semiTransparent-main);
   overflow-y: scroll;
   overflow-wrap: break-word;
@@ -135,7 +136,6 @@
 
 .gameStatusBox {
   max-width: 500px;
-  margin: -12rem auto 2rem auto;
   padding: 0.5rem;
   text-align: center;
   background-color: var(--mui-palette-semiTransparent-main);
@@ -159,8 +159,10 @@
 .selectedBotBox {
   background-color: var(--mui-palette-semiTransparent-main);
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem auto;
   border: 5px dashed var(--mui-palette-primary-main);
+  min-width: 500px;
+  max-width: 1200px;
 }
 
 .selectedBotMessageBox {

@@ -3,7 +3,7 @@ import { createConversationForBot } from "@/common/chat_formatter"
 import styles from "@/styles/Home.module.css"
 import Conversation from "@/components/conversation"
 
-const BotBox = ({bot, addPadding, selectBot}) => {
+const BotBox = ({bot, selectBot}) => {
   let styleJsx
   let botColor
   let botName
@@ -13,12 +13,6 @@ const BotBox = ({bot, addPadding, selectBot}) => {
     botName = bot.name
     botColor = bot.style.color
     botMap[bot.id] = bot
-  }
-
-  if (addPadding === "top") {
-    styleJsx = {paddingTop: "250px"}
-  } else {
-    styleJsx = {paddingTop: "20px"}
   }
 
   return (

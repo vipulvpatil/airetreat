@@ -50,6 +50,11 @@ const SelectedBotBox = ({bot, gameId, textFieldLabel}) => {
         >
           Send
         </Button>
+        <Button
+          variant="contained"
+        >
+          Suggest
+        </Button>
       </Stack>
     </div>
   )

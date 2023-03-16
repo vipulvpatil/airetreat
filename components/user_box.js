@@ -5,23 +5,11 @@ import Conversation from "./conversation"
 import { Button, Stack, Typography } from "@mui/material"
 import { useState } from "react"
 
-const UserBox = ({playerBot, gameId, selectedBot, isAnswering, fullConversation}) => {
-  let selectedBotJsx
+const UserBox = ({playerBot, fullConversation}) => {
   let botName
   let botColor
 
   const [showAllChat, setShowAllChat] = useState(false)
-
-  if(selectedBot){
-    selectedBotJsx =
-      <SelectedBotBox
-        bot={selectedBot}
-        gameId={gameId}
-        textFieldLabel={isAnswering?"answer":"question"}
-      />
-  } else {
-    selectedBotJsx = null
-  }
 
   if(playerBot) {
     botName = playerBot.name
@@ -30,7 +18,6 @@ const UserBox = ({playerBot, gameId, selectedBot, isAnswering, fullConversation}
 
   return (
     <div className={styles.userBox}>
-      {selectedBotJsx}
       <div className={styles.userConversation} style={{border: `5px solid ${botColor}`}}>
         {!showAllChat && <Conversation conversation={playerBot && createConversationForBot(playerBot)}/>}
         {showAllChat && <Conversation conversation={fullConversation}/>}
@@ -50,6 +37,11 @@ const UserBox = ({playerBot, gameId, selectedBot, isAnswering, fullConversation}
           onClick={()=>{setShowAllChat(true)}}
         >
           all chat
+        </Button>
+        <Button
+          variant="contained"
+        >
+          Help
         </Button>
       </Stack>
     </div>

@@ -10,6 +10,7 @@ import { loadPlayerData } from "@/lib/local_storage"
 import usePoll from "react-use-poll"
 import ErrorChecker from "@/common/error_checker"
 import { createFullConversationForGame } from "@/common/chat_formatter"
+import SelectedBotBox from "@/components/selected_bot_box"
 
 const botStyles = [
   {
@@ -45,6 +46,8 @@ const Game = () => {
   const [selectedBot, setSelectedBot] = useState(null)
   const [isAnswering, setAnswering] = useState(false)
   const [fullConversation, setFullConversation] = useState(null)
+
+  let selectedBotJsx = null
 
   useEffect(() => {
     if(router.query && router.query.id) {
@@ -144,38 +147,51 @@ const Game = () => {
     }
   }
 
+  if(selectedBot){
+    selectedBotJsx =
+      <SelectedBotBox
+        bot={selectedBot}
+        gameId={gameId}
+        textFieldLabel={isAnswering?"answer":"question"}
+      />
+  } else {
+    selectedBotJsx = null
+  }
+
   return (
     <div>
       <div className={styles.blurBackground}>
         <div className={styles.gameContainer}>
-          <Stack direction="row" spacing={2} alignItems="flex-start" justifyContent="space-around">
-            <BotBox
-              bot={bots[0]}
-              addPadding="top"
-              selectBot={selectBot}
-            />
-            <BotBox
-              bot={bots[1]}
-              selectBot={selectBot}
-            />
-            <BotBox
-              bot={bots[2]}
-              selectBot={selectBot}
-            />
-            <BotBox
-              bot={bots[3]}
-              addPadding="top"
-              selectBot={selectBot}
-            />
+          <Stack direction="row" alignItems="flex-start" justifyContent="space-between" spacing={2}>
+            <Stack direction="column-reverse" spacing={2}>
+              <BotBox
+                bot={bots[0]}
+                selectBot={selectBot}
+              />
+              <BotBox
+                bot={bots[1]}
+                selectBot={selectBot}
+              />
+            </Stack>
+            <Stack direction="column" spacing={2}>
+              <GameStatusBox game={currentGame} statusMessage={statusMessage}/>
+              <UserBox
+                playerBot={playerBot}
+                fullConversation={fullConversation}
+              />
+            </Stack>
+            <Stack direction="column" spacing={2}>
+              <BotBox
+                bot={bots[2]}
+                selectBot={selectBot}
+              />
+              <BotBox
+                bot={bots[3]}
+                selectBot={selectBot}
+              />
+            </Stack>
           </Stack>
-          <GameStatusBox game={currentGame} statusMessage={statusMessage}/>
-          <UserBox
-            playerBot={playerBot}
-            gameId={currentGame && currentGame.id}
-            selectedBot={selectedBot}
-            isAnswering={isAnswering}
-            fullConversation={fullConversation}
-          />
+          {selectedBotJsx}
         </div>
       </div>
     </div>
