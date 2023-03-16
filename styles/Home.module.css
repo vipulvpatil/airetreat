@@ -158,7 +158,7 @@
 
 .selectedBotBox {
   background-color: var(--mui-palette-semiTransparent-main);
-  padding: 0.5rem;
+  padding: 1rem;
   margin-bottom: 1rem;
   border: 5px dashed var(--mui-palette-primary-main);
 }
@@ -166,7 +166,6 @@
 .selectedBotMessageBox {
   display: flex;
   justify-content: flex-end;
-  padding-bottom: 0.6rem;
 }
 
 .selectedBotMessageTextField {

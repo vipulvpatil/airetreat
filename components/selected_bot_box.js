@@ -35,38 +35,21 @@ const SelectedBotBox = ({bot, gameId, textFieldLabel}) => {
 
   return (
     <div className={styles.selectedBotBox} style={{borderColor: bot.style.color}}>
-      <Stack>
-        <Stack className={styles.selectedBotMessageBox} direction="row" spacing={1}>
-          <TextField
-            label={textFieldLabel}
-            className={styles.selectedBotMessageTextField}
-            color={bot.style.theme}
-            onChange={messageChanged}
-            value={message}
-          />
-          <Button
-            variant="contained"
-            color={bot.style.theme}
-            onClick={sendMessage}
-          >
-            Send
-          </Button>
-        </Stack>
-        <Stack
-          className={styles.selectedBotButtons}
-          direction="row"
-          justifyContent="space-evenly"
-          style={{borderTopColor: bot.style.color}}
+      <Stack className={styles.selectedBotMessageBox} direction="row" spacing={1}>
+        <TextField
+          label={textFieldLabel}
+          className={styles.selectedBotMessageTextField}
+          color={bot.style.theme}
+          onChange={messageChanged}
+          value={message}
+        />
+        <Button
+          variant="contained"
+          color={bot.style.theme}
+          onClick={sendMessage}
         >
-          <Button
-            variant="contained"
-            color={bot.style.theme}
-          >
-            Tag
-          </Button>
-          <Button variant="contained">Suggest</Button>
-          <Button variant="contained">Help</Button>
-        </Stack>
+          Send
+        </Button>
       </Stack>
     </div>
   )
