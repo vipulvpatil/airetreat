@@ -1,11 +1,12 @@
+import {Divider, Typography} from "@mui/material"
 import Header from "@/components/header"
-import {Typography} from "@mui/material"
 import styles from "@/styles/Home.module.css"
 
 const Layout = ({children}) => {
   return (
     <div className={styles.container}>
       <Header />
+      <Divider variant="middle" />
       <main className={styles.main}>
         <div className={styles.gameBackground}>
           {children}

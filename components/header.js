@@ -1,10 +1,9 @@
-
-import {Button, Grid, Typography} from "@mui/material"
+import {Button, Stack, Typography} from "@mui/material"
 import Image from "next/image"
 import Link from "next/link"
 import styles from "@/styles/Home.module.css"
 
-const MenuItem = ({children, href}) => {
+const MenuLink = ({children, href}) => {
   if(href) {
     return (
       <Link className={styles.menuLink} href={href}>
@@ -23,26 +22,20 @@ const ProfileIcon = ({children}) => {
 const Header = () => {
   return (
     <div className={styles.header}>
-      <MenuItem href="/">
+      <Link href="/" className={styles.headerLogo}>
         <Image
           src="/ai-retreat-logo.png"
           alt="Ai Retreat"
           width={38} height={24}
           blurDataURL="/ai-retreat-logo.png"
         />
-      </MenuItem>
-      <Grid container className={styles.headerMenuLinks}>
-        <Grid item mobile={4} tablet={2}>
-          <MenuItem href="/">Home</MenuItem>
-        </Grid>
-        <Grid item mobile={4} tablet={2}>
-          <MenuItem href="/rules">Rules</MenuItem>
-        </Grid>
-        <Grid item mobile={4} tablet={2}>
-          <MenuItem href="/background">About</MenuItem>
-        </Grid>
-      </Grid>
-      <MenuItem href="/background"><ProfileIcon><Typography variant="link">G</Typography></ProfileIcon></MenuItem>
+      </Link>
+      <Stack className={styles.headerMenuLinks} direction="row">
+        <MenuLink href="/">Home</MenuLink>
+        <MenuLink href="/rules">Rules</MenuLink>
+        <MenuLink href="/background">About</MenuLink>
+      </Stack>
+      <ProfileIcon><Typography variant="link">G</Typography></ProfileIcon>
     </div>
   )
 }
