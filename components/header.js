@@ -1,5 +1,5 @@
 
-import {Button, Grid, Stack, Typography} from "@mui/material"
+import {Button, Grid, Typography} from "@mui/material"
 import Image from "next/image"
 import Link from "next/link"
 import styles from "@/styles/Home.module.css"
@@ -7,7 +7,7 @@ import styles from "@/styles/Home.module.css"
 const MenuItem = ({children, href}) => {
   if(href) {
     return (
-      <Link className={styles.menuItem} href={href}>
+      <Link className={styles.menuLink} href={href}>
         <Typography variant="link">{children}</Typography>
       </Link>
     )
@@ -23,29 +23,26 @@ const ProfileIcon = ({children}) => {
 const Header = () => {
   return (
     <div className={styles.header}>
-      <Grid container>
-        <Grid item tablet={6}>
-          <Stack spacing={0.5} direction="row">
-            <MenuItem href="/">
-              <Image
-                src="/AiRetreatLogo.png"
-                alt="Ai Retreat"
-                width={38} height={24}
-                blurDataURL="/AiRetreatLogo.png"
-              />
-            </MenuItem>
-            <MenuItem href="/">HOME</MenuItem>
-            <MenuItem href="/games">GAMES</MenuItem>
-            <MenuItem href="/rules">RULES</MenuItem>
-            <MenuItem href="/background">BACKGROUND</MenuItem>
-          </Stack>
+      <MenuItem href="/">
+        <Image
+          src="/ai-retreat-logo.png"
+          alt="Ai Retreat"
+          width={38} height={24}
+          blurDataURL="/ai-retreat-logo.png"
+        />
+      </MenuItem>
+      <Grid container className={styles.headerMenuLinks}>
+        <Grid item mobile={4} tablet={2}>
+          <MenuItem href="/">Home</MenuItem>
         </Grid>
-        <Grid item tablet={6}>
-          <Stack spacing={0.5} direction="row" sx={{justifyContent:"end"}}>
-            <ProfileIcon>VP</ProfileIcon>
-          </Stack>
+        <Grid item mobile={4} tablet={2}>
+          <MenuItem href="/rules">Rules</MenuItem>
+        </Grid>
+        <Grid item mobile={4} tablet={2}>
+          <MenuItem href="/background">About</MenuItem>
         </Grid>
       </Grid>
+      <MenuItem href="/background"><ProfileIcon><Typography variant="link">G</Typography></ProfileIcon></MenuItem>
     </div>
   )
 }

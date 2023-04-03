@@ -1,4 +1,4 @@
-import {bodyFont, headerFont} from "@/common/font"
+import {bodyFont, font1, headerFont} from "@/common/font"
 import {experimental_extendTheme as extendTheme} from "@mui/material/styles"
 
 const colors = {
@@ -54,7 +54,7 @@ export const theme = extendTheme({
   breakpoints: {
     values: {
       mobile: 0,
-      tablet: 700,
+      tablet: 500,
       desktop: 1000,
     },
   },
@@ -86,9 +86,8 @@ export const theme = extendTheme({
       fontSize: 16,
     },
     link: {
-      fontFamily: bodyFont.style.fontFamily,
+      fontFamily: font1.style.fontFamily,
       fontSize: 14,
-      fontWeight: 500,
     },
     footer: {
       fontFamily: headerFont.style.fontFamily,
