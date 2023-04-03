@@ -121,9 +121,8 @@ export const newTheme = extendTheme({
         },
         text: {
           primary: colors.baseColor,
-          secondary:  colors.secondaryColor,
         },
-        error: {
+        highlight: {
           main: colors.highlightColor,
         },
         action: {

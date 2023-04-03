@@ -22,7 +22,7 @@
   margin-top: auto;
   display: flex;
   flex: 1;
-  padding: 2rem 0;
+  padding: 16px 0;
   justify-content: center;
   align-items: center;
 }
@@ -64,11 +64,23 @@
 }
 
 .title {
-  color: #F14747;
+  color: var(--mui-palette-highlight-main);
 }
 
 .subtitle {
-  color: #E49A61;
+  color: var(--mui-palette-primary-main);
+  padding-top: 8px;
+  padding-bottom: 16px;
+}
+
+.homePageButtons {
+  margin-top: -52px;
+}
+
+.homePageButton {
+  filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.5));
+  -webkit-filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.5));
+  width: 160px;
 }
 
 .primaryButton {

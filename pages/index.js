@@ -1,4 +1,4 @@
-import {Button, Stack, Typography} from "@mui/material"
+import {Button, Grid, Stack, Typography} from "@mui/material"
 import Image from "next/image"
 import JoinGameDialog from "@/components/join_game_dialog"
 import api from "@/lib/api"
@@ -37,17 +37,25 @@ const Index = () => {
   return (
     <div>
       <Stack sx={{alignItems: "center"}}>
-        <Typography variant="h1" className={styles.title}>Ai Retreat</Typography>
-        <Typography variant="h2" className={styles.subtitle}>A two-player game of deduction.</Typography>
-        <div>
-          <Button className={styles.primaryButton} variant="contained" onClick={createGame}>Create a Game</Button>
-          <Button className={styles.primaryButton} variant="contained" onClick={joinGame}>Join Game</Button>
+        <div className={styles.title}>
+          <Typography variant="h1">Ai Retreat</Typography>
+        </div>
+        <div className={styles.subtitle}>
+          <Typography variant="h2">A two-player game of deduction.</Typography>
         </div>
         <Image
           className={styles.mainImage}
           src={mainImage}
           alt="Ai Retreat"
         />
+        <Grid container className={styles.homePageButtons} justifyContent="space-evenly">
+          <Grid item>
+            <Button className={styles.homePageButton} variant="contained" onClick={createGame}>Create a Game</Button>
+          </Grid>
+          <Grid item>
+            <Button className={styles.homePageButton} variant="contained" onClick={joinGame}>Join Game</Button>
+          </Grid>
+        </Grid>
       </Stack>
       <JoinGameDialog open={joinGameDialogOpen} joinGameId={joinGameId} setJoinGameId={setJoinGameId} handleClose={gameJoinClosed} />
     </div>
