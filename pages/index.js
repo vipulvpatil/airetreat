@@ -5,6 +5,7 @@ import {loadPlayerData} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 import {useRouter} from "next/router"
 import {useState} from "react"
+import Image from "next/image"
 
 const Index = () => {
   const router = useRouter()
@@ -33,11 +34,18 @@ const Index = () => {
   }
 
   return (
-    <div className={styles.indexContent}>
+    <div>
       <Stack spacing={2} sx={{alignItems: "center"}}>
-        <Typography variant="h6" className={styles.mainText}>AI Retreat is two-player game of deduction. Ask a friend or play with someone online.</Typography>
+        <Typography variant="h1">Ai Retreat</Typography>
+        <Typography variant="h2">A two-player game of deduction.</Typography>
         <Button className={styles.primaryButton} variant="contained" onClick={createGame}>Create a Game</Button>
         <Button className={styles.primaryButton} variant="contained" onClick={joinGame}>Join Game</Button>
+        <Image
+          src="/ai-retreat-main-image.png"
+          alt="Ai Retreat"
+          width={328} height={328}
+          blurDataURL="/ai-retreat-main-image.png"
+        />
       </Stack>
       <JoinGameDialog open={joinGameDialogOpen} joinGameId={joinGameId} setJoinGameId={setJoinGameId} handleClose={gameJoinClosed} />
     </div>

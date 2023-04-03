@@ -59,7 +59,16 @@ export const theme = extendTheme({
     },
   },
   typography: {
-    fontFamily: bodyFont.style.fontFamily,
+    fontFamily: font1.style.fontFamily,
+    h1: {
+      fontFamily: font1.style.fontFamily,
+      fontSize: 32,
+    },
+    h2: {
+      fontFamily: font1.style.fontFamily,
+      fontSize: 16,
+    },
+    ///
     subtitle: {
       fontFamily: headerFont.style.fontFamily,
       fontSize: 20,

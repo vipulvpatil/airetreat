@@ -26,15 +26,6 @@
   align-items: center;
 }
 
-.indexContent {
-  padding: 2rem;
-  background-color: var(--mui-palette-semiTransparent-main);
-  width: fit-content;
-  margin: auto;
-  margin-top: 1rem;
-  text-align: center;
-}
-
 .profileIcon {
   min-width: 24px;
   width: 24px;
@@ -49,19 +40,6 @@
 .primaryButton {
   min-width: 160px;
   max-width: 160px;
-}
-
-.mainText {
-  max-width: 350px;
-}
-
-.gameBackground {
-  min-width: 2400px;
-  max-width: 2400px;
-  height: 1024px;
-  background-image: url("/primary-bg.png");
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .blurBackground {
@@ -127,6 +105,7 @@
   overflow: hidden;
   display: flex;
   justify-content: center;
+  padding: 8px 16px;
 }
 
 .footer {
