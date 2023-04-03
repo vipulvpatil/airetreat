@@ -50,11 +50,25 @@
   width: 24px;
   height: 24px;
   border-radius: 24px;
-  background-color: #6564DB;
+  color: var(--mui-palette-primary-contrastText);
+  background-color: var(--mui-palette-primary-main);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: auto;
+}
+
+.profileIcon:hover {
+  color: var(--mui-palette-primary-contrastText);
+  background-color: var(--mui-palette-primary-dark);
+}
+
+.title {
+  color: #F14747;
+}
+
+.subtitle {
+  color: #E49A61;
 }
 
 .primaryButton {
@@ -130,7 +144,7 @@
   overflow: hidden;
   display: flex;
   justify-content: center;
-  padding: 8px 16px;
+  padding: 16px 16px;
 }
 
 

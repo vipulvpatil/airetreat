@@ -37,8 +37,8 @@ const Index = () => {
   return (
     <div>
       <Stack sx={{alignItems: "center"}}>
-        <Typography variant="h1">Ai Retreat</Typography>
-        <Typography variant="h2">A two-player game of deduction.</Typography>
+        <Typography variant="h1" className={styles.title}>Ai Retreat</Typography>
+        <Typography variant="h2" className={styles.subtitle}>A two-player game of deduction.</Typography>
         <div>
           <Button className={styles.primaryButton} variant="contained" onClick={createGame}>Create a Game</Button>
           <Button className={styles.primaryButton} variant="contained" onClick={joinGame}>Join Game</Button>

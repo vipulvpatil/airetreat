@@ -1,4 +1,4 @@
-import {Button, Stack, Typography} from "@mui/material"
+import {Stack, Typography} from "@mui/material"
 import Image from "next/image"
 import Link from "next/link"
 import styles from "@/styles/Home.module.css"
@@ -13,10 +13,6 @@ const MenuLink = ({children, href}) => {
   } else {
     return
   }
-}
-
-const ProfileIcon = ({children}) => {
-  return <Button className={styles.profileIcon}>{children}</Button>
 }
 
 const Header = () => {
@@ -35,7 +31,9 @@ const Header = () => {
         <MenuLink href="/rules">Rules</MenuLink>
         <MenuLink href="/background">About</MenuLink>
       </Stack>
-      <ProfileIcon><Typography variant="link">G</Typography></ProfileIcon>
+      <Link href="/" className={styles.profileIcon}>
+        <Typography variant="link">G</Typography>
+      </Link>
     </div>
   )
 }
