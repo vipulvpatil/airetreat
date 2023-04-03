@@ -1,11 +1,12 @@
 import {Button, Stack, Typography} from "@mui/material"
+import Image from "next/image"
 import JoinGameDialog from "@/components/join_game_dialog"
 import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
+import mainImage from "../public/ai-retreat-main-image.png"
 import styles from "@/styles/Home.module.css"
 import {useRouter} from "next/router"
 import {useState} from "react"
-import Image from "next/image"
 
 const Index = () => {
   const router = useRouter()
@@ -35,16 +36,17 @@ const Index = () => {
 
   return (
     <div>
-      <Stack spacing={2} sx={{alignItems: "center"}}>
+      <Stack sx={{alignItems: "center"}}>
         <Typography variant="h1">Ai Retreat</Typography>
         <Typography variant="h2">A two-player game of deduction.</Typography>
-        <Button className={styles.primaryButton} variant="contained" onClick={createGame}>Create a Game</Button>
-        <Button className={styles.primaryButton} variant="contained" onClick={joinGame}>Join Game</Button>
+        <div>
+          <Button className={styles.primaryButton} variant="contained" onClick={createGame}>Create a Game</Button>
+          <Button className={styles.primaryButton} variant="contained" onClick={joinGame}>Join Game</Button>
+        </div>
         <Image
-          src="/ai-retreat-main-image.png"
+          className={styles.mainImage}
+          src={mainImage}
           alt="Ai Retreat"
-          width={328} height={328}
-          blurDataURL="/ai-retreat-main-image.png"
         />
       </Stack>
       <JoinGameDialog open={joinGameDialogOpen} joinGameId={joinGameId} setJoinGameId={setJoinGameId} handleClose={gameJoinClosed} />

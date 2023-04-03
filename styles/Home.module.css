@@ -1,5 +1,6 @@
 .container {
-  min-width: 100vw;
+  width: 100vw;
+  max-width: 1200px;
   min-height: 100vh;
   background-color: var(--mui-palette-secondary-main);
   border: 1px solid var(--mui-palette-debug-main);
@@ -9,10 +10,22 @@
 }
 
 .header {
-  min-width: 100vw;
+  min-width: 100%;
   padding: 8px 16px;
   display: flex;
   border-bottom: 1px solid grey;
+}
+
+.footer {
+  width: 100vw;
+  max-width: 1200px;
+  max-height: 100px;
+  margin-top: auto;
+  display: flex;
+  flex: 1;
+  padding: 2rem 0;
+  justify-content: center;
+  align-items: center;
 }
 
 .menuLink {
@@ -56,6 +69,11 @@
   padding: 1rem;
 }
 
+.mainImage {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
 
 .conversation {
   width: 250px;
@@ -108,16 +126,6 @@
   padding: 8px 16px;
 }
 
-.footer {
-  min-width: 100vw;
-  max-height: 100px;
-  margin-top: auto;
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  justify-content: center;
-  align-items: center;
-}
 
 .gameStatusBox {
   max-width: 500px;
