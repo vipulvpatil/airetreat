@@ -1,10 +1,10 @@
-import { Button, Divider, Stack, Typography } from "@mui/material"
-import styles from "@/styles/Home.module.css"
-import { useRouter } from "next/router"
-import api from "@/lib/api"
-import { loadPlayerData } from "@/lib/local_storage"
-import { useState } from "react"
+import {Button, Stack, Typography} from "@mui/material"
 import JoinGameDialog from "@/components/join_game_dialog"
+import api from "@/lib/api"
+import {loadPlayerData} from "@/lib/local_storage"
+import styles from "@/styles/Home.module.css"
+import {useRouter} from "next/router"
+import {useState} from "react"
 
 const Index = () => {
   const router = useRouter()

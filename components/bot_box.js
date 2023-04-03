@@ -1,7 +1,7 @@
-const { Typography, Button, Stack } = require("@mui/material")
-import { createConversationForBot } from "@/common/chat_formatter"
-import styles from "@/styles/Home.module.css"
+const {Typography, Button, Stack} = require("@mui/material")
 import Conversation from "@/components/conversation"
+import {createConversationForBot} from "@/common/chat_formatter"
+import styles from "@/styles/Home.module.css"
 
 const BotBox = ({bot, selectBot}) => {
   let styleJsx

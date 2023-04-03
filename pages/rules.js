@@ -1,6 +1,6 @@
-import { Button, Stack, Typography } from "@mui/material"
+import {Button, Stack, Typography} from "@mui/material"
 import styles from "@/styles/Home.module.css"
-import { useRouter } from "next/router"
+import {useRouter} from "next/router"
 
 const Rules = () => {
   const router = useRouter()

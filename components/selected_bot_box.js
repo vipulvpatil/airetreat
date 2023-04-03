@@ -1,8 +1,8 @@
-import styles from "@/styles/Home.module.css"
-import { Button, Stack, TextField } from "@mui/material"
-import { useState } from "react"
+import {Button, Stack, TextField} from "@mui/material"
 import api from "@/lib/api"
-import { loadPlayerData } from "@/lib/local_storage"
+import {loadPlayerData} from "@/lib/local_storage"
+import styles from "@/styles/Home.module.css"
+import {useState} from "react"
 
 const SelectedBotBox = ({bot, gameId, textFieldLabel}) => {
   const [message, setMessage] = useState("")
@@ -23,7 +23,7 @@ const SelectedBotBox = ({bot, gameId, textFieldLabel}) => {
           text: message,
         })
         if (resp.error) {
-          console.log(error)
+          console.log(resp.error)
         } else {
           setMessage("")
         }

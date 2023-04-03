@@ -1,9 +1,9 @@
-import { Button, Stack, Typography } from "@mui/material"
-import { useSession, signOut } from "next-auth/react"
+import {Button, Stack, Typography} from "@mui/material"
+import {signOut, useSession} from "next-auth/react"
 import styles from "@/styles/Home.module.css"
 
 const Debug = () => {
-  const { data: session } = useSession({required: true})
+  const {data: session} = useSession({required: true})
   console.log(session)
   if(session){
     return (

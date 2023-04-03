@@ -1,5 +1,5 @@
+import {Divider, Stack, Typography} from "@mui/material"
 import styles from "@/styles/Home.module.css"
-import { Divider, Stack, Typography } from "@mui/material"
 
   // Possible states
 	// "WAITING_FOR_PLAYERS_TO_JOIN"

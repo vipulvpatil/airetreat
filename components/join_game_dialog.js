@@ -1,11 +1,10 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from "@mui/material"
-import { useState } from "react"
 
 const JoinGameDialog = ({open, joinGameId, setJoinGameId, handleClose}) => {
   const handleGameIdChanged = (e) => {
     setJoinGameId(e.target.value)
   }
-  
+
   return (
     <Dialog
         open={open}
@@ -17,8 +16,8 @@ const JoinGameDialog = ({open, joinGameId, setJoinGameId, handleClose}) => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="join-game-dialog-description">
-          <TextField 
-            id="join-game-text-field" 
+          <TextField
+            id="join-game-text-field"
             label="Game Id"
             variant="outlined"
             defaultValue={joinGameId}

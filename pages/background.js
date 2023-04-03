@@ -1,5 +1,5 @@
+import {Stack, Typography} from "@mui/material"
 import styles from "@/styles/Home.module.css"
-import { Stack, Typography } from "@mui/material"
 
 const Background = () => {
   return (

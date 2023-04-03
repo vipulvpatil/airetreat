@@ -1,9 +1,8 @@
-import styles from "@/styles/Home.module.css"
-import SelectedBotBox from "@/components/selected_bot_box"
-import { createConversationForBot } from "@/common/chat_formatter"
+import {Button, Stack, Typography} from "@mui/material"
 import Conversation from "./conversation"
-import { Button, Stack, Typography } from "@mui/material"
-import { useState } from "react"
+import {createConversationForBot} from "@/common/chat_formatter"
+import styles from "@/styles/Home.module.css"
+import {useState} from "react"
 
 const UserBox = ({playerBot, fullConversation}) => {
   let botName

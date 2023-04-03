@@ -1,11 +1,11 @@
+import {useEffect, useRef} from "react"
+import {Typography} from "@mui/material"
 import styles from "@/styles/Home.module.css"
-import { Typography } from "@mui/material"
-import { useEffect, useRef } from "react"
 
 const Conversation = ({conversation}) => {
   const bottomDiv = useRef()
   useEffect(() => {
-    bottomDiv.current.scrollIntoView({ block: "nearest", inline: "nearest"})
+    bottomDiv.current.scrollIntoView({block: "nearest", inline: "nearest"})
   })
 
   return (

@@ -1,6 +1,5 @@
-import styles from "@/styles/Home.module.css"
-import { Typography } from "@mui/material"
 import Link from "next/link"
+import {Typography} from "@mui/material"
 
 const GameList = ({gameIds}) => {
 

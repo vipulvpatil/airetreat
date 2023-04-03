@@ -1,9 +1,9 @@
-import { loadPlayerData } from "@/lib/local_storage"
-import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
-import styles from "@/styles/Home.module.css"
-import { Button, Stack, Typography } from "@mui/material"
+import {Button, Stack, Typography} from "@mui/material"
+import {useEffect, useState} from "react"
 import api from "@/lib/api"
+import {loadPlayerData} from "@/lib/local_storage"
+import styles from "@/styles/Home.module.css"
+import {useRouter} from "next/router"
 
 const Join = () => {
   const [joiningGameId, setJoiningGameId] = useState("")
