@@ -163,6 +163,11 @@ const Game = () => {
     <div>
       <Stack sx={{alignItems: "center"}}>
         <GameStatusBox game={currentGame} statusMessage={statusMessage}/>
+        <div className={styles.chatContainer}>
+          <div className={styles.filterBackgroundImage}>
+            Chat here.
+          </div>
+        </div>
         <Image
           className={styles.mainImage}
           src={mainImage}
