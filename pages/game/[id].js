@@ -1,18 +1,16 @@
-import {Button, Grid, Stack, Typography} from "@mui/material"
 import {useEffect, useState} from "react"
 import ErrorChecker from "@/common/error_checker"
 import GameStatusBox from "@/components/game_status_box"
-import Image from "next/image"
 import SelectedBotBox from "@/components/selected_bot_box"
+import {Stack} from "@mui/material"
 import UserBox from "@/components/user_box"
+import UserInput from "@/components/user_input"
 import api from "@/lib/api"
 import {createFullConversationForGame} from "@/common/chat_formatter"
 import {loadPlayerData} from "@/lib/local_storage"
-import mainImage from "../../public/ai-retreat-main-image.png"
 import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
 import {useRouter} from "next/router"
-import UserInput from "@/components/user_input"
 
 const botStyles = [
   {

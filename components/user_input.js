@@ -1,8 +1,8 @@
 import {TextField} from "@mui/material"
 import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
-import {useState} from "react"
 import styles from "@/styles/Home.module.css"
+import {useState} from "react"
 
 const UserInput = ({bot, gameId}) => {
   const [message, setMessage] = useState("")
