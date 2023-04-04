@@ -118,6 +118,10 @@
   -webkit-backdrop-filter: blur(4px);
 }
 
+.inputTextField {
+  color: var(--mui-palette-alternate-main);
+}
+
 .blurBackground {
   backdrop-filter: blur(3px) brightness(20%);
   -webkit-backdrop-filter: blur(3px) brightness(20%);

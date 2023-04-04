@@ -1,4 +1,4 @@
-import {bodyFont, font1, headerFont} from "@/common/font"
+import {bodyFont, font1, font2, headerFont} from "@/common/font"
 import {experimental_extendTheme as extendTheme} from "@mui/material/styles"
 
 const colors = {
@@ -7,6 +7,7 @@ const colors = {
   secondaryColor: "#E8D9D9",
   emergencyColor: "#E53D00",
   baseColor: "#E49A61",
+  lightColor: "#F7C9A6",
   highlightColor: "#F14747",
 }
 
@@ -61,7 +62,7 @@ export const theme = extendTheme({
     },
   },
   typography: {
-    fontFamily: font1.style.fontFamily,
+    fontFamily: font2.style.fontFamily,
     h1: {
       fontFamily: font1.style.fontFamily,
       fontSize: 32,
@@ -70,7 +71,6 @@ export const theme = extendTheme({
       fontFamily: font1.style.fontFamily,
       fontSize: 16,
     },
-    ///
     subtitle: {
       fontFamily: headerFont.style.fontFamily,
       fontSize: 20,
@@ -119,6 +119,10 @@ export const newTheme = extendTheme({
           main: colors.backgroundColor,
           contrastText: colors.baseColor,
         },
+        alternate: {
+          main: colors.lightColor,
+          contrastText: colors.backgroundColor,
+        },
         text: {
           primary: colors.baseColor,
         },
@@ -148,7 +152,9 @@ export const newTheme = extendTheme({
     },
   },
   typography: {
-    fontFamily: font1.style.fontFamily,
+    fontFamily: font2.style.fontFamily,
+    fontSize: 14,
+    fontWeight: 400,
     h1: {
       fontFamily: font1.style.fontFamily,
       fontSize: 32,
@@ -161,7 +167,6 @@ export const newTheme = extendTheme({
       fontFamily: font1.style.fontFamily,
       fontSize: 14,
     },
-    ///
     subtitle: {
       fontFamily: headerFont.style.fontFamily,
       fontSize: 20,

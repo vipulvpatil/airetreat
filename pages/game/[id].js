@@ -12,6 +12,7 @@ import mainImage from "../../public/ai-retreat-main-image.png"
 import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
 import {useRouter} from "next/router"
+import UserInput from "@/components/user_input"
 
 const botStyles = [
   {
@@ -168,19 +169,7 @@ const Game = () => {
             Chat here.
           </div>
         </div>
-        <Image
-          className={styles.mainImage}
-          src={mainImage}
-          alt="Ai Retreat"
-        />
-        <Grid container className={styles.homePageButtons} justifyContent="space-evenly">
-          <Grid item>
-            <Button className={styles.homePageButton} variant="contained">Create a Game</Button>
-          </Grid>
-          <Grid item>
-            <Button className={styles.homePageButton} variant="contained">Join Game</Button>
-          </Grid>
-        </Grid>
+        <UserInput/>
       </Stack>
       <div className={styles.blurBackground}>
         <div className={styles.gameContainer}>
