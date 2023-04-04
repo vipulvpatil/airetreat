@@ -83,6 +83,18 @@
   width: 160px;
 }
 
+.gameStatusBox {
+  max-width: 500px;
+  text-align: center;
+  background-color: var(--mui-palette-semiTransparent-main);
+}
+
+.statusMessage {
+  color: var(--mui-palette-highlight-main);
+  padding-top: 4px;
+  padding-bottom: 16px;
+}
+
 .primaryButton {
   min-width: 160px;
   max-width: 160px;
@@ -160,12 +172,7 @@
 }
 
 
-.gameStatusBox {
-  max-width: 500px;
-  padding: 0.5rem;
-  text-align: center;
-  background-color: var(--mui-palette-semiTransparent-main);
-}
+
 
 .conversationHistoryBox {
   max-width: 500px;
@@ -208,9 +215,6 @@
   padding-bottom: 0.5rem;
 }
 
-.statusMessage {
-  color: var(--mui-palette-error-main);
-}
 
 .messageBubble {
   margin: 0.5rem;

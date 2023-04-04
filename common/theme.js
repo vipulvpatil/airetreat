@@ -157,6 +157,10 @@ export const newTheme = extendTheme({
       fontFamily: font1.style.fontFamily,
       fontSize: 16,
     },
+    h3: {
+      fontFamily: font1.style.fontFamily,
+      fontSize: 14,
+    },
     ///
     subtitle: {
       fontFamily: headerFont.style.fontFamily,

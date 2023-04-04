@@ -1,4 +1,4 @@
-import {Divider, Stack, Typography} from "@mui/material"
+import {Stack, Typography} from "@mui/material"
 import styles from "@/styles/Home.module.css"
 
   // Possible states
@@ -21,17 +21,17 @@ const GameStatusBox = ({game, statusMessage}) => {
 
   return (
     <div className={styles.gameStatusBox}>
-      <Stack spacing={1}>
-        <Typography variant="h6">
+      <Stack>
+        <Typography variant="h2">
           {displayMessage}
         </Typography>
-        <Divider variant="fullWidth" />
-        <Typography variant="h6" className={styles.statusMessage}>
-          {statusMessage}
-        </Typography>
+        <div className={styles.statusMessage}>
+          <Typography variant="h3">
+            {statusMessage}
+          </Typography>
+        </div>
       </Stack>
     </div>
-
   )
 }
 

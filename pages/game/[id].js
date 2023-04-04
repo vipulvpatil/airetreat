@@ -1,13 +1,14 @@
+import {Button, Grid, Stack, Typography} from "@mui/material"
 import {useEffect, useState} from "react"
-import BotBox from "@/components/bot_box"
 import ErrorChecker from "@/common/error_checker"
 import GameStatusBox from "@/components/game_status_box"
+import Image from "next/image"
 import SelectedBotBox from "@/components/selected_bot_box"
-import {Stack} from "@mui/material"
 import UserBox from "@/components/user_box"
 import api from "@/lib/api"
 import {createFullConversationForGame} from "@/common/chat_formatter"
 import {loadPlayerData} from "@/lib/local_storage"
+import mainImage from "../../public/ai-retreat-main-image.png"
 import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
 import {useRouter} from "next/router"
@@ -160,34 +161,30 @@ const Game = () => {
 
   return (
     <div>
+      <Stack sx={{alignItems: "center"}}>
+        <GameStatusBox game={currentGame} statusMessage={statusMessage}/>
+        <Image
+          className={styles.mainImage}
+          src={mainImage}
+          alt="Ai Retreat"
+        />
+        <Grid container className={styles.homePageButtons} justifyContent="space-evenly">
+          <Grid item>
+            <Button className={styles.homePageButton} variant="contained">Create a Game</Button>
+          </Grid>
+          <Grid item>
+            <Button className={styles.homePageButton} variant="contained">Join Game</Button>
+          </Grid>
+        </Grid>
+      </Stack>
       <div className={styles.blurBackground}>
         <div className={styles.gameContainer}>
           <Stack direction="row" alignItems="flex-start" justifyContent="space-between" spacing={2}>
-            <Stack direction="column-reverse" spacing={2}>
-              <BotBox
-                bot={bots[0]}
-                selectBot={selectBot}
-              />
-              <BotBox
-                bot={bots[1]}
-                selectBot={selectBot}
-              />
-            </Stack>
             <Stack direction="column" spacing={2}>
-              <GameStatusBox game={currentGame} statusMessage={statusMessage}/>
+
               <UserBox
                 playerBot={playerBot}
                 fullConversation={fullConversation}
-              />
-            </Stack>
-            <Stack direction="column" spacing={2}>
-              <BotBox
-                bot={bots[2]}
-                selectBot={selectBot}
-              />
-              <BotBox
-                bot={bots[3]}
-                selectBot={selectBot}
               />
             </Stack>
           </Stack>
