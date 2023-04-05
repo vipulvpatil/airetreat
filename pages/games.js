@@ -50,7 +50,7 @@ const Index = () => {
   return (
     <div className={styles.indexContent}>
       <Stack spacing={2} sx={{alignItems: "center"}}>
-        <Typography variant="h5" className={styles.mainText}>Your ongoing games</Typography>
+        <Typography variant="h2" className={styles.mainText}>Your ongoing games</Typography>
         <GameList gameIds={gameIds}/>
         <Divider flexItem light={true}/>
         <Button className={styles.primaryButton} variant="contained" onClick={createGame}>Create a Game</Button>
