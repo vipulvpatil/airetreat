@@ -160,7 +160,7 @@
 .filterBackgroundImage {
   width: 100%;
   height: 100%;
-  background-color: rgba(244, 237, 237, 0.2);
+  background-color: rgba(130, 130, 130, 0.45);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 2px;
@@ -230,133 +230,12 @@
   margin-right: 8px;
 }
 
-
-/* old stuff below?*/
-
-.blurBackground {
-  backdrop-filter: blur(3px) brightness(20%);
-  -webkit-backdrop-filter: blur(3px) brightness(20%);
-}
-
-.gameContainer {
-  min-width: 375px;
-  max-width: 1200px;
-  width: 100vw;
-  height: 1024px;
-  margin: auto;
-  padding: 1rem;
-}
-
 .mainImage {
   width: 100%;
   max-width: 600px;
   height: auto;
 }
 
-.conversation {
-  width: 250px;
-  height: 150px;
-  background-color: var(--mui-palette-semiTransparent-main);
-  overflow-y: scroll;
-  overflow-wrap: break-word;
-}
-
-.conversationButtons {
-  width: 250px;
-  height: 50px;
-  background-color: var(--mui-palette-semiTransparent-main);
-}
-
-.userConversation {
-  width: 500px;
-  height: 286px;
-  background-color: var(--mui-palette-semiTransparent-main);
-  overflow-y: scroll;
-  overflow-wrap: break-word;
-  border: 5px solid var(--mui-palette-primary-main);
-}
-
-.chatBox {
-  width: fit-content;
-}
-
-.userBox {
-  width: fit-content;
-  margin: auto;
-}
-
-.qna {
-  padding: 0rem;
-}
-
-.botButton {
-  width: 100%;
-  padding: 0.4rem 0.4rem;
-  text-align: center;
-}
-
 .main {
   padding: 16px 16px;
-}
-
-.conversationHistoryBox {
-  max-width: 500px;
-  max-height: 200px;
-  margin: 2rem auto 2rem auto;
-  padding: 1rem;
-  text-align: left;
-  background-color: var(--mui-palette-semiTransparent-main);
-  overflow-y: scroll;
-  overflow-wrap: break-word;
-}
-
-.timerBar {
-  padding-top: 1rem;
-}
-
-.selectedBotBox {
-  background-color: var(--mui-palette-semiTransparent-main);
-  padding: 1rem;
-  margin: 1rem auto;
-  border: 5px dashed var(--mui-palette-primary-main);
-  min-width: 500px;
-  max-width: 1200px;
-}
-
-.selectedBotMessageBox {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.selectedBotMessageTextField {
-  width: -moz-available;
-  width: -webkit-fill-available;
-  width: stretch;
-}
-
-.selectedBotButtons {
-  border-top: 1px solid var(--mui-palette-primary-main);
-  padding-top: 1rem;
-  padding-bottom: 0.5rem;
-}
-
-
-.messageBubble {
-  margin: 0.5rem;
-  padding: 0.5rem;
-  width: fit-content;
-  max-width: 80%;
-  border-radius: 1rem;
-}
-
-.messageBubbleLeft {
-  text-align: left;
-  margin-right: auto;
-  color: var(--mui-palette-secondary-main);
-  background-color: var(--mui-palette-text-secondary);
-}
-
-.messageBubbleRight {
-  text-align: right;
-  margin-left: auto;
 }
