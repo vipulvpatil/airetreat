@@ -75,6 +75,8 @@
 
 .homePageButtons {
   margin-top: -52px;
+  width: 100%;
+  max-width: 600px;
 }
 
 .gameButtons {
@@ -91,6 +93,7 @@
 
 .resizeableButton {
   width: 30vw;
+  min-width: 160px;
 }
 
 .botSelectorButton {

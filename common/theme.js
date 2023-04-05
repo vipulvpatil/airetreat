@@ -11,7 +11,6 @@ const colors = {
   highlightColor: "#F14747",
 }
 
-// const botColors = ["#8C964A", "#5458C9", "#AD5C93", "#087F8C", "#E49A61"]
 const botColors = ["#CEE132", "#44DCE5", "#AC64F4", "#35D959", "#E49A61"]
 
 const generateBotStyle = (botColor) => {
