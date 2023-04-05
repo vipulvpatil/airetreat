@@ -1,12 +1,12 @@
 import {Button, Grid, TextField, Typography} from "@mui/material"
+import {useEffect, useState} from "react"
 import AssistantIcon from "@mui/icons-material/Assistant"
 import BotSelector from "@/components/bot_selector"
 import ReportIcon from "@mui/icons-material/Report"
 import SendIcon from "@mui/icons-material/Send"
-import styles from "@/styles/Home.module.css"
-import {useEffect, useState} from "react"
-import {loadPlayerData} from "@/lib/local_storage"
 import api from "@/lib/api"
+import {loadPlayerData} from "@/lib/local_storage"
+import styles from "@/styles/Home.module.css"
 
 const UserInput = ({game, playerBot, bots}) => {
   const [message, setMessage] = useState("")
@@ -27,8 +27,10 @@ const UserInput = ({game, playerBot, bots}) => {
         setShowBotSelector(true)
         setSelectedBot(bots[0])
       } else if(game.state === "WAITING_ON_YOU_TO_ANSWER") {
+        setShowBotSelector(false)
         setSelectedBot(playerBot)
       } else {
+        setShowBotSelector(false)
         setSelectedBot(null)
       }
     }
@@ -57,20 +59,25 @@ const UserInput = ({game, playerBot, bots}) => {
   }
 
   return <div className={styles.userInput}>
-    {showBotSelector &&
-      <div className={styles.botSelectorContainer}>
-        <BotSelector defaultBot={bots[0]} otherBots={bots.slice(1)} direction="up"/>
-      </div>
-    }
     <TextField
       color="alternate"
-      inputProps={{
-        className: styles.inputTextField
-      }}
+      inputProps={
+        showBotSelector && {
+          className: styles.questionInputTextField
+        } || {
+          className: styles.answerInputTextField
+        }
+      }
       className={styles.userInputTextField}
       onChange={messageChanged}
       value={message}
     />
+    {
+      showBotSelector &&
+      <div className={styles.botSelectorContainer}>
+        <BotSelector defaultBot={bots[0]} otherBots={bots.slice(1)} direction="up"/>
+      </div>
+    }
     <Grid container className={styles.gameButtons} justifyContent="space-between">
       <Grid item>
         <Button className={styles.poppingButton} variant="contained" startIcon={<AssistantIcon />}>
@@ -91,7 +98,7 @@ const UserInput = ({game, playerBot, bots}) => {
           className={styles.poppingButton}
           variant="contained"
           startIcon={<SendIcon/>}
-          onclick={sendMessage}
+          onClick={sendMessage}
           >
           <Typography variant="h2">
             Send

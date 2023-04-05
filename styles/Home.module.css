@@ -101,8 +101,8 @@
 
 .botSelectorContainer {
   padding-left: 8px;
-  margin-top: 20px;
-  margin-bottom: -40px;
+  margin-top: -40px;
+  margin-bottom: 20px;
 }
 
 .gameStatusBox {
@@ -155,7 +155,12 @@
   -webkit-backdrop-filter: blur(4px);
 }
 
-.inputTextField {
+.questionInputTextField {
+  color: var(--mui-palette-alternate-main);
+  padding-left: 106px;
+}
+
+.answerInputTextField {
   color: var(--mui-palette-alternate-main);
 }
 
@@ -174,14 +179,6 @@
   backdrop-filter: blur(3px) brightness(20%);
   -webkit-backdrop-filter: blur(3px) brightness(20%);
 }
-
-
-
-
-
-
-
-
 
 .gameContainer {
   min-width: 375px;

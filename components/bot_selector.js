@@ -28,20 +28,22 @@ const BotSelector = ({defaultBot, otherBots, direction}) => {
     const items = []
     if(defaultBot !== selectedBot) {
       items.push(
-        <MenuItem onClick={handleClose} className={styles.menuItem}>
+        <MenuItem onClick={handleClose} className={styles.menuItem} key={defaultBot.id}>
           <Button
             className={`${styles.poppingButton} ${styles.botSelectorButton}`}
             variant="contained"
             color={defaultBot.style.theme}
             onClick={handleBotSelection(defaultBot)}
-          >{defaultBot.name}</Button>
+          >
+            {defaultBot.name}
+          </Button>
         </MenuItem>
       )
     }
     otherBots.forEach(bot => {
       if(bot !== selectedBot) {
         items.push(
-          <MenuItem onClick={handleClose} className={styles.menuItem}>
+          <MenuItem onClick={handleClose} className={styles.menuItem} key={bot.id}>
             <Button
               className={`${styles.poppingButton} ${styles.botSelectorButton}`}
               variant="contained"
