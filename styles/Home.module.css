@@ -116,11 +116,12 @@
 }
 
 .menuList {
-  padding: 0px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 .menuItem {
-  padding: 8px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
   min-height: 36px;
 }
 

@@ -51,8 +51,15 @@ const Test = () => {
   }
 
   return (
-    <div>
+    <div style={{
+      display: "flex",
+      justifyContent: "center",
+      width: "100%",
+      height: "500px",
+      alignItems: "center"
+    }}>
       <BotSelector defaultBot={playerBot} otherBots={bots}/>
+      <BotSelector defaultBot={playerBot} otherBots={bots} direction="up"/>
     </div>
   )
 }

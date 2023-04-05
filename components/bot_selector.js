@@ -2,7 +2,7 @@ import {Button, Fade, Menu, MenuItem} from "@mui/material"
 import {useEffect, useState} from "react"
 import styles from "@/styles/Home.module.css"
 
-const BotSelector = ({defaultBot, otherBots}) => {
+const BotSelector = ({defaultBot, otherBots, direction}) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [selectedBot, setSelectedBot] = useState(null)
   const [menuItems, setMenuItems] = useState(null)
@@ -53,7 +53,7 @@ const BotSelector = ({defaultBot, otherBots}) => {
       }
     })
     setMenuItems(items)
-  },[selectedBot])
+  },[defaultBot, otherBots, selectedBot])
 
   return<div>
     <Button
@@ -83,6 +83,24 @@ const BotSelector = ({defaultBot, otherBots}) => {
         paper: styles.menuPaper,
         list: styles.menuList,
       }}
+      anchorOrigin={
+        (direction === "up") && {
+          horizontal: "left",
+          vertical: "top"
+        } || {
+          horizontal: "left",
+          vertical: "bottom"
+        }
+      }
+      transformOrigin={
+        (direction === "up") && {
+          horizontal: "left",
+          vertical: "bottom"
+        } || {
+          horizontal: "left",
+          vertical: "top"
+        }
+      }
     >
       {menuItems}
     </Menu>
