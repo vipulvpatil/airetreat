@@ -104,10 +104,11 @@
   background-image: url("/ai-retreat-main-image.png");
   width: 100%;
   max-width: 600px;
-  height: 500px;
+  height: 80vw;
+  max-height: 600px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 600px;
+  background-size: cover;
 }
 
 .filterBackgroundImage {
