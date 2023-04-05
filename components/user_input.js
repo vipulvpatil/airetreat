@@ -18,10 +18,6 @@ const UserInput = ({game, playerBot, bots}) => {
   }
 
   useEffect(() => {
-
-  }, [])
-
-  useEffect(() => {
     if(game){
       if(game.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION") {
         setShowBotSelector(true)
@@ -75,7 +71,12 @@ const UserInput = ({game, playerBot, bots}) => {
     {
       showBotSelector &&
       <div className={styles.botSelectorContainer}>
-        <BotSelector defaultBot={bots[0]} otherBots={bots.slice(1)} direction="up"/>
+        <BotSelector
+          defaultBot={bots[0]}
+          otherBots={bots.slice(1)}
+          direction="up"
+          botSelectionCallback={setSelectedBot}
+        />
       </div>
     }
     <Grid container className={styles.gameButtons} justifyContent="space-between">

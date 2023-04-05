@@ -2,7 +2,7 @@ import {Button, Fade, Menu, MenuItem} from "@mui/material"
 import {useEffect, useState} from "react"
 import styles from "@/styles/Home.module.css"
 
-const BotSelector = ({defaultBot, otherBots, direction}) => {
+const BotSelector = ({defaultBot, otherBots, direction, botSelectionCallback}) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [selectedBot, setSelectedBot] = useState(null)
   const [menuItems, setMenuItems] = useState(null)
@@ -20,6 +20,7 @@ const BotSelector = ({defaultBot, otherBots, direction}) => {
 
   const handleBotSelection = (bot) => ()=> {
     setSelectedBot(bot)
+    botSelectionCallback(bot)
   }
 
   const handleScroll = () => {
