@@ -8,9 +8,7 @@ const Layout = ({children}) => {
       <Header />
       <Divider variant="middle" />
       <main className={styles.main}>
-        <div className={styles.gameBackground}>
-          {children}
-        </div>
+        {children}
       </main>
       <footer className={styles.footer}>
         <Typography variant="footer">
