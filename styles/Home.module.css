@@ -105,6 +105,18 @@
   padding-bottom: 16px;
 }
 
+.menuPaper {
+  background: none;
+}
+
+.menuList {
+  padding: 0px;
+}
+
+.menuItem {
+  padding: 8px 0px 0px 0px;
+}
+
 .primaryButton {
   min-width: 160px;
   max-width: 160px;
