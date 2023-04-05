@@ -1,18 +1,38 @@
 import {Button, Grid, TextField, Typography} from "@mui/material"
 import AssistantIcon from "@mui/icons-material/Assistant"
+import BotSelector from "@/components/bot_selector"
 import ReportIcon from "@mui/icons-material/Report"
 import SendIcon from "@mui/icons-material/Send"
-import api from "@/lib/api"
-import {loadPlayerData} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
-import {useState} from "react"
+import {useEffect, useState} from "react"
+import {loadPlayerData} from "@/lib/local_storage"
+import api from "@/lib/api"
 
-const UserInput = ({bot, gameId}) => {
+const UserInput = ({game, playerBot, bots}) => {
   const [message, setMessage] = useState("")
+  const [showBotSelector, setShowBotSelector] = useState(false)
+  const [selectedBot, setSelectedBot] = useState(null)
 
   const messageChanged = (event) => {
     setMessage(event.target.value)
   }
+
+  useEffect(() => {
+
+  }, [])
+
+  useEffect(() => {
+    if(game){
+      if(game.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION") {
+        setShowBotSelector(true)
+        setSelectedBot(bots[0])
+      } else if(game.state === "WAITING_ON_YOU_TO_ANSWER") {
+        setSelectedBot(playerBot)
+      } else {
+        setSelectedBot(null)
+      }
+    }
+  }, [playerBot, game, bots])
 
   const sendMessage = async () => {
     const trimmedMessage = message.trim()
@@ -20,9 +40,9 @@ const UserInput = ({bot, gameId}) => {
       try {
         const playerData = await loadPlayerData()
         const resp = await api.call("sendMessage", {
-          gameId: gameId,
+          gameId: game.id,
           playerId: playerData.id,
-          botId: bot.id,
+          botId: selectedBot.id,
           text: message,
         })
         if (resp.error) {
@@ -35,7 +55,13 @@ const UserInput = ({bot, gameId}) => {
       }
     }
   }
+
   return <div className={styles.userInput}>
+    {showBotSelector &&
+      <div className={styles.botSelectorContainer}>
+        <BotSelector defaultBot={bots[0]} otherBots={bots.slice(1)} direction="up"/>
+      </div>
+    }
     <TextField
       color="alternate"
       inputProps={{
@@ -61,7 +87,12 @@ const UserInput = ({bot, gameId}) => {
         </Button>
       </Grid>
       <Grid item>
-        <Button className={styles.poppingButton} variant="contained" startIcon={<SendIcon/>}>
+        <Button
+          className={styles.poppingButton}
+          variant="contained"
+          startIcon={<SendIcon/>}
+          onclick={sendMessage}
+          >
           <Typography variant="h2">
             Send
           </Typography>

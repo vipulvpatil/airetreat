@@ -99,6 +99,12 @@
   padding-bottom: 0px;
 }
 
+.botSelectorContainer {
+  padding-left: 8px;
+  margin-top: 20px;
+  margin-bottom: -40px;
+}
+
 .gameStatusBox {
   max-width: 500px;
   text-align: center;
