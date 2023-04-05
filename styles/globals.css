@@ -101,3 +101,7 @@ a {
 .MuiDivider-root {
   border-bottom-color: var(--mui-palette-primary-main);
 }
+
+.MuiButton-contained {
+  text-transform: capitalize !important;
+}

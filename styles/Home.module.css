@@ -77,10 +77,20 @@
   margin-top: -52px;
 }
 
-.homePageButton {
+.gameButtons {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.poppingButton {
   filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.5));
   -webkit-filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.5));
-  width: 160px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.fixedSizeButton {
+  width: 30vw;
 }
 
 .gameStatusBox {
@@ -125,6 +135,7 @@
 
 .userInput {
   padding-top: 8px;
+  padding-bottom: 8px;
   width: 100%;
   max-width: 600px;
 }

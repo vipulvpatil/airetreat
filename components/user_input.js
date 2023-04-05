@@ -1,4 +1,7 @@
-import {TextField} from "@mui/material"
+import {Button, Grid, TextField, Typography} from "@mui/material"
+import AssistantIcon from "@mui/icons-material/Assistant"
+import ReportIcon from "@mui/icons-material/Report"
+import SendIcon from "@mui/icons-material/Send"
 import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
@@ -42,6 +45,29 @@ const UserInput = ({bot, gameId}) => {
       onChange={messageChanged}
       value={message}
     />
+    <Grid container className={styles.gameButtons} justifyContent="space-between">
+      <Grid item>
+        <Button className={styles.poppingButton} variant="contained" startIcon={<AssistantIcon />}>
+          <Typography variant="h2">
+            Suggest
+          </Typography>
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button className={styles.poppingButton} variant="contained" startIcon={<ReportIcon/>}>
+          <Typography variant="h2">
+            Tag
+          </Typography>
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button className={styles.poppingButton} variant="contained" startIcon={<SendIcon/>}>
+          <Typography variant="h2">
+            Send
+          </Typography>
+        </Button>
+      </Grid>
+    </Grid>
   </div>
 }
 

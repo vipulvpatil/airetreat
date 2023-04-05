@@ -50,10 +50,18 @@ const Index = () => {
         />
         <Grid container className={styles.homePageButtons} justifyContent="space-evenly">
           <Grid item>
-            <Button className={styles.homePageButton} variant="contained" onClick={createGame}>Create a Game</Button>
+            <Button className={`${styles.poppingButton} ${styles.fixedSizeButton}`} variant="contained" onClick={createGame}>
+              <Typography variant="h2">
+                Create a Game
+              </Typography>
+            </Button>
           </Grid>
           <Grid item>
-            <Button className={styles.homePageButton} variant="contained" onClick={joinGame}>Join Game</Button>
+            <Button className={`${styles.poppingButton} ${styles.fixedSizeButton}`} variant="contained" onClick={joinGame}>
+              <Typography variant="h2">
+                Join Game
+              </Typography>
+            </Button>
           </Grid>
         </Grid>
       </Stack>
