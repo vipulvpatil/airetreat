@@ -89,8 +89,12 @@
   padding-bottom: 8px;
 }
 
-.fixedSizeButton {
+.resizeableButton {
   width: 30vw;
+}
+
+.botSelectorButton {
+  width: 90px;
 }
 
 .gameStatusBox {
