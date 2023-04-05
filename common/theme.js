@@ -168,6 +168,16 @@ export const newTheme = extendTheme({
       fontFamily: font1.style.fontFamily,
       fontSize: 14,
     },
+    questionLabel: {
+      fontFamily: font2.style.fontFamily,
+      fontSize: 12,
+      fontWeight: 700
+    },
+    messageText: {
+      fontFamily: font2.style.fontFamily,
+      fontSize: 16,
+      fontWeight: 400
+    },
     subtitle: {
       fontFamily: headerFont.style.fontFamily,
       fontSize: 20,

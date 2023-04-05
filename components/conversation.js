@@ -16,9 +16,16 @@ const Conversation = ({playerBot, conversation}) => {
           return (
             <div key={index}>
               <div className={`${styles.receivedMessage} ${styles.questionMessage}`}>
-                <Typography variant="question">
-                  {conversationElement.question}
-                </Typography>
+                <div className={styles.questionLabel}>
+                  <Typography variant="questionLabel">
+                    Question
+                  </Typography>
+                </div>
+                <div className={styles.receivedMessageText}>
+                  <Typography variant="messageText">
+                    {conversationElement.question}
+                  </Typography>
+                </div>
               </div>
               <div/>
               {
@@ -27,16 +34,25 @@ const Conversation = ({playerBot, conversation}) => {
                   conversationElement.bot === playerBot &&
                   (
                     <div className={`${styles.sentMessage} ${styles.answerMessage}`}>
-                      <Typography variant="answer">
-                        {conversationElement.answer}
-                      </Typography>
+                      <div className={styles.sentMessageText}>
+                        <Typography variant="answer">
+                          {conversationElement.answer}
+                        </Typography>
+                      </div>
                     </div>
                   ) ||
                   (
                     <div className={`${styles.receivedMessage} ${styles.answerMessage}`}>
-                      <Typography variant="answer">
-                        {conversationElement.answer}
-                      </Typography>
+                      <div className={styles.questionLabel}>
+                        <Typography variant="questionLabel">
+                          Answer
+                        </Typography>
+                      </div>
+                      <div className={styles.receivedMessageText}>
+                        <Typography variant="messageText">
+                          {conversationElement.answer}
+                        </Typography>
+                      </div>
                     </div>
                   )
                 )

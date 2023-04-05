@@ -139,9 +139,9 @@
 .chatContainer {
   width: 100%;
   max-width: 600px;
-  height: 80vw;
+  height: 70vw;
   max-height: 600px;
-  border-radius: 6px;
+  border-radius: 2px;
 }
 
 .chatBackground {
@@ -151,7 +151,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 6px;
+  border-radius: 2px;
 }
 
 .filterBackgroundImage {
@@ -160,7 +160,7 @@
   background-color: rgba(244, 237, 237, 0.2);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border-radius: 6px;
+  border-radius: 2px;
 }
 
 .questionInputTextField {
@@ -191,30 +191,38 @@
   padding-bottom: 8px;
 }
 
+.receivedMessageText {
+  color: var(--mui-palette-alternate-main);
+}
+
+.sentMessageText {
+  color: var(--mui-palette-primary-contrastText);
+}
+
 .questionMessage {
-  background-color: var(--mui-palette-primary-contrastText);
   margin-top: 8px;
   width: fit-content;
   max-width: 70%;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 6px 8px 8px 8px;
+  border-radius: 2px;
 }
 
 .answerMessage {
-  background-color: var(--mui-palette-primary-contrastText);
   margin-top: 2px;
   width: fit-content;
   max-width: 70%;
   padding: 8px;
-  border-radius: 6px;
+  border-radius: 2px;
 }
 
 .receivedMessage {
+  background-color: var(--mui-palette-primary-contrastText);
   margin-left: 8px;
   margin-right: auto;
 }
 
 .sentMessage {
+  background-color: var(--mui-palette-alternate-main);
   margin-left: auto;
   margin-right: 8px;
 }
