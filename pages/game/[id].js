@@ -97,6 +97,8 @@ const Game = () => {
       const botList = otherBots.map((bot, index) => {
         return Object.assign(bot, {style: botStyles[index]})
       })
+      console.log(botList)
+      console.log(playerBot)
       setBots(botList)
       if(currentGame.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION" || currentGame.state === "WAITING_ON_YOU_TO_ANSWER") {
         setStatusMessage("waiting on you")

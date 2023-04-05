@@ -95,6 +95,8 @@
 
 .botSelectorButton {
   width: 90px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .gameStatusBox {
@@ -119,6 +121,7 @@
 
 .menuItem {
   padding: 8px 0px 0px 0px;
+  min-height: 36px;
 }
 
 .primaryButton {

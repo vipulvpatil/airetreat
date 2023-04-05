@@ -1,16 +1,59 @@
 import {Button, Fade, Menu, MenuItem} from "@mui/material"
+import {useEffect, useState} from "react"
 import styles from "@/styles/Home.module.css"
-import {useState} from "react"
 
-const BotSelector = () => {
+const BotSelector = ({defaultBot, otherBots}) => {
   const [anchorEl, setAnchorEl] = useState(null)
+  const [selectedBot, setSelectedBot] = useState(null)
+  const [menuItems, setMenuItems] = useState(null)
   const open = Boolean(anchorEl)
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
+
   const handleClose = () => {
     setAnchorEl(null)
   }
+
+  const handleBotSelection = (bot) => ()=> {
+    setSelectedBot(bot)
+  }
+
+  useEffect(()=>{
+    setSelectedBot(defaultBot)
+  },[defaultBot])
+
+  useEffect(() => {
+    const items = []
+    if(defaultBot !== selectedBot) {
+      items.push(
+        <MenuItem onClick={handleClose} className={styles.menuItem}>
+          <Button
+            className={`${styles.poppingButton} ${styles.botSelectorButton}`}
+            variant="contained"
+            color={defaultBot.style.theme}
+            onClick={handleBotSelection(defaultBot)}
+          >{defaultBot.name}</Button>
+        </MenuItem>
+      )
+    }
+    otherBots.forEach(bot => {
+      if(bot !== selectedBot) {
+        items.push(
+          <MenuItem onClick={handleClose} className={styles.menuItem}>
+            <Button
+              className={`${styles.poppingButton} ${styles.botSelectorButton}`}
+              variant="contained"
+              color={bot.style.theme}
+              onClick={handleBotSelection(bot)}
+            >{bot.name}</Button>
+          </MenuItem>
+        )
+      }
+    })
+    setMenuItems(items)
+  },[selectedBot])
 
   return<div>
     <Button
@@ -21,8 +64,9 @@ const BotSelector = () => {
       aria-haspopup="true"
       aria-expanded={open ? "true" : undefined}
       onClick={handleClick}
+      color={selectedBot && selectedBot.style.theme || "primary"}
     >
-      EVE-a-L
+      {selectedBot && selectedBot.name}
     </Button>
     <Menu
       id="fade-menu"
@@ -40,30 +84,7 @@ const BotSelector = () => {
         list: styles.menuList,
       }}
     >
-      <MenuItem onClick={handleClose} className={styles.menuItem}>
-        <Button
-          className={`${styles.poppingButton} ${styles.botSelectorButton}`}
-          variant="contained"
-        >GLaDOSE</Button>
-      </MenuItem>
-      <MenuItem onClick={handleClose} className={styles.menuItem}>
-        <Button
-          className={`${styles.poppingButton} ${styles.botSelectorButton}`}
-          variant="contained"
-        >T-800X</Button>
-      </MenuItem>
-      <MenuItem onClick={handleClose} className={styles.menuItem}>
-        <Button
-          className={`${styles.poppingButton} ${styles.botSelectorButton}`}
-          variant="contained"
-        >EVE-a-L</Button>
-      </MenuItem>
-      <MenuItem onClick={handleClose} className={styles.menuItem}>
-        <Button
-          className={`${styles.poppingButton} ${styles.botSelectorButton}`}
-          variant="contained"
-        >B.O.B.Z</Button>
-      </MenuItem>
+      {menuItems}
     </Menu>
   </div>
 }
