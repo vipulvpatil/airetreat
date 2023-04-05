@@ -32,12 +32,13 @@ const UserInput = ({bot, gameId}) => {
       }
     }
   }
-  return <div>
+  return <div className={styles.userInput}>
     <TextField
       color="alternate"
       inputProps={{
         className: styles.inputTextField
       }}
+      className={styles.userInputTextField}
       onChange={messageChanged}
       value={message}
     />
