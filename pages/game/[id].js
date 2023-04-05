@@ -11,6 +11,7 @@ import {loadPlayerData} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
 import {useRouter} from "next/router"
+import ChatContainer from "@/components/chat_container"
 
 const botStyles = [
   {
@@ -162,11 +163,7 @@ const Game = () => {
     <div>
       <Stack sx={{alignItems: "center"}}>
         <GameStatusBox game={currentGame} statusMessage={statusMessage}/>
-        <div className={styles.chatContainer}>
-          <div className={styles.filterBackgroundImage}>
-            Chat here.
-          </div>
-        </div>
+        <ChatContainer/>
         <UserInput game={currentGame} playerBot={playerBot} bots={bots}/>
       </Stack>
       <div className={styles.blurBackground}>
