@@ -35,7 +35,7 @@ const Conversation = ({playerBot, conversation}) => {
                   (
                     <div className={`${styles.sentMessage} ${styles.answerMessage}`}>
                       <div className={styles.sentMessageText}>
-                        <Typography variant="answer">
+                        <Typography variant="messageText">
                           {conversationElement.answer}
                         </Typography>
                       </div>

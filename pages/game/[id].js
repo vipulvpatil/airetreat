@@ -1,17 +1,14 @@
 import {useEffect, useState} from "react"
+import ChatContainer from "@/components/chat_container"
 import ErrorChecker from "@/common/error_checker"
 import GameStatusBox from "@/components/game_status_box"
-import SelectedBotBox from "@/components/selected_bot_box"
 import {Stack} from "@mui/material"
-import UserBox from "@/components/user_box"
 import UserInput from "@/components/user_input"
 import api from "@/lib/api"
 import {createFullConversationForGame} from "@/common/chat_formatter"
 import {loadPlayerData} from "@/lib/local_storage"
-import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
 import {useRouter} from "next/router"
-import ChatContainer from "@/components/chat_container"
 
 const botStyles = [
   {
@@ -44,11 +41,7 @@ const Game = () => {
   const [playerBot, setPlayerBot] = useState(null)
   const [gameId, setGameId] = useState(null)
   const [statusMessage, setStatusMessage] = useState(null)
-  const [selectedBot, setSelectedBot] = useState(null)
-  const [isAnswering, setAnswering] = useState(false)
   const [fullConversation, setFullConversation] = useState(null)
-
-  let selectedBotJsx = null
 
   useEffect(() => {
     if(router.query && router.query.id) {
@@ -113,51 +106,6 @@ const Game = () => {
     }
   }, [currentGame, bots, playerBot])
 
-  useEffect(() => {
-    if(currentGame) {
-      if(currentGame.state === "WAITING_ON_YOU_TO_ANSWER"){
-        setSelectedBot(playerBot)
-        setAnswering(true)
-      } else if(currentGame.state !== "WAITING_ON_YOU_TO_ASK_A_QUESTION") {
-        setSelectedBot(null)
-        setAnswering(false)
-      } else {
-        setAnswering(false)
-      }
-    } else {
-      setSelectedBot(null)
-      setAnswering(false)
-    }
-  })
-
-  const selectBot = (bot) => {
-    if(currentGame) {
-      if(currentGame.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION") {
-        if(bot !== playerBot) {
-          setSelectedBot(bot)
-        } else if(!selectedBot) {
-          setStatusMessage("please select a bot other than yourself")
-        }
-      } else if (currentGame.state === "WAITING_ON_YOU_TO_ANSWER") {
-        if (bot !== playerBot){
-          setStatusMessage("you cannot select a bot other than yourself")
-        }
-      } else {
-        setStatusMessage("please wait for your turn")
-      }
-    }
-  }
-
-  if(selectedBot){
-    selectedBotJsx =
-      <SelectedBotBox
-        bot={selectedBot}
-        gameId={gameId}
-        textFieldLabel={isAnswering?"answer":"question"}
-      />
-  } else {
-    selectedBotJsx = null
-  }
 
   return (
     <div>
@@ -166,20 +114,6 @@ const Game = () => {
         <ChatContainer playerBot={playerBot} fullConversation={fullConversation}/>
         <UserInput game={currentGame} playerBot={playerBot} bots={bots}/>
       </Stack>
-      <div className={styles.blurBackground}>
-        <div className={styles.gameContainer}>
-          <Stack direction="row" alignItems="flex-start" justifyContent="space-between" spacing={2}>
-            <Stack direction="column" spacing={2}>
-
-              <UserBox
-                playerBot={playerBot}
-                fullConversation={fullConversation}
-              />
-            </Stack>
-          </Stack>
-          {selectedBotJsx}
-        </div>
-      </div>
     </div>
   )
 }
