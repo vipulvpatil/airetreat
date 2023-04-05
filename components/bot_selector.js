@@ -6,19 +6,34 @@ const BotSelector = ({defaultBot, otherBots, direction}) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [selectedBot, setSelectedBot] = useState(null)
   const [menuItems, setMenuItems] = useState(null)
-  const open = Boolean(anchorEl)
+  const [open, setOpen] = useState(false)
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
+    setOpen(true)
   }
 
   const handleClose = () => {
     setAnchorEl(null)
+    setOpen(false)
   }
 
   const handleBotSelection = (bot) => ()=> {
     setSelectedBot(bot)
   }
+
+  const handleScroll = () => {
+    handleClose()
+  }
+
+  useEffect(()=>{
+    if(open) {
+      window.addEventListener("scroll", handleScroll, {passive: true})
+    } else {
+      window.removeEventListener("scroll", handleScroll)
+    }
+    return () => window.removeEventListener("scroll", handleScroll)
+  })
 
   useEffect(()=>{
     setSelectedBot(defaultBot)
