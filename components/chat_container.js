@@ -1,11 +1,12 @@
+import Conversation from "@/components/conversation"
 import styles from "@/styles/Home.module.css"
 
-const ChatContainer = () => {
+const ChatContainer = ({playerBot, fullConversation}) => {
   return (
     <div className={styles.chatContainer}>
       <div className={styles.chatBackground}>
         <div className={styles.filterBackgroundImage}>
-          Chat here.
+          <Conversation playerBot={playerBot} conversation={fullConversation}/>
         </div>
       </div>
     </div>

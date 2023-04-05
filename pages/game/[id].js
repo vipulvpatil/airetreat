@@ -163,7 +163,7 @@ const Game = () => {
     <div>
       <Stack sx={{alignItems: "center"}}>
         <GameStatusBox game={currentGame} statusMessage={statusMessage}/>
-        <ChatContainer/>
+        <ChatContainer playerBot={playerBot} fullConversation={fullConversation}/>
         <UserInput game={currentGame} playerBot={playerBot} bots={bots}/>
       </Stack>
       <div className={styles.blurBackground}>
