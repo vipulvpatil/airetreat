@@ -69,7 +69,7 @@ model Bot {
   player                   Player?   @relation(fields: [playerId], references: [id], onDelete: Cascade)
   game                     Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
   lastQuestionTargetInGame Game?     @relation("lastQuestionTarget")
-  messages                 Message[]
+  targetMessages           Message[] @relation("targetBot")
   sourceMessages           Message[] @relation("sourceBot")
 
   @@map("bots")
@@ -95,12 +95,12 @@ model Game {
 
 model Message {
   id          String   @id @default(cuid())
-  botId       String   @map("bot_id")
   sourceBotId String   @map("source_bot_id")
+  targetBotId String   @map("target_bot_id")
   text        String
   type        String
   createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
-  bot         Bot      @relation(fields: [botId], references: [id], onDelete: Cascade)
+  targetBot   Bot      @relation("targetBot", fields: [targetBotId], references: [id], onDelete: Cascade)
   sourceBot   Bot      @relation("sourceBot", fields: [sourceBotId], references: [id], onDelete: Cascade)
 
   @@map("messages")
