@@ -1,26 +1,26 @@
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/migrate-shadow
 }
 
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String  @map("user_id")
-  type               String
-  provider           String
-  providerAccountId  String  @map("provider_account_id")
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -42,7 +42,7 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
-  emailVerified DateTime?  @map("email_verified")
+  emailVerified DateTime? @map("email_verified")
   image         String?
   accounts      Account[]
   sessions      Session[]
@@ -53,7 +53,7 @@ model User {
 model Player {
   id        String   @id @default(cuid())
   bots      Bot[]
-  createdAt DateTime @default(now()) @db.Timestamptz(3) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
 
   @@map("players")
 }
@@ -65,11 +65,12 @@ model Bot {
   playerId                 String?   @map("player_id")
   gameId                   String    @map("game_id")
   questionCount            Int       @default(0) @map("question_count")
-  createdAt                DateTime  @default(now()) @db.Timestamptz(3) @map("created_at")
+  createdAt                DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
   player                   Player?   @relation(fields: [playerId], references: [id], onDelete: Cascade)
   game                     Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
   lastQuestionTargetInGame Game?     @relation("lastQuestionTarget")
   messages                 Message[]
+  sourceMessages           Message[] @relation("sourceBot")
 
   @@map("bots")
 }
@@ -80,12 +81,12 @@ model Game {
   currentTurnIndex        Int       @map("current_turn_index")
   turnOrder               String[]  @map("turn_order")
   stateHandled            Boolean   @map("state_handled")
-  stateHandledAt          DateTime? @db.Timestamptz(3) @map("state_handled_at")
+  stateHandledAt          DateTime? @map("state_handled_at") @db.Timestamptz(3)
   stateTotalTime          Int       @default(0) @map("state_total_time")
   lastQuestion            String?   @map("last_question")
   lastQuestionTargetBotId String?   @unique @map("last_question_target_bot_id")
-  createdAt               DateTime  @default(now()) @db.Timestamptz(3) @map("created_at")
-  updatedAt               DateTime  @updatedAt @default(now()) @db.Timestamptz(3) @map("updated_at")
+  createdAt               DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt               DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(3)
   bots                    Bot[]
   lastQuestionTargetBot   Bot?      @relation("lastQuestionTarget", fields: [lastQuestionTargetBotId], references: [id], onDelete: Cascade)
 
@@ -93,11 +94,14 @@ model Game {
 }
 
 model Message {
-  id        String   @id @default(cuid())
-  botId     String   @map("bot_id")
-  text      String
-  createdAt DateTime @default(now()) @db.Timestamptz(3) @map("created_at")
-  bot       Bot      @relation(fields: [botId], references: [id], onDelete: Cascade)
+  id          String   @id @default(cuid())
+  botId       String   @map("bot_id")
+  sourceBotId String   @map("source_bot_id")
+  text        String
+  type        String
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  bot         Bot      @relation(fields: [botId], references: [id], onDelete: Cascade)
+  sourceBot   Bot      @relation("sourceBot", fields: [sourceBotId], references: [id], onDelete: Cascade)
 
   @@map("messages")
 }
