@@ -64,11 +64,12 @@ model Bot {
   type                     String
   playerId                 String?   @map("player_id")
   gameId                   String    @map("game_id")
-  questionCount            Int       @default(0) @map("question_count")
+  helpCount                Int       @default(0) @map("help_count")
   createdAt                DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
   player                   Player?   @relation(fields: [playerId], references: [id], onDelete: Cascade)
   game                     Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
   lastQuestionTargetInGame Game?     @relation("lastQuestionTarget")
+  winningInGame            Game?     @relation("winning")
   targetMessages           Message[] @relation("targetBot")
   sourceMessages           Message[] @relation("sourceBot")
 
@@ -87,8 +88,11 @@ model Game {
   lastQuestionTargetBotId String?   @unique @map("last_question_target_bot_id")
   createdAt               DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
   updatedAt               DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(3)
+  result                  String?
+  winningBotId            String?   @unique @map("winning_bot_id")
   bots                    Bot[]
   lastQuestionTargetBot   Bot?      @relation("lastQuestionTarget", fields: [lastQuestionTargetBotId], references: [id], onDelete: Cascade)
+  winningBot              Bot?      @relation("winning", fields: [winningBotId], references: [id], onDelete: Cascade)
 
   @@map("games")
 }
