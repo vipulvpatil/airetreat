@@ -88,7 +88,7 @@ const UserInput = ({game, playerBot, bots}) => {
       <Grid item>
         <Button className={styles.poppingButton} variant="contained" startIcon={<AssistantIcon />}>
           <Typography variant="h2">
-            Suggest
+            Help (3)
           </Typography>
         </Button>
       </Grid>
