@@ -65,12 +65,26 @@ const getGameIds = async (params) => {
   }
 }
 
+const tag = async (params) => {
+  if(!params.gameId || !params.playerId || !params.botId){
+    return {result: null, err: "gameId, playerId, botId is required"}
+  }
+  try {
+    await GrpcService.tag(params.gameId, params.playerId, params.botId)
+    return {result: null, err:null}
+  } catch (err) {
+    console.log(err)
+    return {result: null, err}
+  }
+}
+
 const functionMap = {
   "createGame": createGame,
   "joinGame": joinGame,
   "getGame": getGame,
   "sendMessage": sendMessage,
   "getGameIds": getGameIds,
+  "tag": tag,
 }
 
 const Game = async (req, res) => {
