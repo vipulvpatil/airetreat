@@ -5,7 +5,6 @@ import GameStatusBox from "@/components/game_status_box"
 import {Stack} from "@mui/material"
 import UserInput from "@/components/user_input"
 import api from "@/lib/api"
-import {createFullConversationForGame} from "@/common/chat_formatter"
 import {loadPlayerData} from "@/lib/local_storage"
 import usePoll from "react-use-poll"
 import {useRouter} from "next/router"
@@ -41,7 +40,7 @@ const Game = () => {
   const [playerBot, setPlayerBot] = useState(null)
   const [gameId, setGameId] = useState(null)
   const [statusMessage, setStatusMessage] = useState(null)
-  const [fullConversation, setFullConversation] = useState(null)
+  const [gameMessages, setGameMessages] = useState(null)
 
   useEffect(() => {
     if(router.query && router.query.id) {
@@ -102,7 +101,7 @@ const Game = () => {
 
   useEffect(() => {
     if(currentGame && bots && playerBot) {
-      setFullConversation(createFullConversationForGame(currentGame.conversation, bots, playerBot))
+      setGameMessages(addBotDataToGameMessages(currentGame.messages, bots, playerBot))
     }
   }, [currentGame, bots, playerBot])
 
@@ -111,11 +110,26 @@ const Game = () => {
     <div>
       <Stack sx={{alignItems: "center"}}>
         <GameStatusBox game={currentGame} statusMessage={statusMessage}/>
-        <ChatContainer playerBot={playerBot} fullConversation={fullConversation}/>
+        <ChatContainer playerBot={playerBot} gameMessages={gameMessages}/>
         <UserInput game={currentGame} playerBot={playerBot} bots={bots}/>
       </Stack>
     </div>
   )
+}
+
+const addBotDataToGameMessages = (gameMessages, bots, playerBot) => {
+  const botMap = {}
+  bots.forEach(bot => {
+    botMap[bot.id] = bot
+  })
+  botMap[playerBot.id] = playerBot
+  for(let i = 0; i < gameMessages.length; i++) {
+    gameMessages[i] = Object.assign(gameMessages[i], {
+      sourceBot: botMap[gameMessages[i].sourceBotId],
+      targetBot: botMap[gameMessages[i].targetBotId],
+    })
+  }
+  return gameMessages
 }
 
 export default Game

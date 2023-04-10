@@ -81,7 +81,7 @@ export const newTheme = extendTheme({
       fontFamily: font1.style.fontFamily,
       fontSize: 14,
     },
-    questionLabel: {
+    messageLabel: {
       fontFamily: font2.style.fontFamily,
       fontSize: 12,
       fontWeight: 700

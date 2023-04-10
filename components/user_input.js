@@ -12,6 +12,7 @@ const UserInput = ({game, playerBot, bots}) => {
   const [message, setMessage] = useState("")
   const [showBotSelector, setShowBotSelector] = useState(false)
   const [selectedBot, setSelectedBot] = useState(null)
+  const [messageType, setMessageType] = useState("")
 
   const messageChanged = (event) => {
     setMessage(event.target.value)
@@ -22,12 +23,15 @@ const UserInput = ({game, playerBot, bots}) => {
       if(game.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION") {
         setShowBotSelector(true)
         setSelectedBot(bots[0])
+        setMessageType("question")
       } else if(game.state === "WAITING_ON_YOU_TO_ANSWER") {
         setShowBotSelector(false)
         setSelectedBot(playerBot)
+        setMessageType("answer")
       } else {
         setShowBotSelector(false)
         setSelectedBot(null)
+        setMessageType("")
       }
     }
   }, [playerBot, game, bots])
@@ -42,6 +46,7 @@ const UserInput = ({game, playerBot, bots}) => {
           playerId: playerData.id,
           botId: selectedBot.id,
           text: message,
+          type: messageType,
         })
         if (resp.error) {
           console.log(resp.error)
