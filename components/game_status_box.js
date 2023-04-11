@@ -18,14 +18,17 @@ const GameStatusBox = ({game, bots}) => {
   const [statusColor, setStatusColor] = useState(null)
 
   useEffect(() => {
-    if (game && bots){
+    if (game && bots && bots.length > 1){
       setDisplayMessage(game.displayMessage)
       if(game.state === "YOU_WON"){
         setStatusMessage("You won")
         setStatusColor("var(--mui-palette-alternate-main)")
       } else if(game.state === "YOU_LOST"){
         setStatusMessage("You lost")
-        setStatusColor("var(--mui-palette-alternate-main)")
+        const winningBot = botWithId(bots, game.winningBotId)
+        if (winningBot) {
+          setStatusColor(winningBot.style.color)
+        }
       } else if (game.state === "TIME_UP") {
         setStatusMessage("Time ran out")
         setStatusColor(null)
@@ -53,6 +56,17 @@ const GameStatusBox = ({game, bots}) => {
       </Stack>
     </div>
   )
+}
+
+const botWithId = (bots, botId) => {
+  let botFound
+  bots.forEach(bot => {
+    console.log(bot.id === botId)
+    if (bot.id === botId) {
+      botFound = bot
+    }
+  })
+  return botFound
 }
 
 export default GameStatusBox

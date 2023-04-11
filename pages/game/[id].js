@@ -133,7 +133,7 @@ const Game = () => {
   return (
     <div>
       <Stack sx={{alignItems: "center"}}>
-        <GameStatusBox game={currentGame} playerBot={playerBot} bots={bots}/>
+        <GameStatusBox game={currentGame} bots={bots}/>
         <ChatContainer playerBot={playerBot} gameMessages={gameMessages}/>
         <UserInput
           game={currentGame}
