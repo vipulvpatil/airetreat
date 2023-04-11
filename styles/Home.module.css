@@ -248,3 +248,7 @@
   color: var(--mui-palette-primary-main);
   width: 350px;
 }
+
+.highlightText {
+  color: var(--mui-palette-highlight-main);
+}

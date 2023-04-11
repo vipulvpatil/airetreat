@@ -40,7 +40,6 @@ const Game = () => {
   const [currentGame, setCurrentGame] = useState(null)
   const [playerBot, setPlayerBot] = useState(null)
   const [gameId, setGameId] = useState(null)
-  const [statusMessage, setStatusMessage] = useState(null)
   const [gameMessages, setGameMessages] = useState(null)
   const [tagDialogOpen, setTagDialogOpen] = useState(false)
 
@@ -51,6 +50,9 @@ const Game = () => {
   }, [router])
 
   const updateCurrentGameIfStateChanged = async (gameId, existingGameState) => {
+    if(existingGameState === "YOU_WON" || existingGameState === "YOU_LOST" || existingGameState === "TIME_UP") {
+      return
+    }
     const game = await getGame(gameId)
     if (game && existingGameState !== game.state){
       setCurrentGame(game)
@@ -93,13 +95,6 @@ const Game = () => {
         return Object.assign(bot, {style: botStyles[index]})
       })
       setBots(botList)
-      if(currentGame.state === "YOU_WON" || currentGame.state === "YOU_LOST" || currentGame.state === "TIME_UP") {
-        setStatusMessage("game has ended")
-      } else if(currentGame.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION" || currentGame.state === "WAITING_ON_YOU_TO_ANSWER") {
-        setStatusMessage("waiting on you")
-      } else {
-        setStatusMessage("please wait")
-      }
     }
   }, [currentGame])
 
@@ -138,7 +133,7 @@ const Game = () => {
   return (
     <div>
       <Stack sx={{alignItems: "center"}}>
-        <GameStatusBox game={currentGame} statusMessage={statusMessage}/>
+        <GameStatusBox game={currentGame} playerBot={playerBot} bots={bots}/>
         <ChatContainer playerBot={playerBot} gameMessages={gameMessages}/>
         <UserInput
           game={currentGame}

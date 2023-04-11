@@ -11,13 +11,19 @@ const TagDialog = ({open, botTagged, handleClose, bots}) => {
       onClose={handleClose}
       classes={{paper: styles.dialog}}
     >
-      <DialogTitle id="tag-dialog-title" typography={"h2"} sx={{textAlign: "center"}}>
+      <DialogTitle id="tag-dialog-title" typography={"h1"} sx={{textAlign: "center", paddingBottom: "4px"}}>
         Tag the bot
       </DialogTitle>
       <DialogContent sx={{textAlign: "center"}}>
         <DialogContentText id="tag-dialog-description" sx={{paddingBottom: "4px"}}>
           <Typography variant="h3">
-            Tag the bot run by a human. You only get one chance. If you miss, they win.
+            Tag the bot powered by a human.
+          </Typography>
+          <Typography variant="h3">
+            You only get one chance.
+          </Typography>
+          <Typography variant="h3" className={styles.highlightText}>
+            If you miss, they win.
           </Typography>
         </DialogContentText>
         <BotSelectorMenu bots={bots} handleClose={handleClose} botSelectionCallback={botTagged}/>
