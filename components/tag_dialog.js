@@ -5,13 +5,12 @@ import styles from "@/styles/Home.module.css"
 const TagDialog = ({open, botTagged, handleClose, bots}) => {
   return (
     <Dialog
-        open={open}
-        aria-labelledby="tag-dialog-title"
-        aria-describedby="tag-dialog-description"
-        color="alternate"
-        onClose={handleClose}
-        classes={{paper: styles.dialog}}
-      >
+      open={open}
+      aria-labelledby="tag-dialog-title"
+      aria-describedby="tag-dialog-description"
+      onClose={handleClose}
+      classes={{paper: styles.dialog}}
+    >
       <DialogTitle id="tag-dialog-title" typography={"h2"} sx={{textAlign: "center"}}>
         Tag the bot
       </DialogTitle>

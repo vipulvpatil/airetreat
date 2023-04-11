@@ -93,7 +93,9 @@ const Game = () => {
         return Object.assign(bot, {style: botStyles[index]})
       })
       setBots(botList)
-      if(currentGame.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION" || currentGame.state === "WAITING_ON_YOU_TO_ANSWER") {
+      if(currentGame.state === "YOU_WON" || currentGame.state === "YOU_LOST" || currentGame.state === "TIME_UP") {
+        setStatusMessage("game has ended")
+      } else if(currentGame.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION" || currentGame.state === "WAITING_ON_YOU_TO_ANSWER") {
         setStatusMessage("waiting on you")
       } else {
         setStatusMessage("please wait")
@@ -111,9 +113,26 @@ const Game = () => {
     setTagDialogOpen(false)
   }
 
-  const botTagged = (botId) => {
-    console.log("bot tagged")
-    console.log(botId)
+  const botTagged = (bot) => {
+    console.log(bot)
+    tag(bot.id)
+    setTagDialogOpen(false)
+  }
+
+  const tag = async (botId) => {
+    try {
+      const playerData = await loadPlayerData()
+      const resp = await api.call("tag", {
+        gameId: currentGame.id,
+        playerId: playerData.id,
+        botId: botId,
+      })
+      if (resp.error) {
+        console.log(resp.error)
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -133,7 +152,6 @@ const Game = () => {
         botTagged={botTagged}
         handleClose={handleTagDialogClose}
         bots={bots}
-        botTagged={handleTagDialogClose}
       />
     </div>
   )
