@@ -2,7 +2,7 @@ import {Button, Fade, Menu, MenuItem} from "@mui/material"
 import {useEffect, useState} from "react"
 import styles from "@/styles/Home.module.css"
 
-const BotSelector = ({defaultBot, otherBots, direction, botSelectionCallback}) => {
+const BotSelectorDropdown = ({bots, direction, botSelectionCallback}) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [selectedBot, setSelectedBot] = useState(null)
   const [menuItems, setMenuItems] = useState(null)
@@ -16,11 +16,6 @@ const BotSelector = ({defaultBot, otherBots, direction, botSelectionCallback}) =
   const handleClose = () => {
     setAnchorEl(null)
     setOpen(false)
-  }
-
-  const handleBotSelection = (bot) => ()=> {
-    setSelectedBot(bot)
-    botSelectionCallback(bot)
   }
 
   const handleScroll = () => {
@@ -37,26 +32,18 @@ const BotSelector = ({defaultBot, otherBots, direction, botSelectionCallback}) =
   })
 
   useEffect(()=>{
-    setSelectedBot(defaultBot)
-  },[defaultBot])
+    if(bots.length > 0){
+      setSelectedBot(bots[0])
+    }
+  },[bots])
 
   useEffect(() => {
     const items = []
-    if(defaultBot !== selectedBot) {
-      items.push(
-        <MenuItem onClick={handleClose} className={styles.menuItem} key={defaultBot.id}>
-          <Button
-            className={`${styles.poppingButton} ${styles.botSelectorButton}`}
-            variant="contained"
-            color={defaultBot.style.theme}
-            onClick={handleBotSelection(defaultBot)}
-          >
-            {defaultBot.name}
-          </Button>
-        </MenuItem>
-      )
+    const handleBotSelection = (bot) => ()=> {
+      setSelectedBot(bot)
+      botSelectionCallback(bot)
     }
-    otherBots.forEach(bot => {
+    bots.forEach(bot => {
       if(bot !== selectedBot) {
         items.push(
           <MenuItem onClick={handleClose} className={styles.menuItem} key={bot.id}>
@@ -71,7 +58,7 @@ const BotSelector = ({defaultBot, otherBots, direction, botSelectionCallback}) =
       }
     })
     setMenuItems(items)
-  },[defaultBot, otherBots, selectedBot])
+  },[bots, selectedBot, botSelectionCallback])
 
   return<div>
     <Button
@@ -125,4 +112,4 @@ const BotSelector = ({defaultBot, otherBots, direction, botSelectionCallback}) =
   </div>
 }
 
-export default BotSelector
+export default BotSelectorDropdown

@@ -3,6 +3,7 @@ import ChatContainer from "@/components/chat_container"
 import ErrorChecker from "@/common/error_checker"
 import GameStatusBox from "@/components/game_status_box"
 import {Stack} from "@mui/material"
+import TagDialog from "@/components/tag_dialog"
 import UserInput from "@/components/user_input"
 import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
@@ -41,6 +42,7 @@ const Game = () => {
   const [gameId, setGameId] = useState(null)
   const [statusMessage, setStatusMessage] = useState(null)
   const [gameMessages, setGameMessages] = useState(null)
+  const [tagDialogOpen, setTagDialogOpen] = useState(false)
 
   useEffect(() => {
     if(router.query && router.query.id) {
@@ -105,14 +107,34 @@ const Game = () => {
     }
   }, [currentGame, bots, playerBot])
 
+  const handleTagDialogClose = () => {
+    setTagDialogOpen(false)
+  }
+
+  const botTagged = (botId) => {
+    console.log("bot tagged")
+    console.log(botId)
+  }
 
   return (
     <div>
       <Stack sx={{alignItems: "center"}}>
         <GameStatusBox game={currentGame} statusMessage={statusMessage}/>
         <ChatContainer playerBot={playerBot} gameMessages={gameMessages}/>
-        <UserInput game={currentGame} playerBot={playerBot} bots={bots}/>
+        <UserInput
+          game={currentGame}
+          playerBot={playerBot}
+          bots={bots}
+          openTagDialog={() => setTagDialogOpen(true)}
+        />
       </Stack>
+      <TagDialog
+        open={tagDialogOpen}
+        botTagged={botTagged}
+        handleClose={handleTagDialogClose}
+        bots={bots}
+        botTagged={handleTagDialogClose}
+      />
     </div>
   )
 }

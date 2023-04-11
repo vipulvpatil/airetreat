@@ -1,14 +1,14 @@
 import {Button, Grid, TextField, Typography} from "@mui/material"
 import {useEffect, useState} from "react"
 import AssistantIcon from "@mui/icons-material/Assistant"
-import BotSelector from "@/components/bot_selector"
+import BotSelectorDropdown from "@/components/bot_selector_dropdown"
 import ReportIcon from "@mui/icons-material/Report"
 import SendIcon from "@mui/icons-material/Send"
 import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 
-const UserInput = ({game, playerBot, bots}) => {
+const UserInput = ({game, playerBot, bots, openTagDialog}) => {
   const [message, setMessage] = useState("")
   const [showBotSelector, setShowBotSelector] = useState(false)
   const [selectedBot, setSelectedBot] = useState(null)
@@ -76,9 +76,8 @@ const UserInput = ({game, playerBot, bots}) => {
     {
       showBotSelector &&
       <div className={styles.botSelectorContainer}>
-        <BotSelector
-          defaultBot={bots[0]}
-          otherBots={bots.slice(1)}
+        <BotSelectorDropdown
+          bots={bots}
           direction="up"
           botSelectionCallback={setSelectedBot}
         />
@@ -93,7 +92,12 @@ const UserInput = ({game, playerBot, bots}) => {
         </Button>
       </Grid>
       <Grid item>
-        <Button className={styles.poppingButton} variant="contained" startIcon={<ReportIcon/>}>
+        <Button
+          className={styles.poppingButton}
+          variant="contained"
+          startIcon={<ReportIcon/>}
+          onClick={() => openTagDialog()}
+        >
           <Typography variant="h2">
             Tag
           </Typography>
@@ -105,7 +109,7 @@ const UserInput = ({game, playerBot, bots}) => {
           variant="contained"
           startIcon={<SendIcon/>}
           onClick={sendMessage}
-          >
+        >
           <Typography variant="h2">
             Send
           </Typography>

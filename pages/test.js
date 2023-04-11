@@ -1,7 +1,15 @@
-import BotSelector from "@/components/bot_selector"
+import BotSelectorDropdown from "@/components/bot_selector_dropdown"
 
 const Test = () => {
   const bots = [
+    {
+      id: "clg3jftid001iggvksbp6enaa",
+      name: "T-800X",
+      style: {
+        color: "var(--mui-palette-botStyleSelf-main)",
+        theme: "botStyleSelf"
+      }
+    },
     {
       id: "clg3jftid001eggvkycdha7y1",
       name: "GLaDOSE",
@@ -36,15 +44,6 @@ const Test = () => {
     },
   ]
 
-  const playerBot = {
-    id: "clg3jftid001iggvksbp6enaa",
-    name: "T-800X",
-    style: {
-      color: "var(--mui-palette-botStyleSelf-main)",
-      theme: "botStyleSelf"
-    }
-  }
-
   return (
     <div style={{
       display: "flex",
@@ -53,8 +52,8 @@ const Test = () => {
       height: "500px",
       alignItems: "center"
     }}>
-      <BotSelector defaultBot={playerBot} otherBots={bots}/>
-      <BotSelector defaultBot={playerBot} otherBots={bots} direction="up"/>
+      <BotSelectorDropdown bots={bots}/>
+      <BotSelectorDropdown bots={bots} direction="up"/>
     </div>
   )
 }

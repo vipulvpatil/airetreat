@@ -20,7 +20,7 @@ const Conversation = ({gameMessages, playerBot}) => {
           }
         })
       }
-      <div ref={bottomDiv}></div>
+      <div ref={bottomDiv} style={{paddingTop:"6px"}}></div>
     </div>
   )
 }

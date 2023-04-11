@@ -39,6 +39,7 @@ export const newTheme = extendTheme({
         },
         text: {
           primary: colors.baseColor,
+          secondary: colors.lightColor,
         },
         highlight: {
           main: colors.highlightColor,
@@ -80,6 +81,10 @@ export const newTheme = extendTheme({
     h3: {
       fontFamily: font1.style.fontFamily,
       fontSize: 14,
+    },
+    h4: {
+      fontFamily: font1.style.fontFamily,
+      fontSize: 10,
     },
     messageLabel: {
       fontFamily: font2.style.fontFamily,

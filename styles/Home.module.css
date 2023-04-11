@@ -242,3 +242,9 @@
 .main {
   padding: 16px 16px;
 }
+
+.dialog {
+  background-color: var(--mui-palette-primary-contrastText);
+  color: var(--mui-palette-primary-main);
+  width: 350px;
+}
