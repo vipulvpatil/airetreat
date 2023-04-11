@@ -92,8 +92,7 @@
 }
 
 .resizeableButton {
-  width: 30vw;
-  min-width: 160px;
+  width: 160px;
 }
 
 .botSelectorButton {
