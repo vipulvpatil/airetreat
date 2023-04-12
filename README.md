@@ -23,6 +23,7 @@ CA_CERT_BASE64=LS0tLS1CRUdJTiBDRV
 CLIENT_CERT_BASE64=LS0tLS1CRUd...
 CLIENT_KEY_BASE64=LS0tLS1CRUdJ...
 GRPC_SERVER=localhost:9000
+GRPC_SERVER_SSL_NAME_OVERRIDE=true #This is only required locally to allow for name based SSL GRPC connection.
 ```
 
 Run the development server:
