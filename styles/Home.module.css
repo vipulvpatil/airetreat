@@ -251,3 +251,7 @@
 .highlightText {
   color: var(--mui-palette-highlight-main);
 }
+
+.popup {
+  max-width: 1200px;
+}

@@ -10,6 +10,7 @@ const TagDialog = ({open, botTagged, handleClose, bots}) => {
       aria-describedby="tag-dialog-description"
       onClose={handleClose}
       classes={{paper: styles.dialog}}
+      className={styles.popup}
     >
       <DialogTitle id="tag-dialog-title" typography={"h1"} sx={{textAlign: "center", paddingBottom: "4px"}}>
         Tag the bot

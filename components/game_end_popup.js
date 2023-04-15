@@ -9,6 +9,7 @@ const GameEndPopup = ({open, handleClose, gameResult}) => {
       aria-describedby="game-end-description"
       onClose={handleClose}
       classes={{paper: styles.dialog}}
+      className={styles.popup}
     >
       <DialogTitle id="game-end-title" typography={"h1"} sx={{textAlign: "center", paddingBottom: "4px"}}>
         {gameResult.statusMessage}
