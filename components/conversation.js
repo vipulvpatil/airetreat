@@ -1,8 +1,9 @@
+import "animate.css"
 import {useEffect, useRef} from "react"
 import {Typography} from "@mui/material"
 import styles from "@/styles/Home.module.css"
 
-const Conversation = ({gameMessages, playerBot, hasProcessingMessage}) => {
+const Conversation = ({gameMessages, playerBot, processingMessage}) => {
   const bottomDiv = useRef()
   useEffect(() => {
     bottomDiv.current.scrollIntoView({block: "nearest", inline: "nearest"})
@@ -20,7 +21,7 @@ const Conversation = ({gameMessages, playerBot, hasProcessingMessage}) => {
           }
         })
       }
-      {hasProcessingMessage && <Processing/>}
+      <Processing processingMessage={processingMessage}/>
       <div ref={bottomDiv} style={{paddingTop:"6px"}}></div>
     </div>
   )
@@ -74,12 +75,14 @@ const Sending = ({gameMessage}) => {
   )
 }
 
-const Processing = () => {
+const Processing = ({processingMessage}) => {
+  if (!processingMessage) return <></>
   return (
-    <div className={`${styles.receivedMessage} ${styles.questionMessage}`}>
+    <div className={`${styles.receivedMessage} ${processingMessage.style} animate__animated animate__bounce animate__infinite`}>
+      <MessageLabel labelText={processingMessage.label}/>
       <div className={styles.receivedMessageText}>
         <Typography variant="messageText">
-          {"Processing ..."}
+          {processingMessage.message}
         </Typography>
       </div>
     </div>

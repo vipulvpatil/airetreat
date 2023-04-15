@@ -7,6 +7,7 @@ import TagDialog from "@/components/tag_dialog"
 import UserInput from "@/components/user_input"
 import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
+import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
 import {useRouter} from "next/router"
 
@@ -42,7 +43,7 @@ const Game = () => {
   const [gameId, setGameId] = useState(null)
   const [gameMessages, setGameMessages] = useState(null)
   const [tagDialogOpen, setTagDialogOpen] = useState(false)
-  const [isAwaitingMessage, setIsAwaitingMessage] = useState(false)
+  const [awaitingMessage, setAwaitingMessage] = useState(false)
 
   useEffect(() => {
     if(router.query && router.query.id) {
@@ -57,7 +58,7 @@ const Game = () => {
     const game = await getGame(gameId)
     if (game && existingGameState !== game.state){
       setCurrentGame(game)
-      setIsAwaitingMessage(gameIsWaitingOnMessage(game))
+      setAwaitingMessage(waitingMessageForGame(game))
     }
   }
 
@@ -136,7 +137,7 @@ const Game = () => {
     <div>
       <Stack sx={{alignItems: "center"}}>
         <GameStatusBox game={currentGame} bots={bots}/>
-        <ChatContainer playerBot={playerBot} gameMessages={gameMessages} hasProcessingMessage={isAwaitingMessage}/>
+        <ChatContainer playerBot={playerBot} gameMessages={gameMessages} processingMessage={awaitingMessage}/>
         <UserInput
           game={currentGame}
           playerBot={playerBot}
@@ -154,8 +155,21 @@ const Game = () => {
   )
 }
 
-const gameIsWaitingOnMessage = (game) => {
-  return game.state === "WAITING_ON_BOT_TO_ASK_A_QUESTION" || game.state === "WAITING_ON_BOT_TO_ANSWER"
+const waitingMessageForGame = (game) => {
+  if (game.state === "WAITING_ON_BOT_TO_ASK_A_QUESTION") {
+    return {
+      message: "processing ...",
+      label: "Question",
+      style: styles.questionMessage
+    }
+  } else if(game.state === "WAITING_ON_BOT_TO_ANSWER"){
+    return {
+      message: "processing ...",
+      label: "Answer",
+      style: styles.answerMessage
+    }
+  }
+  return null
 }
 
 const addBotDataToGameMessages = (gameMessages, bots, playerBot) => {
