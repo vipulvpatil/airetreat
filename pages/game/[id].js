@@ -42,6 +42,7 @@ const Game = () => {
   const [gameId, setGameId] = useState(null)
   const [gameMessages, setGameMessages] = useState(null)
   const [tagDialogOpen, setTagDialogOpen] = useState(false)
+  const [isAwaitingMessage, setIsAwaitingMessage] = useState(false)
 
   useEffect(() => {
     if(router.query && router.query.id) {
@@ -56,6 +57,7 @@ const Game = () => {
     const game = await getGame(gameId)
     if (game && existingGameState !== game.state){
       setCurrentGame(game)
+      setIsAwaitingMessage(gameIsWaitingOnMessage(game))
     }
   }
 
@@ -134,7 +136,7 @@ const Game = () => {
     <div>
       <Stack sx={{alignItems: "center"}}>
         <GameStatusBox game={currentGame} bots={bots}/>
-        <ChatContainer playerBot={playerBot} gameMessages={gameMessages}/>
+        <ChatContainer playerBot={playerBot} gameMessages={gameMessages} hasProcessingMessage={isAwaitingMessage}/>
         <UserInput
           game={currentGame}
           playerBot={playerBot}
@@ -150,6 +152,10 @@ const Game = () => {
       />
     </div>
   )
+}
+
+const gameIsWaitingOnMessage = (game) => {
+  return game.state === "WAITING_ON_BOT_TO_ASK_A_QUESTION" || game.state === "WAITING_ON_BOT_TO_ANSWER"
 }
 
 const addBotDataToGameMessages = (gameMessages, bots, playerBot) => {

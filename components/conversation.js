@@ -2,7 +2,7 @@ import {useEffect, useRef} from "react"
 import {Typography} from "@mui/material"
 import styles from "@/styles/Home.module.css"
 
-const Conversation = ({gameMessages, playerBot}) => {
+const Conversation = ({gameMessages, playerBot, hasProcessingMessage}) => {
   const bottomDiv = useRef()
   useEffect(() => {
     bottomDiv.current.scrollIntoView({block: "nearest", inline: "nearest"})
@@ -20,6 +20,7 @@ const Conversation = ({gameMessages, playerBot}) => {
           }
         })
       }
+      {hasProcessingMessage && <Processing/>}
       <div ref={bottomDiv} style={{paddingTop:"6px"}}></div>
     </div>
   )
@@ -67,6 +68,18 @@ const Sending = ({gameMessage}) => {
       <div className={styles.sentMessageText}>
         <Typography variant="messageText">
           {gameMessage.text}
+        </Typography>
+      </div>
+    </div>
+  )
+}
+
+const Processing = () => {
+  return (
+    <div className={`${styles.receivedMessage} ${styles.questionMessage}`}>
+      <div className={styles.receivedMessageText}>
+        <Typography variant="messageText">
+          {"Processing ..."}
         </Typography>
       </div>
     </div>
