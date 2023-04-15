@@ -1,5 +1,6 @@
 import {Stack, Typography} from "@mui/material"
 import {useEffect, useState} from "react"
+import {getGameStatus} from "@/model/game"
 import styles from "@/styles/Home.module.css"
 
   // Possible states
@@ -19,26 +20,10 @@ const GameStatusBox = ({game, bots}) => {
 
   useEffect(() => {
     if (game && bots && bots.length > 1){
-      setDisplayMessage(game.displayMessage)
-      if(game.state === "YOU_WON"){
-        setStatusMessage("You won")
-        setStatusColor("var(--mui-palette-alternate-main)")
-      } else if(game.state === "YOU_LOST"){
-        setStatusMessage("You lost")
-        const winningBot = botWithId(bots, game.winningBotId)
-        if (winningBot) {
-          setStatusColor(winningBot.style.color)
-        }
-      } else if (game.state === "TIME_UP") {
-        setStatusMessage("Time ran out")
-        setStatusColor(null)
-      } else if(game.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION" || game.state === "WAITING_ON_YOU_TO_ANSWER") {
-        setStatusMessage("waiting on you")
-        setStatusColor(null)
-      } else {
-        setStatusMessage("please wait")
-        setStatusColor(null)
-      }
+      const {statusMessage, displayMessage, color} = getGameStatus(game, bots)
+      setStatusMessage(statusMessage)
+      setDisplayMessage(displayMessage)
+      setStatusColor(color)
     }
   }, [game, bots])
 
@@ -56,17 +41,6 @@ const GameStatusBox = ({game, bots}) => {
       </Stack>
     </div>
   )
-}
-
-const botWithId = (bots, botId) => {
-  let botFound
-  bots.forEach(bot => {
-    console.log(bot.id === botId)
-    if (bot.id === botId) {
-      botFound = bot
-    }
-  })
-  return botFound
 }
 
 export default GameStatusBox

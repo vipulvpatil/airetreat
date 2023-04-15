@@ -1,11 +1,13 @@
 import {useEffect, useState} from "react"
 import ChatContainer from "@/components/chat_container"
 import ErrorChecker from "@/common/error_checker"
+import GameEndPopup from "@/components/game_end_popup"
 import GameStatusBox from "@/components/game_status_box"
 import {Stack} from "@mui/material"
 import TagDialog from "@/components/tag_dialog"
 import UserInput from "@/components/user_input"
 import api from "@/lib/api"
+import {getGameResult} from "@/model/game"
 import {loadPlayerData} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
@@ -43,6 +45,8 @@ const Game = () => {
   const [gameId, setGameId] = useState(null)
   const [gameMessages, setGameMessages] = useState(null)
   const [tagDialogOpen, setTagDialogOpen] = useState(false)
+  const [gameEndPopupOpen, setGameEndPopupOpen] = useState(false)
+  const [gameResult, setGameResult] = useState(null)
   const [awaitingMessage, setAwaitingMessage] = useState(false)
 
   useEffect(() => {
@@ -104,6 +108,8 @@ const Game = () => {
   useEffect(() => {
     if(currentGame && bots && playerBot) {
       setGameMessages(addBotDataToGameMessages(currentGame.messages, bots, playerBot))
+      setGameResult(getGameResult(currentGame, bots))
+      setGameEndPopupOpen(true)
     }
   }, [currentGame, bots, playerBot])
 
@@ -133,6 +139,10 @@ const Game = () => {
     }
   }
 
+  const handleGameEndPopupClose = () => {
+    setGameEndPopupOpen(false)
+  }
+
   return (
     <div>
       <Stack sx={{alignItems: "center"}}>
@@ -151,6 +161,11 @@ const Game = () => {
         handleClose={handleTagDialogClose}
         bots={bots}
       />
+      {gameResult && <GameEndPopup
+        open={gameEndPopupOpen}
+        gameResult={gameResult}
+        handleClose={handleGameEndPopupClose}
+      />}
     </div>
   )
 }
