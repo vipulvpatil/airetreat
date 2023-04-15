@@ -38,11 +38,19 @@ const getGameStatus = (game, bots) => {
 }
 
 const getGameResult = (game, bots) => {
-  if(game.state === "YOU_WON" || game.state === "YOU_LOST" || game.state === "TIME_UP") {
+  if(gameHasEnded(game)) {
     return getGameStatus(game, bots)
   } else {
     return null
   }
+}
+
+const gameHasEnded = (game) => {
+  return (game.state === "YOU_WON" || game.state === "YOU_LOST" || game.state === "TIME_UP")
+}
+
+const gameTurnIsUsers = (game) => {
+  return (game.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION" || game.state === "WAITING_ON_YOU_TO_ANSWER")
 }
 
 const botWithId = (bots, botId) => {
@@ -58,5 +66,7 @@ const botWithId = (bots, botId) => {
 
 export {
   getGameStatus,
-  getGameResult
+  getGameResult,
+  gameHasEnded,
+  gameTurnIsUsers
 }

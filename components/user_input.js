@@ -8,7 +8,7 @@ import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 
-const UserInput = ({game, playerBot, bots, openTagDialog}) => {
+const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser}) => {
   const [message, setMessage] = useState("")
   const [showBotSelector, setShowBotSelector] = useState(false)
   const [selectedBot, setSelectedBot] = useState(null)
@@ -37,6 +37,9 @@ const UserInput = ({game, playerBot, bots, openTagDialog}) => {
   }, [playerBot, game, bots])
 
   const sendMessage = async () => {
+    if(!currentTurnIsUser()) {
+      return
+    }
     const trimmedMessage = message.trim()
     if(trimmedMessage){
       try {
@@ -96,7 +99,12 @@ const UserInput = ({game, playerBot, bots, openTagDialog}) => {
           className={styles.poppingButton}
           variant="contained"
           startIcon={<ReportIcon/>}
-          onClick={() => openTagDialog()}
+          onClick={() => {
+            if(!currentTurnIsUser()) {
+              return
+            }
+            openTagDialog()
+          }}
         >
           <Typography variant="h2">
             Tag

@@ -7,7 +7,7 @@ import {Stack} from "@mui/material"
 import TagDialog from "@/components/tag_dialog"
 import UserInput from "@/components/user_input"
 import api from "@/lib/api"
-import {getGameResult} from "@/model/game"
+import {gameHasEnded, gameTurnIsUsers, getGameResult} from "@/model/game"
 import {loadPlayerData} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
@@ -124,6 +124,10 @@ const Game = () => {
   }
 
   const tag = async (botId) => {
+    if(gameHasEnded(currentGame)) {
+      setGameEndPopupOpen(true)
+      return
+    }
     try {
       const playerData = await loadPlayerData()
       const resp = await api.call("tag", {
@@ -143,6 +147,19 @@ const Game = () => {
     setGameEndPopupOpen(false)
   }
 
+  const currentTurnIsUser = () => {
+    if(gameHasEnded(currentGame)) {
+      setGameEndPopupOpen(true)
+      return false
+    }
+
+    if (gameTurnIsUsers(currentGame)) {
+      // TODO: Flash the status message
+      return false
+    }
+    return true
+  }
+
   return (
     <div>
       <Stack sx={{alignItems: "center"}}>
@@ -153,6 +170,7 @@ const Game = () => {
           playerBot={playerBot}
           bots={bots}
           openTagDialog={() => setTagDialogOpen(true)}
+          currentTurnIsUser={currentTurnIsUser}
         />
       </Stack>
       <TagDialog
