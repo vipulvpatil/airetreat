@@ -1,7 +1,12 @@
-import {Dialog, DialogContent, DialogContentText, DialogTitle, Typography} from "@mui/material"
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Typography} from "@mui/material"
+import Link from "next/link"
+import {createGame} from "@/common/actions"
 import styles from "@/styles/Home.module.css"
+import {useRouter} from "next/router"
 
 const GameEndPopup = ({open, handleClose, gameResult}) => {
+  const router = useRouter()
+
   return (
     <Dialog
       open={open}
@@ -19,11 +24,24 @@ const GameEndPopup = ({open, handleClose, gameResult}) => {
           <Typography variant="h3" sx={{color: gameResult.color}}>
             {gameResult.displayMessage}
           </Typography>
-          <Typography variant="h3">
-            {"Show CTAs here for providing feedback as well as a starting another game."}
-          </Typography>
         </DialogContentText>
       </DialogContent>
+      <DialogActions sx={{padding: "0px"}}>
+        <Grid container className={styles.popupButtons} justifyContent="space-evenly">
+          <Grid item>
+            <Link href={process.env.NEXT_PUBLIC_FEEDBACK_LINK} rel="noopener noreferrer" target="_blank">
+              <Button className={`${styles.poppingButton} ${styles.resizeableButton}`} variant="contained">
+                <Typography variant="h2">Give feedback</Typography>
+              </Button>
+            </Link>
+          </Grid>
+          <Grid item>
+            <Button className={`${styles.poppingButton} ${styles.resizeableButton}`} variant="contained" onClick={() => createGame(router)}>
+              <Typography variant="h2">Create a Game</Typography>
+            </Button>
+          </Grid>
+        </Grid>
+      </DialogActions>
     </Dialog>
   )
 }

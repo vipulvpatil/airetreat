@@ -245,7 +245,7 @@
 .dialog {
   background-color: var(--mui-palette-primary-contrastText);
   color: var(--mui-palette-primary-main);
-  width: 350px;
+  width: 400px;
 }
 
 .highlightText {
@@ -254,4 +254,10 @@
 
 .popup {
   max-width: 1200px;
+}
+
+.popupButtons {
+  width: 100%;
+  max-width: 600px;
+  padding: 0px 0px 26px 0px;
 }
