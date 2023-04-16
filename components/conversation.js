@@ -78,7 +78,7 @@ const Sending = ({gameMessage}) => {
 const Processing = ({processingMessage}) => {
   if (!processingMessage) return <></>
   return (
-    <div className={`${styles.receivedMessage} ${processingMessage.style} animate__animated animate__bounce animate__infinite`}>
+    <div className={`${styles.receivedMessage} ${processingMessage.style} animate__animated animate__shakeX animate__infinite animate__slower`}>
       <MessageLabel labelText={processingMessage.label}/>
       <div className={styles.receivedMessageText}>
         <Typography variant="messageText">
