@@ -79,9 +79,8 @@ const Processing = ({processingMessage}) => {
   if (!processingMessage) return <></>
   return (
     <div className={`${styles.receivedMessage} ${processingMessage.style} animate__animated animate__shakeX animate__infinite animate__slower`}>
-      <MessageLabel labelText={processingMessage.label}/>
       <div className={styles.receivedMessageText}>
-        <Typography variant="messageText">
+        <Typography variant="messageTextResponding">
           {processingMessage.message}
         </Typography>
       </div>

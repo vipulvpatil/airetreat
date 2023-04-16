@@ -204,13 +204,13 @@ const Game = () => {
 const waitingMessageForGame = (game) => {
   if (game.state === "WAITING_ON_BOT_TO_ASK_A_QUESTION") {
     return {
-      message: "processing ...",
+      message: "someone is responding ...",
       label: "Question",
       style: styles.questionMessage
     }
   } else if(game.state === "WAITING_ON_BOT_TO_ANSWER"){
     return {
-      message: "processing ...",
+      message: "someone is responding ...",
       label: "Answer",
       style: styles.answerMessage
     }

@@ -96,6 +96,12 @@ export const newTheme = extendTheme({
       fontSize: 16,
       fontWeight: 400
     },
+    messageTextResponding: {
+      fontFamily: font2.style.fontFamily,
+      fontSize: 16,
+      fontWeight: 400,
+      fontStyle: "italic"
+    },
     link: {
       fontFamily: font1.style.fontFamily,
       fontSize: 14,

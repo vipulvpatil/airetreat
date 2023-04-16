@@ -15,5 +15,6 @@ export const font1 = Graduate({
 
 export const font2 = Tomorrow({
   weight: ["400", "700"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
 })
