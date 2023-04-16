@@ -99,12 +99,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser}) =>
           className={styles.poppingButton}
           variant="contained"
           startIcon={<ReportIcon/>}
-          onClick={() => {
-            if(!currentTurnIsUser()) {
-              return
-            }
-            openTagDialog()
-          }}
+          onClick={() => openTagDialog()}
         >
           <Typography variant="h2">
             Tag

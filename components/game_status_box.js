@@ -1,3 +1,4 @@
+import "animate.css"
 import {Stack, Typography} from "@mui/material"
 import {useEffect, useState} from "react"
 import {getGameStatus} from "@/model/game"
@@ -13,19 +14,26 @@ import styles from "@/styles/Home.module.css"
 	// "YOU_WON"
 	// "TIME_UP"
 
-const GameStatusBox = ({game, bots}) => {
+const GameStatusBox = ({game, bots, flashMessage}) => {
   const [statusMessage, setStatusMessage] = useState("")
   const [displayMessage, setDisplayMessage] = useState("")
   const [statusColor, setStatusColor] = useState(null)
+  const [flashEffectClass, setFlashEffectClass] = useState(null)
 
   useEffect(() => {
     if (game && bots && bots.length > 1){
       const {statusMessage, displayMessage, color} = getGameStatus(game, bots)
-      setStatusMessage(statusMessage)
+      if (flashMessage) {
+        setStatusMessage(flashMessage)
+        setFlashEffectClass("animate__animated animate__flash animate__infinite")
+      } else {
+        setStatusMessage(statusMessage)
+        setFlashEffectClass(null)
+      }
       setDisplayMessage(displayMessage)
       setStatusColor(color)
     }
-  }, [game, bots])
+  }, [game, bots, flashMessage])
 
   return (
     <div className={styles.gameStatusBox}>
@@ -33,7 +41,7 @@ const GameStatusBox = ({game, bots}) => {
         <Typography variant="h2" sx={{color: statusColor}}>
           {displayMessage}
         </Typography>
-        <div className={styles.statusMessage}>
+        <div className={`${styles.statusMessage} ${flashEffectClass}`}>
           <Typography variant="h3">
             {statusMessage}
           </Typography>

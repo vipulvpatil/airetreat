@@ -1,4 +1,5 @@
-import {useEffect, useState} from "react"
+import {gameHasEnded, gameTurnIsUsers, getGameResult} from "@/model/game"
+import {useEffect, useRef, useState} from "react"
 import ChatContainer from "@/components/chat_container"
 import ErrorChecker from "@/common/error_checker"
 import GameEndPopup from "@/components/game_end_popup"
@@ -7,7 +8,6 @@ import {Stack} from "@mui/material"
 import TagDialog from "@/components/tag_dialog"
 import UserInput from "@/components/user_input"
 import api from "@/lib/api"
-import {gameHasEnded, gameTurnIsUsers, getGameResult} from "@/model/game"
 import {loadPlayerData} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
@@ -48,6 +48,9 @@ const Game = () => {
   const [gameEndPopupOpen, setGameEndPopupOpen] = useState(false)
   const [gameResult, setGameResult] = useState(null)
   const [awaitingMessage, setAwaitingMessage] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  const timerRef = useRef()
 
   useEffect(() => {
     if(router.query && router.query.id) {
@@ -153,17 +156,27 @@ const Game = () => {
       return false
     }
 
-    if (gameTurnIsUsers(currentGame)) {
-      // TODO: Flash the status message
+    if (!gameTurnIsUsers(currentGame)) {
+      setErrorMessage("please wait for your turn")
       return false
     }
     return true
   }
 
+  useEffect(() => {
+    if(errorMessage) {
+      clearTimeout(timerRef.current)
+      timerRef.current = setTimeout(() => {
+        setErrorMessage(null)
+      }, 3000)
+      return () => clearTimeout(timerRef.current)
+    }
+  }, [errorMessage])
+
   return (
     <div>
       <Stack sx={{alignItems: "center"}}>
-        <GameStatusBox game={currentGame} bots={bots}/>
+        <GameStatusBox game={currentGame} bots={bots} flashMessage={errorMessage}/>
         <ChatContainer playerBot={playerBot} gameMessages={gameMessages} processingMessage={awaitingMessage}/>
         <UserInput
           game={currentGame}
