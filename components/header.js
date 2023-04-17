@@ -29,7 +29,7 @@ const Header = () => {
       <Stack className={styles.headerMenuLinks} direction="row">
         <MenuLink href="/">Home</MenuLink>
         <MenuLink href="/rules">Rules</MenuLink>
-        <MenuLink href="/background">About</MenuLink>
+        <MenuLink href="/about">About</MenuLink>
       </Stack>
       <Link href="/" className={styles.profileIcon}>
         <Typography variant="link">G</Typography>

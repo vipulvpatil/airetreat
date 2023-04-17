@@ -73,13 +73,13 @@
   padding-bottom: 16px;
 }
 
-.rulesTitle {
+.sectionTitle {
   color: var(--mui-palette-text-primary);
   padding-top: 8px;
   padding-bottom: 0px;
 }
 
-.rulesDetail {
+.description {
   color: var(--mui-palette-text-secondary);
   padding-top: 2px;
   padding-bottom: 16px;
@@ -87,7 +87,7 @@
   line-height: 150%;
 }
 
-.rulesDetailParagraph {
+.descriptionParagraph {
   text-indent: 32px;
 }
 
