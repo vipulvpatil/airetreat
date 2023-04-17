@@ -1,7 +1,9 @@
-import {Button, Stack, Typography} from "@mui/material"
+import {Button, Grid, Stack, Typography} from "@mui/material"
 import {useEffect, useState} from "react"
+import Image from "next/image"
 import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
+import mainImage from "../../../public/ai-retreat-main-image.png"
 import styles from "@/styles/Home.module.css"
 import {useRouter} from "next/router"
 
@@ -32,9 +34,28 @@ const Join = () => {
 
   return (
     <div className={styles.indexContent}>
-      <Stack spacing={2} sx={{alignItems: "center"}}>
-        <Typography className={styles.mainText}>You are joining game: {joiningGameId}</Typography>
-        <Button className={styles.primaryButton} variant="contained" onClick={joinGame}>Continue</Button>
+      <Stack sx={{alignItems: "center"}}>
+        <div className={styles.title}>
+          <Typography variant="h1">Ai Retreat</Typography>
+        </div>
+        <div className={styles.subtitle}>
+          <Typography variant="h2">You are joining game: {joiningGameId}</Typography>
+        </div>
+        <Button
+          className={`${styles.poppingButton} ${styles.resizeableButton}`}
+          variant="contained"
+          onClick={joinGame}
+          sx={{marginBottom: "20px"}}
+        >
+          <Typography variant="h2">
+            {"Continue"}
+          </Typography>
+        </Button>
+        <Image
+          className={styles.mainImage}
+          src={mainImage}
+          alt="Ai Retreat"
+        />
       </Stack>
     </div>
   )

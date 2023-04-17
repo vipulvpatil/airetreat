@@ -1,26 +1,13 @@
 import {Button, Grid, Stack, Typography} from "@mui/material"
 import Image from "next/image"
-import JoinGameDialog from "@/components/join_game_dialog"
+import Link from "next/link"
 import {createGame} from "@/common/actions"
 import mainImage from "../public/ai-retreat-main-image.png"
 import styles from "@/styles/Home.module.css"
 import {useRouter} from "next/router"
-import {useState} from "react"
 
 const Index = () => {
   const router = useRouter()
-  const [joinGameDialogOpen, setJoinGameDialogOpen] = useState(false)
-  const [joinGameId, setJoinGameId] = useState("")
-
-  const joinGame = () => {
-    setJoinGameDialogOpen(true)
-  }
-
-  const gameJoinClosed = () => {
-    if(joinGameId) {
-      router.push(`/game/join/${joinGameId}`)
-    }
-  }
 
   return (
     <div>
@@ -38,22 +25,23 @@ const Index = () => {
         />
         <Grid container className={styles.homePageButtons} justifyContent="space-evenly">
           <Grid item>
+          <Link href={"/rules"}>
+            <Button className={`${styles.poppingButton} ${styles.resizeableButton}`} variant="contained">
+              <Typography variant="h2">
+                Rules
+              </Typography>
+            </Button>
+            </Link>
+          </Grid>
+          <Grid item>
             <Button className={`${styles.poppingButton} ${styles.resizeableButton}`} variant="contained" onClick={() => createGame(router)}>
               <Typography variant="h2">
                 Create a Game
               </Typography>
             </Button>
           </Grid>
-          <Grid item>
-            <Button className={`${styles.poppingButton} ${styles.resizeableButton}`} variant="contained" onClick={joinGame}>
-              <Typography variant="h2">
-                Join Game
-              </Typography>
-            </Button>
-          </Grid>
         </Grid>
       </Stack>
-      <JoinGameDialog open={joinGameDialogOpen} joinGameId={joinGameId} setJoinGameId={setJoinGameId} handleClose={gameJoinClosed} />
     </div>
   )
 }
