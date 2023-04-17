@@ -17,13 +17,13 @@ const TagDialog = ({open, botTagged, handleClose, bots}) => {
       </DialogTitle>
       <DialogContent sx={{textAlign: "center"}}>
         <DialogContentText id="tag-dialog-description" sx={{paddingBottom: "4px"}}>
-          <Typography variant="h3">
+          <Typography variant="h4">
             Tag the bot powered by a human.
           </Typography>
-          <Typography variant="h3">
+          <Typography variant="h4">
             You only get one chance.
           </Typography>
-          <Typography variant="h3" className={styles.highlightText}>
+          <Typography variant="h4" className={styles.highlightText}>
             If you miss, they win.
           </Typography>
         </DialogContentText>

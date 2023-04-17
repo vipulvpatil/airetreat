@@ -38,11 +38,11 @@ const GameStatusBox = ({game, bots, flashMessage}) => {
   return (
     <div className={styles.gameStatusBox}>
       <Stack>
-        <Typography variant="h2" sx={{color: statusColor}}>
+        <Typography variant="h3" sx={{color: statusColor}}>
           {displayMessage}
         </Typography>
         <div className={`${styles.statusMessage} ${flashEffectClass}`}>
-          <Typography variant="h3">
+          <Typography variant="h4">
             {statusMessage}
           </Typography>
         </div>

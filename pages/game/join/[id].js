@@ -1,4 +1,4 @@
-import {Button, Grid, Stack, Typography} from "@mui/material"
+import {Button, Stack, Typography} from "@mui/material"
 import {useEffect, useState} from "react"
 import Image from "next/image"
 import api from "@/lib/api"
@@ -39,7 +39,7 @@ const Join = () => {
           <Typography variant="h1">Ai Retreat</Typography>
         </div>
         <div className={styles.subtitle}>
-          <Typography variant="h2">You are joining game: {joiningGameId}</Typography>
+          <Typography variant="h3">You are joining game: {joiningGameId}</Typography>
         </div>
         <Button
           className={`${styles.poppingButton} ${styles.resizeableButton}`}
@@ -47,7 +47,7 @@ const Join = () => {
           onClick={joinGame}
           sx={{marginBottom: "20px"}}
         >
-          <Typography variant="h2">
+          <Typography variant="h3">
             {"Continue"}
           </Typography>
         </Button>

@@ -5,7 +5,7 @@ const GameList = ({gameIds}) => {
 
 
   if (!gameIds) {
-    return <Typography variant="h2">No games found. Please Create or Join one.</Typography>
+    return <Typography variant="h3">No games found. Please Create or Join one.</Typography>
   }
   return (
     gameIds.map((gameId, index) => {

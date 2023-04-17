@@ -16,7 +16,7 @@ const Index = () => {
           <Typography variant="h1">Ai Retreat</Typography>
         </div>
         <div className={styles.subtitle}>
-          <Typography variant="h2">A two-player game of deduction.</Typography>
+          <Typography variant="h3">A two-player game of deduction.</Typography>
         </div>
         <Image
           className={styles.mainImage}
@@ -27,7 +27,7 @@ const Index = () => {
           <Grid item>
           <Link href={"/rules"}>
             <Button className={`${styles.poppingButton} ${styles.resizeableButton}`} variant="contained">
-              <Typography variant="h2">
+              <Typography variant="h3">
                 Rules
               </Typography>
             </Button>
@@ -35,7 +35,7 @@ const Index = () => {
           </Grid>
           <Grid item>
             <Button className={`${styles.poppingButton} ${styles.resizeableButton}`} variant="contained" onClick={() => createGame(router)}>
-              <Typography variant="h2">
+              <Typography variant="h3">
                 Create a Game
               </Typography>
             </Button>

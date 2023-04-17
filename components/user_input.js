@@ -89,7 +89,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser}) =>
     <Grid container className={styles.gameButtons} justifyContent="space-between">
       <Grid item>
         <Button className={styles.poppingButton} variant="contained" startIcon={<AssistantIcon />}>
-          <Typography variant="h2">
+          <Typography variant="h3">
             Help (3)
           </Typography>
         </Button>
@@ -101,7 +101,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser}) =>
           startIcon={<ReportIcon/>}
           onClick={() => openTagDialog()}
         >
-          <Typography variant="h2">
+          <Typography variant="h3">
             Tag
           </Typography>
         </Button>
@@ -113,7 +113,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser}) =>
           startIcon={<SendIcon/>}
           onClick={sendMessage}
         >
-          <Typography variant="h2">
+          <Typography variant="h3">
             Send
           </Typography>
         </Button>

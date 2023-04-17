@@ -76,15 +76,15 @@ export const newTheme = extendTheme({
     },
     h2: {
       fontFamily: font1.style.fontFamily,
-      fontSize: 16,
+      fontSize: 24,
     },
     h3: {
       fontFamily: font1.style.fontFamily,
-      fontSize: 14,
+      fontSize: 16,
     },
     h4: {
       fontFamily: font1.style.fontFamily,
-      fontSize: 10,
+      fontSize: 14,
     },
     messageLabel: {
       fontFamily: font2.style.fontFamily,

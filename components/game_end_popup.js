@@ -21,7 +21,7 @@ const GameEndPopup = ({open, handleClose, gameResult}) => {
       </DialogTitle>
       <DialogContent sx={{textAlign: "center"}}>
         <DialogContentText id="game-end-description" sx={{paddingBottom: "4px"}}>
-          <Typography variant="h3" sx={{color: gameResult.color}}>
+          <Typography variant="h4" sx={{color: gameResult.color}}>
             {gameResult.displayMessage}
           </Typography>
         </DialogContentText>
@@ -31,13 +31,13 @@ const GameEndPopup = ({open, handleClose, gameResult}) => {
           <Grid item>
             <Link href={process.env.NEXT_PUBLIC_FEEDBACK_LINK} rel="noopener noreferrer" target="_blank">
               <Button className={`${styles.poppingButton} ${styles.resizeableButton}`} variant="contained">
-                <Typography variant="h2">Give feedback</Typography>
+                <Typography variant="h3">Give feedback</Typography>
               </Button>
             </Link>
           </Grid>
           <Grid item>
             <Button className={`${styles.poppingButton} ${styles.resizeableButton}`} variant="contained" onClick={() => createGame(router)}>
-              <Typography variant="h2">Create a Game</Typography>
+              <Typography variant="h3">Create a Game</Typography>
             </Button>
           </Grid>
         </Grid>
