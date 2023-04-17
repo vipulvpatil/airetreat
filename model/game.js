@@ -60,7 +60,6 @@ const gameTurnIsUsers = (game) => {
 const botWithId = (bots, botId) => {
   let botFound
   bots.forEach(bot => {
-    console.log(bot.id === botId)
     if (bot.id === botId) {
       botFound = bot
     }

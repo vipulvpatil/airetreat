@@ -128,7 +128,6 @@ const Game = () => {
   }
 
   const botTagged = (bot) => {
-    console.log(bot)
     tag(bot.id)
     setTagDialogOpen(false)
   }

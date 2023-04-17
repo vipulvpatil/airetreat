@@ -3,9 +3,15 @@ import Link from "next/link"
 import {createGame} from "@/common/actions"
 import styles from "@/styles/Home.module.css"
 import {useRouter} from "next/router"
+import {useState} from "react"
 
 const GameEndPopup = ({open, handleClose, gameResult}) => {
   const router = useRouter()
+  const [creatingGame, setCreatingGame] = useState(false)
+
+  const apiCallCompleted = () => {
+    setCreatingGame(false)
+  }
 
   return (
     <Dialog
@@ -36,7 +42,15 @@ const GameEndPopup = ({open, handleClose, gameResult}) => {
             </Link>
           </Grid>
           <Grid item>
-            <Button className={`${styles.poppingButton} ${styles.resizeableButton}`} variant="contained" onClick={() => createGame(router)}>
+            <Button
+              disabled={creatingGame}
+              className={`${styles.poppingButton} ${styles.resizeableButton}`}
+              variant="contained"
+              onClick={() => {
+                setCreatingGame(true)
+                createGame(router, apiCallCompleted)
+              }}
+            >
               <Typography variant="h3">Create a Game</Typography>
             </Button>
           </Grid>
