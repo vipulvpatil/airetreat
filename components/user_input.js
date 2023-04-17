@@ -8,7 +8,7 @@ import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 
-const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser}) => {
+const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, currentGameHasEnded}) => {
   const [message, setMessage] = useState("")
   const [showBotSelector, setShowBotSelector] = useState(false)
   const [selectedBot, setSelectedBot] = useState(null)
@@ -37,7 +37,10 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser}) =>
   }, [playerBot, game, bots])
 
   const sendMessage = async () => {
-    if(!currentTurnIsUser()) {
+    if(currentGameHasEnded()) {
+      return
+    }
+    if(!currentTurnIsUser()){
       return
     }
     const trimmedMessage = message.trim()
@@ -75,6 +78,12 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser}) =>
       className={styles.userInputTextField}
       onChange={messageChanged}
       value={message}
+      onKeyPress={(event) => {
+        if (event.key === "Enter") {
+          event.preventDefault()
+          sendMessage()
+        }
+      }}
     />
     {
       showBotSelector &&
@@ -99,7 +108,11 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser}) =>
           className={styles.poppingButton}
           variant="contained"
           startIcon={<ReportIcon/>}
-          onClick={() => openTagDialog()}
+          onClick={() => {
+            if(!currentGameHasEnded()){
+              openTagDialog()
+            }
+          }}
         >
           <Typography variant="h3">
             Tag

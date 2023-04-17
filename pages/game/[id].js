@@ -158,16 +158,19 @@ const Game = () => {
   }
 
   const currentTurnIsUser = () => {
-    if(gameHasEnded(currentGame)) {
-      setGameEndPopupOpen(true)
-      return false
-    }
-
     if (!gameTurnIsUsers(currentGame)) {
       setErrorMessage("please wait for your turn")
       return false
     }
     return true
+  }
+
+  const currentGameHasEnded = () => {
+    if(gameHasEnded(currentGame)) {
+      setGameEndPopupOpen(true)
+      return true
+    }
+    return false
   }
 
   useEffect(() => {
@@ -191,6 +194,7 @@ const Game = () => {
           bots={bots}
           openTagDialog={() => setTagDialogOpen(true)}
           currentTurnIsUser={currentTurnIsUser}
+          currentGameHasEnded={currentGameHasEnded}
         />
       </Stack>
       <TagDialog
