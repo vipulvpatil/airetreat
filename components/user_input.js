@@ -13,6 +13,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
   const [showBotSelector, setShowBotSelector] = useState(false)
   const [selectedBot, setSelectedBot] = useState(null)
   const [messageType, setMessageType] = useState("")
+  const [sendButtonDisabled, setSendButtonDisabled] = useState(false)
 
   const messageChanged = (event) => {
     setMessage(event.target.value)
@@ -46,6 +47,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
     const trimmedMessage = message.trim()
     if(trimmedMessage){
       try {
+        setSendButtonDisabled(true)
         const playerData = await loadPlayerData()
         const resp = await api.call("sendMessage", {
           gameId: game.id,
@@ -54,6 +56,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
           text: message,
           type: messageType,
         })
+        setSendButtonDisabled(false)
         if (resp.error) {
           console.log(resp.error)
         } else {
@@ -121,6 +124,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
       </Grid>
       <Grid item>
         <Button
+          disabled={sendButtonDisabled}
           className={styles.poppingButton}
           variant="contained"
           startIcon={<SendIcon/>}
