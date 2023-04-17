@@ -22,6 +22,7 @@ const Index = () => {
           className={styles.mainImage}
           src={mainImage}
           alt="Ai Retreat"
+          priority
         />
         <Grid container className={styles.homePageButtons} justifyContent="space-evenly">
           <Grid item>

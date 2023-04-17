@@ -21,7 +21,7 @@ const About = () => {
         </div>
         <div className={styles.description}>
           <Typography variant="h3" className={styles.descriptionParagraph}>
-            My name is Vipul Vinod Patil and I am an software engineer by profession. This is my second project built on OpenAi. The first one is <Link href="https://www.joblead.io">JobLead</Link> which is a simple website that finds jobs matching a given resume. Apart from programming, I also like to write about my experiences at <Link href="https://medium.com/@vipulvpatil">Medium</Link> or <Link href="https://twitter.com/vipulvpatil">Twitter</Link>
+            My name is Vipul Vinod Patil and I am an software engineer by profession. This is my second project built on OpenAi. The first one is <Link href="https://www.joblead.io">JobLead</Link> which is a simple website that finds jobs matching a given resume. Apart from programming, I also like to write about my experiences at <Link href="https://medium.com/@vipulvpatil">Medium</Link> or follow me on <Link href="https://twitter.com/vipulvpatil">Twitter</Link>
           </Typography>
         </div>
         <div className={styles.sectionTitle}>

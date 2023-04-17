@@ -49,6 +49,10 @@ const gameHasEnded = (game) => {
   return (game.state === "YOU_WON" || game.state === "YOU_LOST" || game.state === "TIME_UP")
 }
 
+const gameIsWaitingForPlayer = (game) => {
+  return game.state === "WAITING_FOR_PLAYERS_TO_JOIN"
+}
+
 const gameTurnIsUsers = (game) => {
   return (game.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION" || game.state === "WAITING_ON_YOU_TO_ANSWER")
 }
@@ -68,5 +72,6 @@ export {
   getGameStatus,
   getGameResult,
   gameHasEnded,
-  gameTurnIsUsers
+  gameTurnIsUsers,
+  gameIsWaitingForPlayer
 }

@@ -55,6 +55,7 @@ const Join = () => {
           className={styles.mainImage}
           src={mainImage}
           alt="Ai Retreat"
+          priority
         />
       </Stack>
     </div>

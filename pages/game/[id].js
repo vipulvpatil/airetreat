@@ -1,8 +1,9 @@
-import {gameHasEnded, gameTurnIsUsers, getGameResult} from "@/model/game"
+import {gameHasEnded, gameIsWaitingForPlayer, gameTurnIsUsers, getGameResult} from "@/model/game"
 import {useEffect, useRef, useState} from "react"
 import ChatContainer from "@/components/chat_container"
 import ErrorChecker from "@/common/error_checker"
 import GameEndPopup from "@/components/game_end_popup"
+import GameInvitePopup from "@/components/game_invite_popup"
 import GameStatusBox from "@/components/game_status_box"
 import {Stack} from "@mui/material"
 import TagDialog from "@/components/tag_dialog"
@@ -46,6 +47,7 @@ const Game = () => {
   const [gameMessages, setGameMessages] = useState(null)
   const [tagDialogOpen, setTagDialogOpen] = useState(false)
   const [gameEndPopupOpen, setGameEndPopupOpen] = useState(false)
+  const [gameInvitePopupOpen, setGameInvitePopupOpen] = useState(false)
   const [gameResult, setGameResult] = useState(null)
   const [awaitingMessage, setAwaitingMessage] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -110,6 +112,11 @@ const Game = () => {
 
   useEffect(() => {
     if(currentGame && bots && playerBot) {
+      if(gameIsWaitingForPlayer(currentGame)){
+        setGameInvitePopupOpen(true)
+        return
+      }
+      setGameInvitePopupOpen(false)
       setGameMessages(addBotDataToGameMessages(currentGame.messages, bots, playerBot))
       setGameResult(getGameResult(currentGame, bots))
       setGameEndPopupOpen(true)
@@ -195,6 +202,11 @@ const Game = () => {
       {gameResult && <GameEndPopup
         open={gameEndPopupOpen}
         gameResult={gameResult}
+        handleClose={handleGameEndPopupClose}
+      />}
+      {gameId && <GameInvitePopup
+        open={gameInvitePopupOpen}
+        inviteLink={`${process.env.NEXT_PUBLIC_BASE_URL}/game/join/${gameId}`}
         handleClose={handleGameEndPopupClose}
       />}
     </div>
