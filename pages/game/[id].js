@@ -60,12 +60,12 @@ const Game = () => {
     }
   }, [router])
 
-  const updateCurrentGameIfStateChanged = async (gameId, existingGameState) => {
+  const updateCurrentGameIfNeedsUpdate = async (gameId, existingGameState) => {
     if(existingGameState === "YOU_WON" || existingGameState === "YOU_LOST" || existingGameState === "TIME_UP") {
       return
     }
     const game = await getGame(gameId)
-    if (game && existingGameState !== game.state){
+    if (game && gameNeedsUpdate(game)){
       setCurrentGame(game)
       setAwaitingMessage(waitingMessageForGame(game))
     }
@@ -85,10 +85,28 @@ const Game = () => {
     }
   }
 
+  const gameNeedsUpdate = (game) => {
+    if (!currentGame) {
+      return true
+    }
+
+    const currentGameState = currentGame.state
+    if (currentGameState !== game.state) {
+      return true
+    }
+
+    const currentMyHelpCount = currentGame.myHelpCount
+    if (currentMyHelpCount !== game.myHelpCount) {
+      return true
+    }
+
+    return false
+  }
+
   usePoll(() => {
     if(gameId) {
       const currentGameState = currentGame && currentGame.state
-      updateCurrentGameIfStateChanged(gameId, currentGameState)
+      updateCurrentGameIfNeedsUpdate(gameId, currentGameState)
     }
   }, [gameId, currentGame], {interval: 1000})
 
