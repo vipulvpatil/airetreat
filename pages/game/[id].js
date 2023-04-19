@@ -194,6 +194,7 @@ const Game = () => {
           openTagDialog={() => setTagDialogOpen(true)}
           currentTurnIsUser={currentTurnIsUser}
           currentGameHasEnded={currentGameHasEnded}
+          setErrorMessage={setErrorMessage}
         />
       </Stack>
       <TagDialog

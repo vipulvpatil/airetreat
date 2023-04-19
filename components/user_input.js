@@ -8,7 +8,7 @@ import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 
-const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, currentGameHasEnded}) => {
+const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, currentGameHasEnded, setErrorMessage}) => {
   const [message, setMessage] = useState("")
   const [showBotSelector, setShowBotSelector] = useState(false)
   const [selectedBot, setSelectedBot] = useState(null)
@@ -62,6 +62,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
         setSendButtonDisabled(false)
         if (resp.error) {
           console.log(resp.error)
+          setErrorMessage(resp.error.details)
         } else {
           setMessage("")
         }
@@ -88,6 +89,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
       setHelpButtonDisabled(false)
       if (resp.error) {
         console.log(resp.error)
+        setErrorMessage(resp.error.details)
       } else {
         setMessage(resp.result.text)
       }
