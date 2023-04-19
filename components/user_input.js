@@ -13,7 +13,9 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
   const [showBotSelector, setShowBotSelector] = useState(false)
   const [selectedBot, setSelectedBot] = useState(null)
   const [messageType, setMessageType] = useState("")
+  const [helpCount, setHelpCount] = useState(0)
   const [sendButtonDisabled, setSendButtonDisabled] = useState(false)
+  const [helpButtonDisabled, setHelpButtonDisabled] = useState(false)
 
   const messageChanged = (event) => {
     setMessage(event.target.value)
@@ -21,6 +23,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
 
   useEffect(() => {
     if(game){
+      setHelpCount(game.myHelpCount)
       if(game.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION") {
         setShowBotSelector(true)
         setSelectedBot(bots[0])
@@ -68,6 +71,31 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
     }
   }
 
+  const getHelp = async () => {
+    if(currentGameHasEnded()) {
+      return
+    }
+    if(!currentTurnIsUser()){
+      return
+    }
+    try {
+      setHelpButtonDisabled(true)
+      const playerData = await loadPlayerData()
+      const resp = await api.call("help", {
+        gameId: game.id,
+        playerId: playerData.id,
+      })
+      setHelpButtonDisabled(false)
+      if (resp.error) {
+        console.log(resp.error)
+      } else {
+        setMessage(resp.result.text)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return <div className={styles.userInput}>
     <TextField
       color="alternate"
@@ -100,9 +128,15 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
     }
     <Grid container className={styles.gameButtons} justifyContent="space-between">
       <Grid item>
-        <Button className={styles.poppingButton} variant="contained" startIcon={<AssistantIcon />}>
+        <Button
+          disabled={helpButtonDisabled}
+          className={styles.poppingButton}
+          variant="contained"
+          startIcon={<AssistantIcon />}
+          onClick={getHelp}
+        >
           <Typography variant="h3">
-            Help (3)
+            Help ({helpCount})
           </Typography>
         </Button>
       </Grid>
