@@ -12,13 +12,13 @@ const Rules = () => {
           <Typography variant="h2">Objective</Typography>
         </div>
         <div className={styles.description}>
-          <Typography variant="h3">
+          <Typography variant="h3" className={styles.descriptionBullet}>
             &bull;&nbsp;{"Tag the other human before they tag you."}
           </Typography>
-          <Typography variant="h3">
+          <Typography variant="h3" className={styles.descriptionBullet}>
             &bull;&nbsp;{"You only get one attempt."}
           </Typography>
-          <Typography variant="h3">
+          <Typography variant="h3" className={styles.descriptionBullet}>
             &bull;&nbsp;{"If you miss, you lose."}
           </Typography>
         </div>
@@ -26,16 +26,16 @@ const Rules = () => {
           <Typography variant="h2">Gameplay</Typography>
         </div>
         <div className={styles.description}>
-          <Typography variant="h3">
+          <Typography variant="h3" className={styles.descriptionBullet}>
             &bull;&nbsp;{"On your turn, you select a bot and anonymously ask a question."}
           </Typography>
-          <Typography variant="h3">
+          <Typography variant="h3" className={styles.descriptionBullet}>
             &bull;&nbsp;{"When you are asked a question, answer it as soon as possible."}
           </Typography>
-          <Typography variant="h3">
+          <Typography variant="h3" className={styles.descriptionBullet}>
             &bull;&nbsp;{"While answering or asking a question, use help to get an AI generated answer/question. This can only be used a limited number of times in a game."}
           </Typography>
-          <Typography variant="h3">
+          <Typography variant="h3" className={styles.descriptionBullet}>
             &bull;&nbsp;{"Once you have identified the other human, tag them to end the game."}
           </Typography>
         </div>
