@@ -1,5 +1,5 @@
 import {Button, Stack, Typography} from "@mui/material"
-import {useEffect, useState} from "react"
+import {useCallback, useEffect, useState} from "react"
 import Image from "next/image"
 import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
@@ -12,12 +12,7 @@ const Join = () => {
   const [joining, setJoining] = useState(false)
   const router = useRouter()
 
-  useEffect(() => {
-    const {id} = router.query
-    setJoiningGameId(id)
-  }, [router])
-
-  const joinGame = async () => {
+  const joinGame = useCallback(async () => {
     if (joining) {
       return
     }
@@ -30,7 +25,13 @@ const Join = () => {
       router.push(`/game/${resp.result.gameId}`)
     }
     setJoining(false)
-  }
+  }, [joiningGameId, joining, router])
+
+  useEffect(() => {
+    const {id} = router.query
+    setJoiningGameId(id)
+    joinGame()
+  }, [router, joinGame])
 
   return (
     <div className={styles.indexContent}>
