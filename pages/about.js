@@ -28,7 +28,8 @@ const About = () => {
           <Typography variant="h2">Thank you</Typography>
         </div>
         <div className={styles.description}>
-          <Typography variant="h3" sx={{textAlign: "center"}}>Vipul Vinod Patil</Typography>
+          <Typography variant="h3" className={styles.descriptionBullet} sx={{textAlign: "center"}}>Vipul Vinod Patil</Typography>
+          <Typography variant="h3" className={styles.descriptionBullet} sx={{textAlign: "center"}}>vipulvpatil@gmail.com</Typography>
         </div>
       </Stack>
     </div>

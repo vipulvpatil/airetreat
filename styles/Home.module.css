@@ -27,6 +27,11 @@
   align-items: center;
 }
 
+.footerIcon {
+  margin-left: 16px;
+  display: flex;
+}
+
 .menuLink {
   display: flex;
   align-items: center;
