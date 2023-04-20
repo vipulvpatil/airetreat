@@ -8,12 +8,11 @@ import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 
-const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, currentGameHasEnded, setErrorMessage}) => {
+const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, currentGameHasEnded, setErrorMessage, helpCount, setHelpCount}) => {
   const [message, setMessage] = useState("")
   const [showBotSelector, setShowBotSelector] = useState(false)
   const [selectedBot, setSelectedBot] = useState(null)
   const [messageType, setMessageType] = useState("")
-  const [helpCount, setHelpCount] = useState(0)
   const [sendButtonDisabled, setSendButtonDisabled] = useState(false)
   const [helpButtonDisabled, setHelpButtonDisabled] = useState(false)
 
@@ -23,7 +22,6 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
 
   useEffect(() => {
     if(game){
-      setHelpCount(game.myHelpCount)
       if(game.state === "WAITING_ON_YOU_TO_ASK_A_QUESTION") {
         setShowBotSelector(true)
         setSelectedBot(bots[0])
@@ -92,6 +90,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
         setErrorMessage(resp.error.details)
       } else {
         setMessage(resp.result.text)
+        setHelpCount(helpCount-1)
       }
     } catch (err) {
       console.log(err)

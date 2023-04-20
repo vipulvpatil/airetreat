@@ -51,6 +51,8 @@ const Game = () => {
   const [gameResult, setGameResult] = useState(null)
   const [awaitingMessage, setAwaitingMessage] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
+  const [helpCount, setHelpCount] = useState(0)
+
 
   const timerRef = useRef()
 
@@ -65,9 +67,14 @@ const Game = () => {
       return
     }
     const game = await getGame(gameId)
-    if (game && gameNeedsUpdate(game)){
-      setCurrentGame(game)
-      setAwaitingMessage(waitingMessageForGame(game))
+    if (game) {
+      if(gameNeedsUpdate(game)){
+        setCurrentGame(game)
+        setAwaitingMessage(waitingMessageForGame(game))
+      }
+      if(helpCountNeedsUpdate(game)){
+        setHelpCount(game.myHelpCount)
+      }
     }
   }
 
@@ -89,17 +96,17 @@ const Game = () => {
     if (!currentGame) {
       return true
     }
-
     const currentGameState = currentGame.state
     if (currentGameState !== game.state) {
       return true
     }
+    return false
+  }
 
-    const currentMyHelpCount = currentGame.myHelpCount
-    if (currentMyHelpCount !== game.myHelpCount) {
+  const helpCountNeedsUpdate = (game) => {
+    if (helpCount !== game.myHelpCount) {
       return true
     }
-
     return false
   }
 
@@ -213,6 +220,8 @@ const Game = () => {
           currentTurnIsUser={currentTurnIsUser}
           currentGameHasEnded={currentGameHasEnded}
           setErrorMessage={setErrorMessage}
+          helpCount={helpCount}
+          setHelpCount={setHelpCount}
         />
       </Stack>
       <TagDialog
