@@ -6,6 +6,7 @@ import ReportIcon from "@mui/icons-material/Report"
 import SendIcon from "@mui/icons-material/Send"
 import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
+import {logAnalyticsEvent} from "@/lib/analytics_events"
 import styles from "@/styles/Home.module.css"
 
 const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, currentGameHasEnded, setErrorMessage, helpCount, setHelpCount}) => {
@@ -62,6 +63,11 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
           console.log(resp.error)
           setErrorMessage(resp.error.details)
         } else {
+          if(messageType == "question") {
+            logAnalyticsEvent(window, "QuestionAskedEvent")
+          } else {
+            logAnalyticsEvent(window, "QuestionAnsweredEvent")
+          }
           setMessage("")
         }
       } catch (err) {
@@ -91,6 +97,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
       } else {
         setMessage(resp.result.text)
         setHelpCount(helpCount-1)
+        logAnalyticsEvent(window, "HelpTakenEvent")
       }
     } catch (err) {
       console.log(err)

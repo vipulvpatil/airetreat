@@ -3,6 +3,7 @@ import {useCallback, useEffect, useState} from "react"
 import Image from "next/image"
 import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
+import {logAnalyticsEvent} from "@/lib/analytics_events"
 import mainImage from "../../../public/ai-retreat-main-image.png"
 import styles from "@/styles/Home.module.css"
 import {useRouter} from "next/router"
@@ -22,6 +23,7 @@ const Join = () => {
     if(resp.error) {
       console.log(resp.error)
     } else {
+      logAnalyticsEvent(window, "GameJoinedEvent")
       router.push(`/game/${resp.result.gameId}`)
     }
     setJoining(false)

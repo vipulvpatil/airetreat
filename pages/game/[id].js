@@ -10,6 +10,7 @@ import TagDialog from "@/components/tag_dialog"
 import UserInput from "@/components/user_input"
 import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
+import {logAnalyticsEvent} from "@/lib/analytics_events"
 import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
 import {useRouter} from "next/router"
@@ -136,14 +137,19 @@ const Game = () => {
   }, [currentGame])
 
   useEffect(() => {
-    if(currentGame && bots && playerBot) {
+    if (currentGame && bots && playerBot) {
       if(gameIsWaitingForPlayer(currentGame)){
         setGameInvitePopupOpen(true)
         return
       }
       setGameInvitePopupOpen(false)
       setGameMessages(addBotDataToGameMessages(currentGame.messages, bots, playerBot))
-      setGameResult(getGameResult(currentGame, bots))
+
+      const result = getGameResult(currentGame, bots)
+      if (result) {
+        logAnalyticsEvent(window, "GameFinishedEvent")
+        setGameResult(result)
+      }
       setGameEndPopupOpen(true)
     }
   }, [currentGame, bots, playerBot])
@@ -171,6 +177,8 @@ const Game = () => {
       })
       if (resp.error) {
         console.log(resp.error)
+      } else {
+        logAnalyticsEvent(window, "BotTaggedEvent")
       }
     } catch (err) {
       console.log(err)
