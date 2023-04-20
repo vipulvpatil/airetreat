@@ -2,6 +2,7 @@ import {Button, Grid, Stack, Typography} from "@mui/material"
 import Image from "next/image"
 import Link from "next/link"
 import {createGame} from "@/common/actions"
+import {logAnalyticsEvent} from "@/lib/analytics_events"
 import mainImage from "../public/ai-retreat-main-image.png"
 import styles from "@/styles/Home.module.css"
 import {useRouter} from "next/router"
@@ -13,6 +14,7 @@ const Index = () => {
 
   const apiCallCompleted = () => {
     setCreatingGame(false)
+    logAnalyticsEvent(window, "GameCreatedEvent")
   }
 
   return (

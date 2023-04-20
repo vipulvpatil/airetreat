@@ -3,6 +3,7 @@ import GameList from "@/components/game_list"
 import api from "@/lib/api"
 import {createGame} from "@/common/actions"
 import {loadPlayerData} from "@/lib/local_storage"
+import {logAnalyticsEvent} from "@/lib/analytics_events"
 import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
 import {useRouter} from "next/router"
@@ -15,6 +16,7 @@ const Index = () => {
 
   const apiCallCompleted = () => {
     setCreatingGame(false)
+    logAnalyticsEvent(window, "GameCreatedEvent")
   }
 
   const getGameIds = async () => {

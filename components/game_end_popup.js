@@ -1,6 +1,7 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Typography} from "@mui/material"
 import Link from "next/link"
 import {createGame} from "@/common/actions"
+import {logAnalyticsEvent} from "@/lib/analytics_events"
 import styles from "@/styles/Home.module.css"
 import {useRouter} from "next/router"
 import {useState} from "react"
@@ -11,6 +12,7 @@ const GameEndPopup = ({open, handleClose, gameResult}) => {
 
   const apiCallCompleted = () => {
     setCreatingGame(false)
+    logAnalyticsEvent(window, "GameCreatedEvent")
   }
 
   return (
