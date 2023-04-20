@@ -1,4 +1,4 @@
-import {Button, Divider, Link, Typography} from "@mui/material"
+import {Divider, Link, Typography} from "@mui/material"
 import EmailIcon from "@mui/icons-material/Email"
 import FeedbackIcon from "@mui/icons-material/Feedback"
 import Header from "@/components/header"

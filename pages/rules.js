@@ -1,5 +1,12 @@
 import {Stack, Typography} from "@mui/material"
+import Image from "next/image"
+import answerImage from "../public/screens/answer.png"
+import askQuestionImage from "../public/screens/ask_question.png"
+import fullGameImage from "../public/screens/full_game.png"
+import gameStatusImage from "../public/screens/game_status.png"
+import helpImage from "../public/screens/help.png"
 import styles from "@/styles/Home.module.css"
+import tagBotImage from "../public/screens/tag_bot.png"
 
 const Rules = () => {
   return (
@@ -27,17 +34,71 @@ const Rules = () => {
         </div>
         <div className={styles.description}>
           <Typography variant="h3" className={styles.descriptionBullet}>
+            &bull;&nbsp;{"The game consist of a chat screen with status at the top and messaging options at the bottom"}
+          </Typography>
+          <div className={styles.gameRuleImageContainer}>
+            <Image
+              className={styles.gameRuleImage}
+              src={fullGameImage}
+              alt="fullGameImage"
+              priority
+            />
+          </div>
+          <Typography variant="h3" className={styles.descriptionBullet}>
             &bull;&nbsp;{"On your turn, you select a bot and anonymously ask a question."}
           </Typography>
+          <div className={styles.gameRuleImageContainer}>
+            <Image
+              className={styles.gameRuleImage}
+              src={askQuestionImage}
+              alt="askQuestionImage"
+              priority
+            />
+          </div>
           <Typography variant="h3" className={styles.descriptionBullet}>
             &bull;&nbsp;{"When you are asked a question, answer it as soon as possible."}
           </Typography>
+          <div className={styles.gameRuleImageContainer}>
+            <Image
+              className={styles.gameRuleImage}
+              src={answerImage}
+              alt="answerImage"
+              priority
+            />
+          </div>
           <Typography variant="h3" className={styles.descriptionBullet}>
             &bull;&nbsp;{"While answering or asking a question, use help to get an AI generated answer/question. This can only be used a limited number of times in a game."}
           </Typography>
+          <div className={styles.gameRuleImageContainer}>
+            <Image
+              className={styles.gameRuleImage}
+              src={helpImage}
+              alt="helpImage"
+              priority
+            />
+          </div>
           <Typography variant="h3" className={styles.descriptionBullet}>
             &bull;&nbsp;{"Once you have identified the other human, tag them to end the game."}
           </Typography>
+          <div className={styles.gameRuleImageContainer}>
+            <Image
+              className={styles.gameRuleImage}
+              src={tagBotImage}
+              alt="tagBotImage"
+              priority
+            />
+          </div>
+          <Typography variant="h3" className={styles.descriptionBullet}>
+            &bull;&nbsp;{"Current game status can always be found at the top of the game."}
+          </Typography>
+          <div className={styles.gameRuleImageContainer}>
+            <Image
+              className={styles.gameRuleImage}
+              src={gameStatusImage}
+              alt="gameStatusImage"
+              priority
+            />
+          </div>
         </div>
         <div className={styles.sectionTitle}>
           <Typography variant="h2">Story</Typography>

@@ -31,8 +31,8 @@ const Header = () => {
         <MenuLink href="/rules">Rules</MenuLink>
         <MenuLink href="/about">About</MenuLink>
       </Stack>
-      <Link href="/" className={styles.profileIcon}>
-        <Typography variant="link">G</Typography>
+      <Link href="/rules" className={styles.profileIcon}>
+        <Typography variant="link">?</Typography>
       </Link>
     </div>
   )

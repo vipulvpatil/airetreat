@@ -76,6 +76,7 @@
   color: var(--mui-palette-primary-main);
   padding-top: 8px;
   padding-bottom: 16px;
+  text-align: center;
 }
 
 .sectionTitle {
@@ -286,4 +287,20 @@
   width: 100%;
   max-width: 600px;
   padding: 0px 0px 26px 0px;
+}
+
+.gameRuleImageContainer {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  padding-top: 8px;
+  padding-bottom: 16px;
+}
+
+.gameRuleImage {
+  width: 80%;
+  max-width: 480px;
+  height: auto;
+  padding-left: 20%;
 }
