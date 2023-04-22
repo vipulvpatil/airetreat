@@ -1,4 +1,5 @@
 import GrpcService from "@/lib/grpc_service"
+import {getServerSession} from "next-auth"
 
 const createGame = async (params) => {
   if(!params.playerId){
@@ -122,6 +123,9 @@ const Game = async (req, res) => {
       res.status(400).json({error: "valid player id is required"})
       return
     }
+    const session = await getServerSession(req, res)
+    console.log(session)
+
     const {result, err} = await actionFunc(req.body.params)
     res.status(200).json({result: result, error: err})
   } else {

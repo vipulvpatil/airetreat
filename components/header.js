@@ -1,4 +1,5 @@
-import {Stack, Typography} from "@mui/material"
+import {Button, Stack, Typography} from "@mui/material"
+import {signIn, signOut, useSession} from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
 import styles from "@/styles/Home.module.css"
@@ -16,6 +17,31 @@ const MenuLink = ({children, href}) => {
 }
 
 const Header = () => {
+  let profileButton
+  const {data: session, status} = useSession()
+  if (status === "authenticated") {
+    const {user} = session
+    console.log(session)
+    profileButton = (
+      <Button onClick={signOut} className={styles.profileIcon}>
+        <Typography variant="link">
+          <Image
+            src={user.image}
+            alt="user profile image"
+            width={24} height={24}
+            style={{borderRadius: "50%", display: "block"}}
+          />
+        </Typography>
+      </Button>
+    )
+  } else {
+    profileButton = (
+      <Button onClick={signIn} className={styles.profileIcon}>
+        <Typography variant="link">?</Typography>
+      </Button>
+    )
+  }
+
   return (
     <div className={styles.header}>
       <Link href="/" className={styles.headerLogo}>
@@ -31,9 +57,7 @@ const Header = () => {
         <MenuLink href="/rules">Rules</MenuLink>
         <MenuLink href="/about">About</MenuLink>
       </Stack>
-      <Link href="/rules" className={styles.profileIcon}>
-        <Typography variant="link">?</Typography>
-      </Link>
+      {profileButton}
     </div>
   )
 }

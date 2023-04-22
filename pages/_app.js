@@ -6,7 +6,7 @@ import {newTheme} from "@/common/theme"
 
 export default function App({Component, pageProps: {session, ...pageProps}}) {
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={session} refetchInterval={5 * 60}>
       <CssVarsProvider theme={newTheme}>
         <Layout>
           <Component {...pageProps} />
