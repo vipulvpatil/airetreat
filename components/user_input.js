@@ -18,7 +18,8 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
   const [helpButtonDisabled, setHelpButtonDisabled] = useState(false)
 
   const messageChanged = (event) => {
-    setMessage(event.target.value)
+    const value = event.target.value.substring(0, 120)
+    setMessage(value)
   }
 
   useEffect(() => {
