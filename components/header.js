@@ -1,8 +1,9 @@
-import {Button, Stack, Typography} from "@mui/material"
-import {signIn, signOut, useSession} from "next-auth/react"
+import {Stack, Typography} from "@mui/material"
 import Image from "next/image"
 import Link from "next/link"
+import ProfileMenu from "@/components/profile_menu"
 import styles from "@/styles/Home.module.css"
+import {useSession} from "next-auth/react"
 
 const MenuLink = ({children, href}) => {
   if(href) {
@@ -17,29 +18,10 @@ const MenuLink = ({children, href}) => {
 }
 
 const Header = () => {
-  let profileButton
   const {data: session, status} = useSession()
+  let loggedInUser
   if (status === "authenticated") {
-    const {user} = session
-    console.log(session)
-    profileButton = (
-      <Button onClick={signOut} className={styles.profileIcon}>
-        <Typography variant="link">
-          <Image
-            src={user.image}
-            alt="user profile image"
-            width={24} height={24}
-            style={{borderRadius: "50%", display: "block"}}
-          />
-        </Typography>
-      </Button>
-    )
-  } else {
-    profileButton = (
-      <Button onClick={() => signIn("google")} className={styles.profileIcon}>
-        <Typography variant="link">?</Typography>
-      </Button>
-    )
+    loggedInUser = session.user
   }
 
   return (
@@ -57,7 +39,7 @@ const Header = () => {
         <MenuLink href="/rules">Rules</MenuLink>
         <MenuLink href="/about">About</MenuLink>
       </Stack>
-      {profileButton}
+      <ProfileMenu user={loggedInUser}/>
     </div>
   )
 }

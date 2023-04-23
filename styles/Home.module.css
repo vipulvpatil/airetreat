@@ -50,6 +50,10 @@
   align-items: center;
 }
 
+.profileMenu {
+  margin-left: auto;
+}
+
 .profileIcon {
   min-width: 24px;
   width: 24px;
@@ -60,7 +64,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
 }
 
 .profileIcon:hover {
