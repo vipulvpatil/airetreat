@@ -46,6 +46,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  players       Player[]
 
   @@map("users")
 }
@@ -53,6 +54,8 @@ model User {
 model Player {
   id        String   @id @default(cuid())
   bots      Bot[]
+  userId    String?  @map("user_id")
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
 
   @@map("players")
