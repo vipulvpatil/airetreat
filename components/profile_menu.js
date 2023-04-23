@@ -26,7 +26,9 @@ const ProfileMenuItem = ({user, handleClose}) => {
           handleClose()
         }}
       >
-        Logout
+        <Typography variant="link">
+          Logout
+        </Typography>
       </MenuItem>
     )
   } else {
@@ -37,7 +39,9 @@ const ProfileMenuItem = ({user, handleClose}) => {
           handleClose()
         }}
       >
-        Login with Google
+        <Typography variant="link">
+          Login with Google
+        </Typography>
       </MenuItem>
     )
   }
@@ -74,6 +78,12 @@ const ProfileMenu = ({user}) => {
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "profile-button",
+        }}
+        PaperProps={{
+          style: {
+            color: "var(--mui-palette-secondary-main)",
+            backgroundColor: "var(--mui-palette-secondary-contrastText)",
+          },
         }}
       >
         <ProfileMenuItem user={user} handleClose={handleClose}/>
