@@ -36,7 +36,7 @@ const Header = () => {
     )
   } else {
     profileButton = (
-      <Button onClick={signIn} className={styles.profileIcon}>
+      <Button onClick={() => signIn("google")} className={styles.profileIcon}>
         <Typography variant="link">?</Typography>
       </Button>
     )
