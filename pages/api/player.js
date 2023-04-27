@@ -15,8 +15,8 @@ const Player = async (req, res) => {
     const playerData = await GrpcService.syncPlayerData(email, playerId)
     res.status(200).json({result: {playerData}, error: null})
   } catch (err){
-    console.log(err)
-    res.status(400).json({error: "improper request"})
+    console.log(err.details)
+    res.status(200).json({result: null, error: err})
   }
 }
 
