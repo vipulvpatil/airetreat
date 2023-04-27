@@ -1,8 +1,8 @@
 import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
 
-const createGame = async (router, apiCallCompleted) => {
-  const playerData = await loadPlayerData()
+const createGame = async (router, apiCallCompleted, session) => {
+  const playerData = await loadPlayerData(session)
   const resp = await api.call("createGame", {playerId: playerData.id})
   apiCallCompleted()
   if(resp.error) {

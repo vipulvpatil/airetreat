@@ -6,15 +6,17 @@ import {logAnalyticsEvent} from "@/lib/analytics_events"
 import mainImage from "../public/ai-retreat-main-image.png"
 import styles from "@/styles/Home.module.css"
 import {useRouter} from "next/router"
+import {useSession} from "next-auth/react"
 import {useState} from "react"
 
 const Index = () => {
   const router = useRouter()
   const [creatingGame, setCreatingGame] = useState(false)
+  const {data: session} = useSession()
 
   const apiCallCompleted = () => {
     setCreatingGame(false)
-    logAnalyticsEvent(window, "GameCreatedEvent")
+    logAnalyticsEvent(window, "GameCreatedEvent", session)
   }
 
   return (
@@ -49,7 +51,7 @@ const Index = () => {
               variant="contained"
               onClick={() => {
                 setCreatingGame(true)
-                createGame(router, apiCallCompleted)
+                createGame(router, apiCallCompleted, session)
               }}
               >
               <Typography variant="h3">

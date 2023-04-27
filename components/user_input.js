@@ -8,6 +8,7 @@ import api from "@/lib/api"
 import {loadPlayerData} from "@/lib/local_storage"
 import {logAnalyticsEvent} from "@/lib/analytics_events"
 import styles from "@/styles/Home.module.css"
+import {useSession} from "next-auth/react"
 
 const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, currentGameHasEnded, setErrorMessage, helpCount, setHelpCount}) => {
   const [message, setMessage] = useState("")
@@ -16,6 +17,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
   const [messageType, setMessageType] = useState("")
   const [sendButtonDisabled, setSendButtonDisabled] = useState(false)
   const [helpButtonDisabled, setHelpButtonDisabled] = useState(false)
+  const {data: session} = useSession()
 
   const messageChanged = (event) => {
     const value = event.target.value.substring(0, 120)
@@ -51,7 +53,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
     if(trimmedMessage){
       try {
         setSendButtonDisabled(true)
-        const playerData = await loadPlayerData()
+        const playerData = await loadPlayerData(session)
         const resp = await api.call("sendMessage", {
           gameId: game.id,
           playerId: playerData.id,
@@ -65,9 +67,9 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
           setErrorMessage(resp.error.details)
         } else {
           if(messageType == "question") {
-            logAnalyticsEvent(window, "QuestionAskedEvent")
+            logAnalyticsEvent(window, "QuestionAskedEvent", session)
           } else {
-            logAnalyticsEvent(window, "QuestionAnsweredEvent")
+            logAnalyticsEvent(window, "QuestionAnsweredEvent", session)
           }
           setMessage("")
         }
@@ -86,7 +88,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
     }
     try {
       setHelpButtonDisabled(true)
-      const playerData = await loadPlayerData()
+      const playerData = await loadPlayerData(session)
       const resp = await api.call("help", {
         gameId: game.id,
         playerId: playerData.id,
@@ -98,7 +100,7 @@ const UserInput = ({game, playerBot, bots, openTagDialog, currentTurnIsUser, cur
       } else {
         setMessage(resp.result.text)
         setHelpCount(helpCount-1)
-        logAnalyticsEvent(window, "HelpTakenEvent")
+        logAnalyticsEvent(window, "HelpTakenEvent", session)
       }
     } catch (err) {
       console.log(err)

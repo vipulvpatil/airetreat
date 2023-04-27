@@ -7,20 +7,23 @@ import {logAnalyticsEvent} from "@/lib/analytics_events"
 import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
 import {useRouter} from "next/router"
+import {useSession} from "next-auth/react"
 import {useState} from "react"
+
 
 const Index = () => {
   const router = useRouter()
   const [gameIds, setGameIds] = useState()
   const [creatingGame, setCreatingGame] = useState(false)
+  const {data: session} = useSession()
 
   const apiCallCompleted = () => {
     setCreatingGame(false)
-    logAnalyticsEvent(window, "GameCreatedEvent")
+    logAnalyticsEvent(window, "GameCreatedEvent", session)
   }
 
   const getGameIds = async () => {
-    const playerData = await loadPlayerData()
+    const playerData = await loadPlayerData(session)
     const resp = await api.call("getGameIds", {playerId: playerData.id})
     if(resp.error) {
       console.log(resp.error)

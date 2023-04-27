@@ -7,27 +7,29 @@ import {logAnalyticsEvent} from "@/lib/analytics_events"
 import mainImage from "../../../public/ai-retreat-main-image.png"
 import styles from "@/styles/Home.module.css"
 import {useRouter} from "next/router"
+import {useSession} from "next-auth/react"
 
 const Join = () => {
   const [joiningGameId, setJoiningGameId] = useState("")
   const [joining, setJoining] = useState(false)
   const router = useRouter()
+  const {data: session} = useSession()
 
   const joinGame = useCallback(async () => {
     if (joining) {
       return
     }
     setJoining(true)
-    const playerData = await loadPlayerData()
+    const playerData = await loadPlayerData(session)
     const resp = await api.call("joinGame", {gameId: joiningGameId, playerId: playerData.id})
     if(resp.error) {
       console.log(resp.error)
     } else {
-      logAnalyticsEvent(window, "GameJoinedEvent")
+      logAnalyticsEvent(window, "GameJoinedEvent", session)
       router.push(`/game/${resp.result.gameId}`)
     }
     setJoining(false)
-  }, [joiningGameId, joining, router])
+  }, [joiningGameId, joining, router, session])
 
   useEffect(() => {
     const {id} = router.query

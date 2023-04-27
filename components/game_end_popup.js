@@ -6,13 +6,13 @@ import styles from "@/styles/Home.module.css"
 import {useRouter} from "next/router"
 import {useState} from "react"
 
-const GameEndPopup = ({open, handleClose, gameResult}) => {
+const GameEndPopup = ({open, handleClose, gameResult, session}) => {
   const router = useRouter()
   const [creatingGame, setCreatingGame] = useState(false)
 
   const apiCallCompleted = () => {
     setCreatingGame(false)
-    logAnalyticsEvent(window, "GameCreatedEvent")
+    logAnalyticsEvent(window, "GameCreatedEvent", session)
   }
 
   return (

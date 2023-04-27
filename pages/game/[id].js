@@ -14,6 +14,7 @@ import {logAnalyticsEvent} from "@/lib/analytics_events"
 import styles from "@/styles/Home.module.css"
 import usePoll from "react-use-poll"
 import {useRouter} from "next/router"
+import {useSession} from "next-auth/react"
 
 const botStyles = [
   {
@@ -53,6 +54,7 @@ const Game = () => {
   const [awaitingMessage, setAwaitingMessage] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
   const [helpCount, setHelpCount] = useState(0)
+  const {data: session} = useSession()
 
 
   const timerRef = useRef()
@@ -80,7 +82,7 @@ const Game = () => {
   }
 
   const getGame = async (gameId) => {
-    const playerData = await loadPlayerData()
+    const playerData = await loadPlayerData(session)
     const resp = await api.call("getGame", {gameId, playerId: playerData.id})
     if(resp.error) {
       if(ErrorChecker.errorIsNotFound(resp.error)){
@@ -147,12 +149,12 @@ const Game = () => {
 
       const result = getGameResult(currentGame, bots)
       if (result) {
-        logAnalyticsEvent(window, "GameFinishedEvent")
+        logAnalyticsEvent(window, "GameFinishedEvent", session)
         setGameResult(result)
       }
       setGameEndPopupOpen(true)
     }
-  }, [currentGame, bots, playerBot])
+  }, [currentGame, bots, playerBot, session])
 
   const handleTagDialogClose = () => {
     setTagDialogOpen(false)
@@ -169,7 +171,7 @@ const Game = () => {
       return
     }
     try {
-      const playerData = await loadPlayerData()
+      const playerData = await loadPlayerData(session)
       const resp = await api.call("tag", {
         gameId: currentGame.id,
         playerId: playerData.id,
@@ -178,7 +180,7 @@ const Game = () => {
       if (resp.error) {
         console.log(resp.error)
       } else {
-        logAnalyticsEvent(window, "BotTaggedEvent")
+        logAnalyticsEvent(window, "BotTaggedEvent", session)
       }
     } catch (err) {
       console.log(err)
@@ -242,6 +244,7 @@ const Game = () => {
         open={gameEndPopupOpen}
         gameResult={gameResult}
         handleClose={handleGameEndPopupClose}
+        session={session}
       />}
       {gameId && <GameInvitePopup
         open={gameInvitePopupOpen}

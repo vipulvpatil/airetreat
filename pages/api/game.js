@@ -1,6 +1,5 @@
 import GrpcService from "@/lib/grpc_service"
-import {authOptions} from "./auth/[...nextauth]"
-import {getServerSession} from "next-auth"
+import getLoggedInUserEmail from "@/common/logged_in_user"
 
 const createGame = async (userEmail, params) => {
   if(!params.playerId){
@@ -131,14 +130,6 @@ const Game = async (req, res) => {
   } else {
     res.status(400).json({error: "improper request"})
   }
-}
-
-const getLoggedInUserEmail = async (req, res) => {
-  const session = await getServerSession(req, res, authOptions)
-  if (session && session.user && session.user.email) {
-    return session.user.email
-  }
-  return null
 }
 
 export default Game
