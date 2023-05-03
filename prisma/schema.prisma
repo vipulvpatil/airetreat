@@ -96,6 +96,7 @@ model Game {
   bots                    Bot[]
   lastQuestionTargetBot   Bot?      @relation("lastQuestionTarget", fields: [lastQuestionTargetBotId], references: [id], onDelete: Cascade)
   winningBot              Bot?      @relation("winning", fields: [winningBotId], references: [id], onDelete: Cascade)
+  public                  Boolean   @default(false) @map("public")
 
   @@map("games")
 }
