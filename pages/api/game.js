@@ -5,8 +5,11 @@ const createGame = async (userEmail, params) => {
   if(!params.playerId){
     return {result: null, err: "playerId is required"}
   }
+  if(!params.publicGame){
+    return {result: null, err: "publicGame is required"}
+  }
   try {
-    const {gameId} = await GrpcService.createGame(userEmail, params.playerId)
+    const {gameId} = await GrpcService.createGame(userEmail, params.playerId, params.publicGame)
     return {result: {gameId}, err:null}
   } catch (err){
     console.log(err)

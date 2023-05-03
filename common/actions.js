@@ -3,7 +3,12 @@ import {loadPlayerData} from "@/lib/local_storage"
 
 const createGame = async (router, apiCallCompleted, session) => {
   const playerData = await loadPlayerData(session)
-  const resp = await api.call("createGame", {playerId: playerData.id})
+  const resp = await api.call("createGame",
+    {
+      playerId: playerData.id,
+      publicGame: false,
+    }
+  )
   apiCallCompleted()
   if(resp.error) {
     console.log(resp.error)
