@@ -11,7 +11,7 @@ import {useSession} from "next-auth/react"
 import {useState} from "react"
 
 
-const Index = () => {
+const Games = () => {
   const router = useRouter()
   const [gameIds, setGameIds] = useState()
   const [creatingGame, setCreatingGame] = useState(false)
@@ -35,7 +35,7 @@ const Index = () => {
   usePoll(getGameIds, [], {interval: 5000})
 
   return (
-    <div className={styles.indexContent}>
+    <div className={styles.GamesContent}>
       <Stack spacing={2} sx={{alignItems: "center"}}>
         <Typography variant="h3" className={styles.mainText}>Your ongoing games</Typography>
         <GameList gameIds={gameIds}/>
@@ -56,4 +56,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default Games

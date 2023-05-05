@@ -30,6 +30,16 @@ const getGame = async (userEmail, params) => {
   }
 }
 
+const autoJoinGame = async (userEmail, params) => {
+  try {
+    await GrpcService.autoJoinGame(userEmail, params.playerId)
+    return {result: {gameId: params.gameId}, err:null}
+  } catch (err) {
+    console.log(err)
+    return {result: null, err}
+  }
+}
+
 const joinGame = async (userEmail, params) => {
   if(!params.gameId){
     return {result: null, err: "gameId is required"}
@@ -97,6 +107,7 @@ const help = async (userEmail, params) => {
 
 const functionMap = {
   "createGame": createGame,
+  "autoJoinGame": autoJoinGame,
   "joinGame": joinGame,
   "getGame": getGame,
   "sendMessage": sendMessage,

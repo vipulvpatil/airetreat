@@ -1,6 +1,6 @@
 import {Button, Grid, Stack, Typography} from "@mui/material"
+import AutoJoinGameDialog from "@/components/auto_join_game_dialog"
 import Image from "next/image"
-import Link from "next/link"
 import {createGame} from "@/common/actions"
 import {logAnalyticsEvent} from "@/lib/analytics_events"
 import mainImage from "../public/ai-retreat-main-image.png"
@@ -12,6 +12,7 @@ import {useState} from "react"
 const Index = () => {
   const router = useRouter()
   const [creatingGame, setCreatingGame] = useState(false)
+  const [autoJoinGameDialogOpen, setAutoJoinGameDialogOpen] = useState(false)
   const {data: session} = useSession()
 
   const apiCallCompleted = () => {
@@ -36,13 +37,17 @@ const Index = () => {
         />
         <Grid container className={styles.homePageButtons} justifyContent="space-evenly">
           <Grid item>
-          <Link href={"/rules"}>
-            <Button className={`${styles.poppingButton} ${styles.resizeableButton}`} variant="contained">
+            <Button
+                className={`${styles.poppingButton} ${styles.resizeableButton}`}
+                variant="contained"
+                onClick={() => {
+                  setAutoJoinGameDialogOpen(true)
+                }}
+                >
               <Typography variant="h3">
-                Rules
+                Join Game
               </Typography>
             </Button>
-            </Link>
           </Grid>
           <Grid item>
             <Button
@@ -61,6 +66,10 @@ const Index = () => {
           </Grid>
         </Grid>
       </Stack>
+      <AutoJoinGameDialog
+        open={autoJoinGameDialogOpen}
+        handleClose={()=> setAutoJoinGameDialogOpen(false)}
+      />
     </div>
   )
 }
