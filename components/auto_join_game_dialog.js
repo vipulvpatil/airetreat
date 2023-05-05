@@ -1,4 +1,4 @@
-import {Dialog, DialogContent, DialogContentText, DialogTitle, Typography} from "@mui/material"
+import {Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Typography} from "@mui/material"
 import styles from "@/styles/Home.module.css"
 
 const AutoJoinGameDialog = ({open, handleClose}) => {
@@ -20,7 +20,23 @@ const AutoJoinGameDialog = ({open, handleClose}) => {
             Please wait as we find a game to join
           </Typography>
         </DialogContentText>
+        <div style={{paddingTop: "16px"}}>
+          <CircularProgress color="primary" />
+        </div>
       </DialogContent>
+      <DialogActions sx={{padding: "0px"}}>
+        <Grid container className={styles.popupButtons} justifyContent="space-evenly">
+          <Grid item>
+            <Button
+              className={`${styles.poppingButton} ${styles.resizeableButton}`}
+              variant="contained"
+              onClick={handleClose}
+            >
+              <Typography variant="h3">Cancel</Typography>
+            </Button>
+          </Grid>
+        </Grid>
+      </DialogActions>
     </Dialog>
   )
 }
