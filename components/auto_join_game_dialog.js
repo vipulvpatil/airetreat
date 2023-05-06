@@ -1,13 +1,41 @@
 import {Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Typography} from "@mui/material"
+import {useEffect, useState} from "react"
 import styles from "@/styles/Home.module.css"
+import usePoll from "react-use-poll"
 
 const AutoJoinGameDialog = ({open, handleClose}) => {
+  const [pollCount, setPollCount] = useState(20)
+
+  useEffect(() => {
+    setPollCount(20)
+  }, [open])
+
+  const closeDialog = () => {
+    handleClose()
+  }
+
+  const autoJoinGame = () => {
+    if (!open) {
+      return
+    }
+    setPollCount(pollCount => {
+      let newPollCount = pollCount
+      if(pollCount > 0) {
+        console.log("joining game")
+        newPollCount = pollCount-1
+      }
+      return newPollCount
+    })
+  }
+
+  usePoll(autoJoinGame, [open], {interval: 5000})
+
   return (
     <Dialog
       open={open}
       aria-labelledby="auto-join-game-dialog-title"
       aria-describedby="auto-join-game-dialog-description"
-      onClose={handleClose}
+      onClose={closeDialog}
       classes={{paper: styles.dialog}}
       className={styles.popup}
     >
@@ -30,7 +58,7 @@ const AutoJoinGameDialog = ({open, handleClose}) => {
             <Button
               className={`${styles.poppingButton} ${styles.resizeableButton}`}
               variant="contained"
-              onClick={handleClose}
+              onClick={closeDialog}
             >
               <Typography variant="h3">Cancel</Typography>
             </Button>
