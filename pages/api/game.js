@@ -6,7 +6,7 @@ const createGame = async (userEmail, params) => {
     return {result: null, err: "playerId is required"}
   }
   if(!params.publicGame){
-    return {result: null, err: "publicGame is required"}
+    params.publicGame = false
   }
   try {
     const {gameId} = await GrpcService.createGame(userEmail, params.playerId, params.publicGame)
@@ -32,8 +32,8 @@ const getGame = async (userEmail, params) => {
 
 const autoJoinGame = async (userEmail, params) => {
   try {
-    await GrpcService.autoJoinGame(userEmail, params.playerId)
-    return {result: {gameId: params.gameId}, err:null}
+    const {gameId}  = await GrpcService.autoJoinGame(userEmail, params.playerId)
+    return {result: {gameId}, err:null}
   } catch (err) {
     console.log(err)
     return {result: null, err}

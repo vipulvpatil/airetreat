@@ -1,7 +1,9 @@
 import {Button, Grid, Stack, Typography} from "@mui/material"
 import AutoJoinGameDialog from "@/components/auto_join_game_dialog"
 import Image from "next/image"
+import api from "@/lib/api"
 import {createGame} from "@/common/actions"
+import {loadPlayerData} from "@/lib/local_storage"
 import {logAnalyticsEvent} from "@/lib/analytics_events"
 import mainImage from "../public/ai-retreat-main-image.png"
 import styles from "@/styles/Home.module.css"
@@ -18,6 +20,18 @@ const Index = () => {
   const apiCallCompleted = () => {
     setCreatingGame(false)
     logAnalyticsEvent(window, "GameCreatedEvent", session)
+  }
+
+  const autoJoinGame = async () => {
+    const playerData = await loadPlayerData(session)
+    const resp = await api.call("autoJoinGame", {playerId: playerData.id})
+    console.log(resp)
+    if(resp.error) {
+      console.log(resp.error)
+    } else {
+      const gameId = resp.result.gameId
+      router.push(`/game/${gameId}`)
+    }
   }
 
   return (
@@ -69,6 +83,7 @@ const Index = () => {
       <AutoJoinGameDialog
         open={autoJoinGameDialogOpen}
         handleClose={()=> setAutoJoinGameDialogOpen(false)}
+        autoJoinGame={autoJoinGame}
       />
     </div>
   )
